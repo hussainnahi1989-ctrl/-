@@ -6460,7 +6460,7 @@ window.addEventListener('popstate', function(){
 
 function initApp(){
   authEnsure();
-  try{if(cloudEnabled()&&authHasSession()) cloudPullNow(true);}catch(e){}
+  function initAppAfterCloud(){
   if(!authHasSession()){
     renderAuthLogin();
     navigateTo('view-auth', {}, true);
@@ -6485,6 +6485,15 @@ function initApp(){
   }
   renderDashboard();
   navigateTo('view-dashboard', {}, true);
+  }
+  if(typeof cloudEnabled==='function'&&cloudEnabled()){
+    try{
+      if(!authHasSession()){renderAuthLogin();navigateTo('view-auth',{},true);}
+      cloudPullNow(true).then(function(){initAppAfterCloud();}).catch(function(){initAppAfterCloud();});
+      return;
+    }catch(e){initAppAfterCloud();return;}
+  }
+  initAppAfterCloud();
 }
 
 function goHome(){
@@ -6614,7 +6623,7 @@ function renderSettingsView(isOnboarding){
         '<div class="logo-preview" id="logoPreview">' + (APP.school.logo ? '<img src="'+APP.school.logo+'">' : 'شعار') + '</div>' +
         '<label class="upload-btn">اختيار صورة<input type="file" accept="image/*" id="setLogoFile" style="display:none"></label>' +
       '</div>' +
-      (isOnboarding?'':cloudHtml()) +
+      '' +
       '<div class="panel-actions">' +
         (isOnboarding
           ? '<button onclick="saveSettingsAndNext()">التالي ←</button>'
@@ -6686,7 +6695,6 @@ function saveSettingsAndNext(){
   navigateTo('view-grades');
 }
 function saveSettingsOnly(){
-  try{cloudSaveCfgFromForm();}catch(e){}
   collectSettingsForm();
   if(!APP.school.stage){ alert('الرجاء اختيار مرحلة المدرسة.'); return; }
   saveApp();
@@ -11282,19 +11290,30 @@ function renderAuthLogin(){
     '<div class="mat-field"><label>اسم الدخول</label><input id="authName" type="text" autocomplete="username" dir="ltr" placeholder="مثال: st482193"></div>'+
     '<div class="mat-field"><label>الرقم السري</label><input id="authPass" type="password" autocomplete="current-password"></div>'+
     '<button type="button" class="material-btn" style="width:100%;margin-top:8px" onclick="authDoLogin()">دخول</button>'+
-    '<small style="display:block;margin-top:12px;color:#78909c">حساب المدير الافتراضي: اسم الدخول admin — الرقم السري 1111</small>'+
+    '<small id="authCloudHint" style="display:block;margin-top:12px;color:#047857">السحابة مربوطة تلقائياً — أدخل اسم الدخول والرقم السري فقط</small>'+
     '</div></div>';
   const pn=document.getElementById('authPass');
   if(pn) pn.addEventListener('keydown',function(e){if(e.key==='Enter')authDoLogin();});
 }
 function authDoLogin(){
-  const acc=authLogin((document.getElementById('authName')||{}).value,(document.getElementById('authPass')||{}).value);
-  if(!acc){alert('الاسم أو الرقم السري غير صحيح.');return;}
-  authSetSession(acc);
-  try{if(cloudEnabled()) cloudPullNow(true).then(function(){try{if(acc.role==='teacher')renderTeacherHome(); else if(acc.role==='student')renderStudentHome(); else if(typeof renderDashboard==='function')renderDashboard();}catch(e){}}); }catch(e){}
-  if(acc.role==='teacher'){renderTeacherHome();appStack=[{id:'view-teacher',meta:{page:'home'}}];showView('view-teacher');}
-  else if(acc.role==='student'){renderStudentHome();appStack=[{id:'view-student',meta:{page:'home'}}];showView('view-student');}
-  else {goDashboard();}
+  const name=(document.getElementById('authName')||{}).value;
+  const pass=(document.getElementById('authPass')||{}).value;
+  const hint=document.getElementById('authCloudHint');
+  function finish(acc){
+    if(!acc){alert('الاسم أو الرقم السري غير صحيح.');return;}
+    authSetSession(acc);
+    if(acc.role==='teacher'){renderTeacherHome();appStack=[{id:'view-teacher',meta:{page:'home'}}];showView('view-teacher');}
+    else if(acc.role==='student'){renderStudentHome();appStack=[{id:'view-student',meta:{page:'home'}}];showView('view-student');}
+    else {if(typeof goDashboard==='function')goDashboard();else if(typeof renderDashboard==='function')renderDashboard();}
+  }
+  if(typeof cloudEnabled==='function'&&cloudEnabled()){
+    if(hint)hint.textContent='جاري جلب الحسابات من السحابة…';
+    Promise.resolve(cloudPullNow(true)).then(function(){
+      finish(authLogin(name,pass));
+    }).catch(function(){finish(authLogin(name,pass));});
+    return;
+  }
+  finish(authLogin(name,pass));
 }
 
 function renderAuthTasksHome(){
@@ -12214,7 +12233,12 @@ function loadCloudCfg(){
 }
 function saveCloudCfg(){try{localStorage.setItem(CLOUD_KEY,JSON.stringify(CLOUD_CFG));}catch(e){}}
 let CLOUD_CFG=loadCloudCfg();
-if(!CLOUD_CFG.room) CLOUD_CFG.room='school1';
+const CLOUD_DEFAULT_URL='https://school-bc895-default-rtdb.europe-west1.firebasedatabase.app';
+const CLOUD_DEFAULT_ROOM='karbala1';
+CLOUD_CFG.on=true;
+CLOUD_CFG.url=CLOUD_DEFAULT_URL;
+CLOUD_CFG.room=CLOUD_DEFAULT_ROOM;
+try{saveCloudCfg();}catch(e){}
 let CLOUD_PUSH_T=null, CLOUD_BUSY=false, CLOUD_LAST=0;
 function cloudEnabled(){
   const u=String(CLOUD_CFG.url||'').trim().replace(/\/$/,'');
@@ -12324,27 +12348,8 @@ function cloudSaveCfgFromForm(){
   saveCloudCfg();
   cloudSetStatus(cloudEnabled()?'حُفظت إعدادات السحابة': 'أدخل رابطاً صحيحاً مثل https://اسم.firebaseio.com', cloudEnabled());
 }
-function cloudHtml(){
-  const on=CLOUD_CFG.on?' checked':'';
-  const url=escapeHtml(CLOUD_CFG.url||'');
-  const room=escapeHtml(CLOUD_CFG.room||'school1');
-  return '<div class="panel" style="margin-top:14px;border:1px solid #a7f3d0;background:linear-gradient(180deg,#f0fdf4,#fff);">'
-    +'<h2>السحابة — أجهزة متعددة</h2>'
-    +'<p style="color:#475569;font-size:13px;line-height:1.7;margin:6px 0 10px;">ارفع هذه الصفحة على GitHub Pages ثم أنشئ قاعدة Firebase مجانية. نفس الرابط ورمز المدرسة على كل جهاز (مدير / معلم / طالب) يجعل البيانات مشتركة.</p>'
-    +'<label style="display:flex;align-items:center;gap:8px;"><input type="checkbox" id="setCloudOn"'+on+'> تفعيل المزامنة السحابية</label>'
-    +'<label>رابط Firebase Realtime Database</label>'
-    +'<input type="url" id="setCloudUrl" dir="ltr" placeholder="https://your-project-default-rtdb.firebaseio.com" value="'+url+'">'
-    +'<label>رمز المدرسة (نفسه على كل الأجهزة)</label>'
-    +'<input type="text" id="setCloudRoom" dir="ltr" value="'+room+'">'
-    +'<p style="color:#64748b;font-size:12px;margin:8px 0;">خطوات مختصرة: Firebase → Build → Realtime Database → إنشاء → القواعد: قراءة وكتابة true للتجربة → انسخ الرابط الذي ينتهي بـ firebaseio.com</p>'
-    +'<div class="panel-actions" style="flex-wrap:wrap;gap:8px;">'
-    +'<button type="button" onclick="cloudSaveCfgFromForm()">حفظ إعداد السحابة</button>'
-    +'<button type="button" onclick="cloudPushNow()">رفع الآن</button>'
-    +'<button type="button" onclick="cloudPullNow()">سحب الآن</button>'
-    +'</div>'
-    +'<p id="cloudStatus" style="font-size:12px;margin:8px 0 0;"></p>'
-    +'</div>';
-}
+function cloudHtml(){return '';}
+
 
 function wifiOnSave(){
   try{cloudOnSave();}catch(e){}
@@ -12505,5 +12510,5 @@ loadUiTheme();
 initApp();
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2ff288b5bb4331b',t:'MTc4NzU0MDk2OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2ff66a31a142845',t:'MTc4NzU0MzUxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
