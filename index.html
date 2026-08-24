@@ -1580,6 +1580,9 @@
   #btnNotif.has-unread .notif-red-dot{display:block!important}
   #btnNotif.has-unread{box-shadow:0 0 0 2px rgba(229,57,53,.35)}
   .mail-unread{border:2px solid #c62828!important;background:#ffebee!important;box-shadow:0 0 0 2px rgba(198,40,40,.18)}
+  html[data-ui-skin^="night"] .mail-unread{background:#3a1518!important;color:#ffe8e8!important;}
+  @media (max-width:760px){.dashboard-main{padding:12px!important}.grade-report-grid,.section-grid,.staff-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+  @media (max-width:520px){.grade-report-grid,.section-grid,.staff-home-grid{grid-template-columns:1fr!important}}
   .notif-panel{position:fixed;top:52px;left:12px;z-index:120;width:min(380px,calc(100vw - 24px));max-height:70vh;overflow:auto;background:#fff;border-radius:14px;box-shadow:0 16px 40px rgba(0,0,0,.25);padding:12px;display:none;border:1px solid #ead9a4}
   .notif-panel.open{display:block}
   .notif-item{border:1px solid #eee;border-radius:10px;padding:10px;margin-top:8px}
@@ -1595,6 +1598,17 @@
   .portal-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}
   .portal-fb,.portal-fb-top,.fb-head-btn{background:#1877f2!important;color:#fff!important;text-decoration:none;font-weight:800;border:0;cursor:pointer;font-family:inherit}
   .fb-head-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:12px;white-space:nowrap;flex:0 0 auto;font-size:14px;min-height:42px}
+  .parents-tabs{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;padding:6px 2px 12px;margin:0 0 12px;scroll-snap-type:x mandatory}
+  .parents-tabs::-webkit-scrollbar{height:6px}
+  .parents-tab{flex:0 0 auto;scroll-snap-align:start;border:0;border-radius:999px;padding:10px 16px;font-weight:800;cursor:pointer;white-space:nowrap;background:#eceff1;color:#37474f}
+  .parents-tab.active{background:linear-gradient(135deg,#1565c0,#42a5f5);color:#fff}
+  .par-wa,.par-call{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;text-decoration:none;font-size:18px;margin-inline-start:6px}
+  .par-wa{background:#25d366;color:#fff}
+  .par-call{background:#1565c0;color:#fff}
+  html[data-ui-skin^="night"] .parents-tab{background:#241c22;color:#fff8ee}
+  html[data-ui-skin^="night"] #view-parents .acc-table td{color:#fff8ee!important}
+  html[data-ui-skin^="night"] #view-parents .acc-table tbody tr:nth-child(even) td{background:#2a1e28!important;color:#fff8ee!important}
+  html[data-ui-skin^="night"] #view-parents .acc-table tbody tr:nth-child(odd) td{background:#141018!important;color:#fff8ee!important}
   .portal-logout{width:100%;margin:0 0 14px;min-height:44px}
   #view-student .module-head, #view-teacher .module-head{align-items:center;flex-wrap:nowrap;gap:10px}
   a.portal-fb{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px}
@@ -2357,8 +2371,8 @@
 
   /* ================= Compact professional application bar ================= */
 
-  #topStack{position:sticky;top:0;z-index:50;width:100%;}
-  #topStack #topbar{position:relative!important;top:auto!important;}
+  #topStack{position:sticky;top:0;z-index:90;width:100%;margin:0;padding:0;}
+  #topStack #topbar{position:relative!important;top:auto!important;margin:0;}
   #creditBar{
     display:none;
     width:100%;
@@ -2809,6 +2823,83 @@
   }
   html[data-ui-skin^="night"] textarea::placeholder,
   html[data-ui-skin^="night"] input::placeholder{color:#c4b8a8!important;opacity:1;}
+  html[data-ui-skin^="night"] .view, html[data-ui-skin^="night"] .module-shell,
+  html[data-ui-skin^="night"] .dashboard-main, html[data-ui-skin^="night"] .stat-kpi span,
+  html[data-ui-skin^="night"] .dashboard-top p, html[data-ui-skin^="night"] .empty-hint{color:var(--skin-heading,#fff6d4)!important;opacity:1!important;}
+  @media screen{
+  html[data-ui-skin^="night"] .notif-panel{background:#161218!important;color:#fff8ee!important;border-color:#5a4450!important;}
+  html[data-ui-skin^="night"] .notif-panel strong,
+  html[data-ui-skin^="night"] .notif-item,
+  html[data-ui-skin^="night"] .notif-item b,
+  html[data-ui-skin^="night"] .notif-item p,
+  html[data-ui-skin^="night"] .notif-item small{color:#fff8ee!important;opacity:1!important;}
+  html[data-ui-skin^="night"] .notif-item{background:#241c22!important;border-color:#5a4450!important;}
+  html[data-ui-skin^="night"] .rec-modal{background:#161218!important;color:#fff8ee!important;}
+  html[data-ui-skin^="night"] .rec-modal h2,
+  html[data-ui-skin^="night"] .rec-modal td,
+  html[data-ui-skin^="night"] .rec-modal th{color:#fff8ee!important;}
+  html[data-ui-skin^="night"] table td,
+  html[data-ui-skin^="night"] table th,
+  html[data-ui-skin^="night"] .acc-table td,
+  html[data-ui-skin^="night"] .acc-table .name,
+  html[data-ui-skin^="night"] .staff-table td,
+  html[data-ui-skin^="night"] .levels-table td,
+  html[data-ui-skin^="night"] .students-table td,
+  html[data-ui-skin^="night"] .properties-table td,
+  html[data-ui-skin^="night"] td.name{color:#fff8ee!important;opacity:1!important;}
+  html[data-ui-skin^="night"] table tbody tr:nth-child(odd) td{background:#141018!important;color:#fff8ee!important;}
+  html[data-ui-skin^="night"] table tbody tr:nth-child(even) td{background:#221a22!important;color:#fff8ee!important;}
+  html[data-ui-skin^="night"] .properties-table tbody tr:nth-child(even) td,
+  html[data-ui-skin^="night"] .properties-table tbody tr:nth-child(odd) td,
+  html[data-ui-skin^="night"] .properties-table td,
+  html[data-ui-skin^="night"] .properties-table select,
+  html[data-ui-skin^="night"] .properties-table input{color:#fff8ee!important;opacity:1!important;}
+  html[data-ui-skin^="night"] .properties-table tbody tr:nth-child(even) td{background:#221a22!important;}
+  html[data-ui-skin^="night"] .rec-modal table td,
+  html[data-ui-skin^="night"] .rec-modal table .name,
+  html[data-ui-skin^="night"] #dashListBody table td,
+  html[data-ui-skin^="night"] #dashListBody .name,
+  html[data-ui-skin^="night"] .rec-overlay table td{
+    color:#fff8ee!important;opacity:1!important;
+  }
+  html[data-ui-skin^="night"] .rec-modal table tbody tr:nth-child(odd) td,
+  html[data-ui-skin^="night"] #dashListBody table tbody tr:nth-child(odd) td{
+    background:#141018!important;color:#fff8ee!important;
+  }
+  html[data-ui-skin^="night"] .rec-modal table tbody tr:nth-child(even) td,
+  html[data-ui-skin^="night"] #dashListBody table tbody tr:nth-child(even) td,
+  html[data-ui-skin^="night"] .rec-modal .acc-table tbody tr:nth-child(even) td{
+    background:#2a1e28!important;color:#fff8ee!important;
+  }
+  html[data-ui-skin^="night"] #view-tasks .acc-table td,
+  html[data-ui-skin^="night"] #view-tasks .acc-table th,
+  html[data-ui-skin^="night"] .asg-teacher-card,
+  html[data-ui-skin^="night"] .asg-teacher-card h3{color:#fff8ee!important;}
+  html[data-ui-skin^="night"] #view-tasks .acc-table tbody tr:nth-child(even) td{background:#2a1e28!important;color:#fff8ee!important;}
+  html[data-ui-skin^="night"] #view-tasks .acc-table tbody tr:nth-child(odd) td{background:#141018!important;color:#fff8ee!important;}
+
+
+  html[data-ui-skin^="night"] .properties-table tbody tr:nth-child(odd) td{background:#141018!important;}
+  html[data-ui-skin^="night"] .st-pass-input,
+  html[data-ui-skin^="night"] .properties-table select{background:#0e0c10!important;color:#fff8ee!important;border-color:#5a4450!important;}
+  }
+  @media print{
+    html[data-ui-skin^="night"] table td,
+    html[data-ui-skin^="night"] table th,
+    html[data-ui-skin^="night"] table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] table tbody tr:nth-child(even) td{
+      background:transparent!important;
+      color:inherit!important;
+    }
+    html[data-ui-skin^="night"] .page,
+    html[data-ui-skin^="night"] .page table td,
+    html[data-ui-skin^="night"] .page table th{
+      color:inherit!important;
+      background:unset!important;
+    }
+    #topStack,#topbar,#creditBar,#notifPanel{display:none!important;}
+  }
+  html:not([data-ui-skin^="night"]) .stat-kpi span, html:not([data-ui-skin^="night"]) .module-title p{color:#3d322c!important;opacity:1!important;}
   html[data-ui-skin^="night"] .module-title h2{color:var(--skin-heading)!important;}
   html[data-ui-skin^="night"] .module-title p{color:var(--skin-muted)!important;}
 
@@ -2919,7 +3010,7 @@
   html[data-app-font="xxhuge"] .dashboard-backdrop{ zoom:1.7; }
   @media print{ html, html[data-app-font] .view, html[data-app-font] .dashboard-main{ zoom:1 !important; } }
   html{ overflow-x:hidden; }
-  body{ margin:0; padding:46px 0 0 !important; overflow-x:hidden; max-width:100%; }
+  body{ margin:0; padding:0 !important; overflow-x:hidden; max-width:100%; }
   #topbar{
     display:flex !important;
     flex-direction:row !important;
@@ -3377,6 +3468,7 @@
   html[data-ui-skin] .exam-list-table tbody tr:nth-child(even) td{
     background:color-mix(in srgb,var(--skin-accent) 22%,#fff8e1)!important;
   }
+@media screen{
   html[data-ui-skin^="night"] table.students-table tbody tr:nth-child(even) td,
   html[data-ui-skin^="night"] .staff-table tbody tr:nth-child(even) td,
   html[data-ui-skin^="night"] .gradebook-table tbody tr:nth-child(even) td,
@@ -3384,6 +3476,7 @@
   html[data-ui-skin^="night"] .attendance-register-table tbody tr:nth-child(even) td,
   html[data-ui-skin^="night"] .exam-list-table tbody tr:nth-child(even) td{
     background:color-mix(in srgb,var(--skin-accent) 18%,#243038)!important;
+  }
   }
   .gradebook-table td.calc-cell{background:#e3f2fd!important;}
   .gb-sum-row td{background:#e8f5e9!important;}
@@ -4782,6 +4875,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
     <button type="button" data-nav="attendance" onclick="closeGlobalNav();openAttendanceModule()"><span>📋</span>الغياب</button>
     <button type="button" data-nav="properties" onclick="closeGlobalNav();openPropertiesModule()"><span>🏫</span>الممتلكات</button>
     <button type="button" data-nav="care" onclick="closeGlobalNav();openCareModule()"><span>🤍</span>الرعاية والأيتام</button>
+    <button type="button" data-nav="parents" onclick="closeGlobalNav();openParentsModule()"><span>👨‍👩‍👧</span>أولياء الأمور</button>
     <button type="button" data-nav="records" onclick="closeGlobalNav();openRecordsModule()"><span>📑</span>القيود</button>
     <button type="button" data-nav="notes" onclick="closeGlobalNav();openNotesModule()"><span>📝</span>الملاحظات</button>
     <button type="button" data-nav="accounts" onclick="closeGlobalNav();openAccountsModule()"><span>💰</span>الحسابات</button>
@@ -4865,6 +4959,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
 <div class="view wide" id="view-attendance"></div>
 <div class="view wide" id="view-properties"></div>
 <div class="view wide" id="view-care"></div>
+<div class="view wide" id="view-parents"></div>
 <div class="view wide" id="view-records"></div>
 <div class="view wide" id="view-notes"></div>
 <div class="view wide" id="view-accounts"></div>
@@ -6420,6 +6515,7 @@ function authClampView(id){
     if(id==='view-records'&&typeof teacherCanRecords==='function'&&teacherCanRecords()) return id;
     if((id==='view-home'||id==='view-students')&&typeof teacherCanSheets==='function'&&teacherCanSheets()) return id;
     if(id==='view-care'&&typeof teacherCanCare==='function'&&teacherCanCare()) return id;
+    if(id==='view-parents'&&typeof teacherCanParents==='function'&&teacherCanParents()) return id;
     return 'view-teacher';
   }
   if(r==='student' && id!=='view-student' && id!=='view-auth') return 'view-student';
@@ -6476,6 +6572,8 @@ function restoreEntry(entry){
     renderPropertiesView();
   } else if(entry.id === 'view-care'){
     restoreCareView(entry.meta||{});
+  } else if(entry.id === 'view-parents'){
+    if(typeof renderParentsView==='function') renderParentsView(entry.meta&&entry.meta.tab);
   } else if(entry.id === 'view-records'){
     restoreRecordsView(entry.meta||{});
   } else if(entry.id === 'view-notes'){
@@ -7979,7 +8077,7 @@ function openDashNameList(kind){
   }else{
     all.forEach(function(s){rows.push({name:s.name,meta:'الصف '+s.grade+' / '+s.section});});
   }
-  body.innerHTML=rows.length?('<div class="table-scroll"><table class="acc-table"><thead><tr><th>ت</th><th>الاسم</th><th>التفاصيل</th></tr></thead><tbody>'+rows.map(function(r,i){return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(r.name)+'</td><td>'+escapeHtml(r.meta)+'</td></tr>';}).join('')+'</tbody></table></div>'):'<div class="empty-hint">لا توجد أسماء ضمن هذا الملخص.</div>';
+  body.innerHTML=rows.length?('<div class="table-scroll"><table class="acc-table"><thead><tr><th>ت</th><th>الاسم</th><th>التفاصيل</th></tr></thead><tbody>'+rows.map(function(r,i){var night=document.documentElement.getAttribute('data-ui-skin')||''; var nr=night.indexOf('night')===0; var bg=nr?(i%2?'#2a1e28':'#141018'):''; var fg=nr?'#fff8ee':''; var st=nr?(' style="background:'+bg+'!important;color:'+fg+'!important"'):''; return '<tr><td'+st+'>'+(i+1)+'</td><td class="name"'+st+'>'+escapeHtml(r.name)+'</td><td'+st+'>'+escapeHtml(r.meta)+'</td></tr>';}).join('')+'</tbody></table></div>'):'<div class="empty-hint">لا توجد أسماء ضمن هذا الملخص.</div>';
 
   ov.classList.add('open');
 }
@@ -8015,6 +8113,7 @@ function dashMenuItems(){
     ['📋','الغياب','التسجيل والإحصاءات','openAttendanceModule()','linear-gradient(135deg,#00695c,#26a69a)'],
     ['🏛','الممتلكات','عهدة المدرسة','openPropertiesModule()','linear-gradient(135deg,#ef6c00,#ffa726)'],
     ['🤍','الرعاية والأيتام','المشمولون بالرعاية','openCareModule()','linear-gradient(135deg,#ad1457,#ec407a)'],
+    ['👨‍👩‍👧','أولياء الأمور','أرقام التواصل واتساب واتصال','openParentsModule()','linear-gradient(135deg,#1565c0,#42a5f5)'],
     ['📑','القيود','أرقام القيد والكشوف','openRecordsModule()','linear-gradient(135deg,#37474f,#78909c)'],
     ['📝','الملاحظات','ملاحظات الطلاب','openNotesModule()','linear-gradient(135deg,#5d4037,#a1887f)'],
     ['💰','الحسابات','النقدي والأقساط','openAccountsModule()','linear-gradient(135deg,#c62828,#ef6c00)'],
@@ -8069,6 +8168,7 @@ function renderDashboard(){
       '<button onclick="openAttendanceModule()"><span class="dni">📋</span>الغياب</button>'+
       '<button onclick="openPropertiesModule()"><span class="dni">🏫</span>الممتلكات</button>'+
       '<button onclick="openCareModule()"><span class="dni">🤍</span>الرعاية والأيتام</button>'+
+      '<button onclick="openParentsModule()"><span class="dni">👨‍👩‍👧</span>أولياء الأمور</button>'+
       '<button onclick="openRecordsModule()"><span class="dni">📑</span>القيود</button>'+
       '<button onclick="openNotesModule()"><span class="dni">📝</span>الملاحظات</button>'+
       '<button onclick="openAccountsModule()"><span class="dni">💰</span>الحسابات</button>'+
@@ -8944,6 +9044,63 @@ const CARE_STORAGE_KEY='schoolResultsCare_v1';
 function loadCareState(){try{return JSON.parse(localStorage.getItem(CARE_STORAGE_KEY)||'{}')||{};}catch(e){return {};}}
 function saveCareState(){try{localStorage.setItem(CARE_STORAGE_KEY,JSON.stringify(CARE_STATE));}catch(e){}}
 let CARE_STATE=loadCareState();if(!Array.isArray(CARE_STATE.orphans))CARE_STATE.orphans=[];if(!Array.isArray(CARE_STATE.chronic))CARE_STATE.chronic=[];
+function parentPhoneDigits(raw){
+  let d=String(raw||'').replace(/\D+/g,'');
+  if(!d)return '';
+  if(d.indexOf('00')===0)d=d.slice(2);
+  if(d.charAt(0)==='0' && d.length>=10) d='964'+d.slice(1);
+  if(d.indexOf('964')!==0 && d.length===10 && d.charAt(0)==='7') d='964'+d;
+  return d;
+}
+function parentTabsData(){
+  const tabs=[];
+  (typeof gradebookGradeLabels==='function'?gradebookGradeLabels():[]).forEach(function(g){
+    (typeof gbSectionsForGrade==='function'?gbSectionsForGrade(g):[]).forEach(function(sec){
+      tabs.push({key:g+'|'+(sec.id||''),grade:g,sectionId:sec.id,label:'الصف '+g+' شعبة '+(sec.label||'')});
+    });
+  });
+  return tabs;
+}
+let PARENTS_TAB='';
+function parentsPickTab(k){try{k=decodeURIComponent(k);}catch(e){} renderParentsView(k); navigateTo('view-parents',{tab:k},true);}
+function openParentsModule(){
+  const r=typeof authRole==='function'?authRole():'';
+  if(r==='teacher'&&typeof teacherCanParents==='function'&&!teacherCanParents()){alert('لم تُكلَّف بقسم أولياء الأمور.');return;}
+  renderParentsView();
+  navigateTo('view-parents',{tab:PARENTS_TAB});
+}
+function renderParentsView(tabKey){
+  const el=document.getElementById('view-parents'); if(!el)return;
+  const who=typeof studentsSectionTitle==='function'?studentsSectionTitle():'الطلاب';
+  const tabs=parentTabsData();
+  if(tabKey) PARENTS_TAB=tabKey;
+  if(!PARENTS_TAB && tabs[0]) PARENTS_TAB=tabs[0].key;
+  const cur=tabs.find(function(x){return x.key===PARENTS_TAB;})||tabs[0];
+  const back=(typeof authRole==='function'&&authRole()==='teacher')
+    ? '<button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button>'
+    : '<button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button>';
+  const tabHtml=tabs.length?tabs.map(function(tb){
+    return '<button type="button" class="parents-tab'+(cur&&tb.key===cur.key?' active':'')+'" onclick="parentsPickTab(\''+encodeURIComponent(tb.key)+'\')">'+escapeHtml(tb.label)+'</button>';
+  }).join(''):'<span class="empty-hint">لا توجد شعب بعد.</span>';
+  let rows='';
+  if(cur){
+    const sec=(typeof gbSectionsForGrade==='function'?gbSectionsForGrade(cur.grade):[]).find(function(s){return s.id===cur.sectionId;});
+    const sts=(sec&&sec.students)||[];
+    const night=(document.documentElement.getAttribute('data-ui-skin')||'').indexOf('night')===0;
+    sts.forEach(function(st,i){
+      const phone=String(st.guardianPhone||st.phone||'').trim();
+      const intl=parentPhoneDigits(phone);
+      const wa=intl?('<a class="par-wa" href="https://wa.me/'+intl+'" target="_blank" rel="noopener noreferrer" title="واتساب">🟢</a>'):'';
+      const tel=phone?('<a class="par-call" href="tel:'+phone.replace(/\s+/g,'')+'" title="اتصال">📞</a>'):'<span style="color:#90a4ae">—</span>';
+      const stl=night?(' style="background:'+(i%2?'#2a1e28':'#141018')+'!important;color:#fff8ee!important"'):'';
+      rows+='<tr><td'+stl+'>'+toArabicDigits(String(i+1))+'</td><td class="name"'+stl+'>'+escapeHtml(st.name||'—')+'</td><td dir="ltr"'+stl+'>'+escapeHtml(phone||'—')+'</td><td'+stl+'>'+wa+tel+'</td></tr>';
+    });
+    if(!sts.length) rows='<tr><td colspan="4">لا يوجد '+who+' في هذه الشعبة.</td></tr>';
+  }
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">👨‍👩‍👧</span><div><h2>أولياء الأمور</h2><p>أرقام التواصل حسب الصف والشعبة</p></div></div>'+back+'</div>'+
+    '<div class="parents-tabs">'+tabHtml+'</div>'+
+    '<div class="table-scroll"><table class="acc-table"><thead><tr><th>ت</th><th>'+(who==='التلاميذ'?'اسم التلميذ':'اسم الطالب')+'</th><th>رقم ولي الأمر</th><th>التواصل</th></tr></thead><tbody>'+(rows||'<tr><td colspan="4">—</td></tr>')+'</tbody></table></div></div>';
+}
 function openCareModule(){renderCareHome();navigateTo('view-care',{page:'home'});}
 function restoreCareView(meta){if(meta.page==='orphans')renderOrphansView();else if(meta.page==='chronic')renderChronicView();else renderCareHome();}
 function renderCareHome(){const careBack=(typeof authRole==='function'&&authRole()==='teacher')?'<button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button>':'<button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button>';document.getElementById('view-care').innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🤍</span><div><h2>الرعاية والأيتام</h2><p>متابعة الأيتام وحالات الأمراض المزمنة</p></div></div>'+careBack+'</div><div class="care-home-grid"><button class="care-module-card orphans" onclick="openOrphansView()"><span>🫶</span><h3>الأيتام</h3><p>تسجيل ومتابعة بيانات الأيتام وأولياء أمورهم.</p></button><button class="care-module-card chronic" onclick="openChronicView()"><span>🩺</span><h3>المرض المزمن</h3><p>تسجيل الطلاب المصابين بأمراض مزمنة وملاحظاتهم.</p></button></div></div>';}
@@ -11645,22 +11802,42 @@ function renderAuthAssign(){
   const teachers=AUTH_STATE.accounts.filter(function(a){return a.role==='teacher';});
   const tOpts=teachers.map(function(t){return '<option value="'+t.id+'">'+escapeHtml(t.name)+'</option>';}).join('');
   const gOpts=slogGrades?slogGrades().map(function(g){return '<option value="'+escapeHtml(g)+'">'+escapeHtml(g)+'</option>';}).join(''):gradebookGradeLabels().map(function(g){return '<option value="'+escapeHtml(g)+'">'+escapeHtml(g)+'</option>';}).join('');
-  let rows='';
+  const night=(document.documentElement.getAttribute('data-ui-skin')||'').indexOf('night')===0;
+  function asgTaskList(t,asg){
+    const tasks=[];
+    if(asg.grades)tasks.push('درجات');
+    if(asg.levels)tasks.push('مستويات');
+    if(asg.attendance)tasks.push('غياب');
+    if(asg.questions)tasks.push('أسئلة');
+    if(asg.examlist)tasks.push('قائمة امتحان');
+    if(asg.homework)tasks.push('واجب بيتي');
+    if(asg.records||t.canRecords)tasks.push('القيود');
+    if(asg.sheets)tasks.push('كشوف النتائج'+(asg.sheetScope==='stage'?' (المرحلة)':(asg.sheetScope==='grade'?' (كل الصف)':'')));
+    if(asg.care||t.canCare)tasks.push('الرعاية');
+      if(asg.parents||t.canParents)tasks.push('أولياء الأمور');
+    return tasks.join('، ')||'—';
+  }
+  let teacherTables='';
   teachers.forEach(function(t){
-    (t.assignments||[]).forEach(function(asg){
-      const tasks=[];
-      if(asg.grades)tasks.push('درجات');
-      if(asg.levels)tasks.push('مستويات');
-      if(asg.attendance)tasks.push('غياب');
-      if(asg.questions)tasks.push('أسئلة');
-      if(asg.examlist)tasks.push('قائمة امتحان');
-      if(asg.homework)tasks.push('واجب بيتي');
-      if(asg.records||t.canRecords)tasks.push('القيود');
-      if(asg.sheets)tasks.push('كشوف النتائج'+(asg.sheetScope==='stage'?' (المرحلة)':(asg.sheetScope==='grade'?' (كل الصف)':'')));
-      if(asg.care||t.canCare)tasks.push('الرعاية');
-      rows+='<tr><td>'+escapeHtml(t.name)+'</td><td>'+escapeHtml(asg.grade)+'</td><td>'+escapeHtml(asg.sectionLabel||asg.sectionId)+'</td><td>'+escapeHtml(asg.subject)+'</td><td>'+escapeHtml(tasks.join('، '))+'</td><td><button class="material-btn secondary" onclick="authRemoveAssign(\''+t.id+'\',\''+asg.id+'\')">حذف التكليف</button></td></tr>';
+    const list=t.assignments||[];
+    const extras=[];
+    if(t.canRecords && !list.some(function(a){return a.records;})) extras.push('إدارة القيود');
+    if(t.canCare && !list.some(function(a){return a.care;})) extras.push('الرعاية والأيتام');
+    if(t.canParents && !list.some(function(a){return a.parents;})) extras.push('أولياء الأمور');
+    if(!list.length && !extras.length) return;
+    let body='';
+    list.forEach(function(asg,i){
+      const st=night?(' style="background:'+(i%2?'#2a1e28':'#141018')+'!important;color:#fff8ee!important"'):'';
+      body+='<tr><td'+st+'>'+escapeHtml(asg.grade||'—')+'</td><td'+st+'>'+escapeHtml(asg.sectionLabel||asg.sectionId||'—')+'</td><td'+st+'>'+escapeHtml(asg.subject||'—')+'</td><td'+st+'>'+escapeHtml(asgTaskList(t,asg))+'</td><td'+st+'><button class="material-btn secondary" onclick="authRemoveAssign(\''+t.id+'\',\''+asg.id+'\')">حذف التكليف</button></td></tr>';
     });
+    if(!list.length && extras.length){
+      const st=night?' style="background:#141018!important;color:#fff8ee!important"':'';
+      body='<tr><td'+st+' colspan="4">'+escapeHtml(extras.join('، '))+'</td><td'+st+'>—</td></tr>';
+    }
+    teacherTables+='<div class="barcode-result-card asg-teacher-card" style="margin:14px 0 0"><h3 style="margin:0 0 10px">مهام: '+escapeHtml(t.name)+(t.login?(' <small dir="ltr">('+escapeHtml(t.login)+')</small>'):'')+'</h3>'+
+      '<div class="table-scroll"><table class="acc-table"><thead><tr><th>الصف</th><th>الشعبة</th><th>المادة</th><th>المهام</th><th></th></tr></thead><tbody>'+body+'</tbody></table></div></div>';
   });
+  if(!teacherTables) teacherTables='<p class="empty-hint">لا تكليفات بعد. أنشئ حساب معلم أولاً ثم أضف تكليفاً.</p>';
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🗂️</span><div><h2>توزيع المهام</h2><p>يمكن تكليف المعلم بأكثر من مادة وشعبة</p></div></div><button class="material-btn secondary" onclick="openAuthTasks()">رجوع إلى المهام</button></div>'+
     '<div class="slog-filters">'+
       '<div class="mat-field"><label>المعلم / المدرس</label><select id="asgTeacher"><option value="">اختر</option>'+tOpts+'</select></div>'+
@@ -11683,11 +11860,13 @@ function renderAuthAssign(){
       '<label><input type="checkbox" id="asgRec"> إدارة قسم القيود</label>'+
       '<label><input type="checkbox" id="asgSheets"> كشوف النتائج (الصف/الشعبة فقط)</label>'+
       '<label><input type="checkbox" id="asgCare"> الرعاية والأيتام</label>'+
+      '<label><input type="checkbox" id="asgParents"> أولياء الأمور</label>'+
       '<button class="material-btn" onclick="authAddAssign()">حفظ التكليف</button>'+
       '<button class="material-btn secondary" onclick="authGrantRecords()">تكليف المعلم المختار بإدارة القيود فقط</button>'+
       '<button class="material-btn secondary" onclick="authGrantCare()">تكليف المعلم المختار بالرعاية والأيتام</button>'+
+      '<button class="material-btn secondary" onclick="authGrantParents()">تكليف المعلم المختار بأولياء الأمور</button>'+
     '</div>'+
-    '<div class="table-scroll"><table class="acc-table"><thead><tr><th>المعلم</th><th>الصف</th><th>الشعبة</th><th>المادة</th><th>المهام</th><th></th></tr></thead><tbody>'+(rows||'<tr><td colspan="6">لا تكليفات بعد. أنشئ حساب معلم أولاً ثم أضف تكليفاً.</td></tr>')+'</tbody></table></div>';
+    teacherTables;
 }
 function authAsgGradeChanged(){
   const g=(document.getElementById('asgGrade')||{}).value||'';
@@ -11712,6 +11891,15 @@ function authGrantCare(){
   alert('تم تكليف «'+tch.name+'» بقسم الرعاية والأيتام.');
   renderAuthAssign();
 }
+function authGrantParents(){
+  const tid=(document.getElementById('asgTeacher')||{}).value||'';
+  const tch=AUTH_STATE.accounts.find(function(a){return a.id===tid;});
+  if(!tch){alert('اختر معلماً أولاً.');return;}
+  tch.canParents=true; saveAuthState();
+  if(typeof wifiOnSave==='function')wifiOnSave();
+  alert('تم تكليف «'+tch.name+'» بقسم أولياء الأمور.');
+  renderAuthAssign();
+}
 function authAddAssign(){
   const tid=(document.getElementById('asgTeacher')||{}).value||'';
   const t=AUTH_STATE.accounts.find(function(a){return a.id===tid;});
@@ -11721,13 +11909,15 @@ function authAddAssign(){
   const subject=(document.getElementById('asgSubject')||{}).value||'';
   const wantSheets=!!(document.getElementById('asgSheets')||{}).checked;
   const wantCare=!!(document.getElementById('asgCare')||{}).checked;
+  const wantParents=!!(document.getElementById('asgParents')||{}).checked;
   const wantRec=!!(document.getElementById('asgRec')||{}).checked;
   if(wantCare) t.canCare=true;
+  if(wantParents) t.canParents=true;
   if(wantRec) t.canRecords=true;
   const sheetScope=((document.getElementById('asgSheetScope')||{}).value)||'section';
-  if(wantCare && !grade && !sectionId && !subject && !wantSheets){
+  if((wantCare||wantParents) && !grade && !sectionId && !subject && !wantSheets){
     saveAuthState();renderAuthAssign();
-    alert('تم تكليف «'+t.name+'» بقسم الرعاية والأيتام.');
+    alert('تم تكليف «'+t.name+'»'+(wantCare?' بالرعاية':'')+(wantParents?' بأولياء الأمور':'')+'.');
     return;
   }
   if(wantSheets && sheetScope==='stage'){
@@ -11763,7 +11953,7 @@ function authAddAssign(){
     homework:!!(document.getElementById('asgHw')||{}).checked,
     records:wantRec,
     sheets:wantSheets,
-    care:wantCare
+    care:wantCare,parents:wantParents
   });
   saveAuthState();renderAuthAssign();
 }
@@ -11794,8 +11984,8 @@ function renderTeacherHome(){
   const canAtt=asgs.some(function(a){return a.attendance;});
   const canRec=teacherCanRecords();
   const canCareT=teacherCanCare(); const canSheets=teacherCanSheets();
-  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>لوحة المعلم</h2><p>مرحباً '+escapeHtml(me.name)+' — المواد والمهام المكلّف بها فقط</p></div></div>'+facebookHeadBtn()+'</div>'+portalLogoutBtn()+
+  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(typeof teacherCanParents==='function'&&teacherCanParents()?'<button class="material-btn" onclick="teacherOpenParents()">👨‍👩‍👧 أولياء الأمور</button>':'')+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>لوحة المعلم</h2><p>مرحباً '+escapeHtml(me.name)+' — المواد والمهام المكلّف بها فقط</p></div></div>'+facebookHeadBtn()+'</div>'+
     wifiTeacherBar()+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px">'+attBar+'</div>'+
     '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مهام بعد. يطلب من المدير توزيع المواد من قسم المهام.</div>')+'</div></div>';
 }
@@ -11821,6 +12011,15 @@ function teacherCanCare(){
   const me=authMe(); if(!me)return false;
   if(me.canCare)return true;
   return (me.assignments||[]).some(function(a){return a.care;});
+}
+function teacherCanParents(){
+  const me=authMe(); if(!me)return false;
+  if(me.canParents)return true;
+  return (me.assignments||[]).some(function(a){return a.parents;});
+}
+function teacherOpenParents(){
+  if(!teacherCanParents()){alert('لم تُكلَّف بقسم أولياء الأمور.');return;}
+  openParentsModule();
 }
 function teacherCanSheets(){
   const me=authMe(); if(!me)return false;
@@ -12175,9 +12374,7 @@ function updateFacebookBtn(){
   if(!a)return;
   const role=typeof authRole==='function'?authRole():'';
   const u=schoolFacebookUrl();
-  if((role==='teacher'||role==='student')&&u){
-    a.href=u; a.hidden=false;
-  }else{ a.hidden=true; }
+  a.hidden=true;
 }
 function studentShowLevels(){return !(APP.school&&APP.school.studentShowLevels===false);}
 function renderStudentHome(){
@@ -12197,7 +12394,7 @@ function renderStudentHome(){
       (showG?('<div class="grc-total"><b>'+(final===''||final==null?'—':toArabicDigits(String(final)))+'</b> الدرجة النهائية</div>'):'')+
       '<p style="margin:8px 0 0;color:#546e7a;font-size:12px">اضغط لعرض '+[showG?'درجاتك':'',showL?'المستويات':'','التحضير'].filter(Boolean).join(' و ')+'</p></article>';
   }).join('');
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🎓</span><div><h2>واجهة الطالب</h2><p>مرحباً '+escapeHtml(ctx.studentName)+(ctx.grade?(' — '+escapeHtml(ctx.grade)):'')+'</p></div></div>'+facebookHeadBtn()+'</div>'+portalLogoutBtn()+
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🎓</span><div><h2>واجهة الطالب</h2><p>مرحباً '+escapeHtml(ctx.studentName)+(ctx.grade?(' — '+escapeHtml(ctx.grade)):'')+'</p></div></div>'+facebookHeadBtn()+'</div>'+
     '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مواد أو لم يُربط حسابك بطالب.</div>')+'</div></div>';
 }
 function studentNotifList(me){
@@ -12360,23 +12557,70 @@ function renderMailHome(){
   const html=items.map(function(m){
     const grp=m.to==='all'?'جماعية':'خاصة';
     const unread=mailIsUnread(m,me);
-    return '<article class="barcode-result-card'+(unread?' mail-unread':'')+'"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>'+escapeHtml(m.fromName)+(unread?' <span style="color:#c62828">• غير مقروءة</span>':'')+'</strong><small>'+escapeHtml(m.when||'')+' — '+grp+'</small></div><p style="margin:8px 0 0;white-space:pre-wrap">'+escapeHtml(m.text)+'</p>'+(m.to!=='all'?'<small>إلى: '+escapeHtml(m.toName||'')+'</small>':'<small>إلى الجميع</small>')+'</article>';
+    const canDel=me.role==='admin'||m.fromId===me.id;
+    return '<article class="barcode-result-card'+(unread?' mail-unread':'')+'" onclick="mailOpenOne(\''+m.id+'\')"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>'+escapeHtml(m.fromName)+(unread?' <span style="color:#c62828">• غير مقروءة</span>':'')+'</strong><small>'+escapeHtml(m.when||'')+' — '+grp+'</small></div>'+(m.text?'<p style="margin:8px 0 0;white-space:pre-wrap">'+escapeHtml(m.text)+'</p>':'')+(m.audio?'<audio controls preload="metadata" style="width:100%;margin-top:8px" src="'+m.audio+'"></audio>':'')+(m.to!=='all'?'<small>إلى: '+escapeHtml(m.toName||'')+'</small>':'<small>إلى الجميع</small>')+(canDel?'<div style="margin-top:8px"><button type="button" class="material-btn secondary" onclick="event.stopPropagation();mailDelete(\''+m.id+'\')">حذف الرسالة</button></div>':'')+'</article>';
   }).join('');
   const notifBox=me.role==='admin'?'<div class="barcode-result-card" style="margin:12px 0"><h3>إشعار من المدير</h3><p>يظهر في الشريط العلوي للطلاب أو المعلمين أو كل المدرسة</p><div class="slog-filters"><div class="mat-field"><label>إلى</label><select id="notifTo"><option value="students">الطلاب فقط</option><option value="teachers">المعلمين / المدرسين فقط</option><option value="all">كل المدرسة</option></select></div><div class="mat-field"><label>عنوان الإشعار</label><input id="notifTitle" type="text" placeholder="عنوان"></div></div><div class="mat-field"><label>نص الإشعار</label><textarea id="notifText" rows="3"></textarea></div><button class="material-btn" onclick="notifSend()">نشر الإشعار في الشريط العلوي</button></div>':'';
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">✉️</span><div><h2>مراسلة</h2><p>الرسائل غير المقروءة تظهر بالأحمر في الشريط العلوي</p></div></div>'+back+'</div>'+notifBox+
     '<div class="slog-filters"><div class="mat-field"><label>إلى</label><select id="mailTo">'+opts+'</select></div></div>'+
     '<div class="mat-field"><label>الرسالة</label><textarea id="mailText" rows="4" placeholder="اكتب الرسالة..."></textarea></div>'+
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0">'+
     '<button class="material-btn" onclick="mailSend()">إرسال</button>'+
+    '<button type="button" class="material-btn secondary" id="mailRecBtn" onclick="mailToggleRec()">🎤 بصمة صوتية</button>'+
+    '<span id="mailRecStatus" style="font-size:12px;color:#546e7a"></span></div>'+
+    '<input type="hidden" id="mailAudioData" value="">'+
     '<h3 style="margin:18px 0 8px">الوارد والصادر</h3>'+
     '<div style="display:grid;gap:10px">'+(html||'<div class="empty-hint">لا رسائل بعد.</div>')+'</div>';
-  mailMarkRead();
   updateMailBadges();
+}
+function mailDelete(id){
+  const me=authMe(); if(!me)return;
+  const m=MAIL_STATE.find(function(x){return x.id===id;});
+  if(!m)return;
+  if(me.role!=='admin' && m.fromId!==me.id){alert('يمكن حذف رسالتك فقط.');return;}
+  if(!confirm('حذف هذه الرسالة؟'))return;
+  MAIL_STATE=MAIL_STATE.filter(function(x){return x.id!==id;});
+  saveMail(); renderMailHome();
+}
+function mailOpenOne(id){
+  const me=authMe(); if(!me)return;
+  const m=MAIL_STATE.find(function(x){return x.id===id;});
+  if(!m||m.fromId===me.id)return;
+  if(!m.readBy)m.readBy={};
+  if(!m.readBy[me.id]){m.readBy[me.id]=1; saveMail(); renderMailHome();}
+}
+let MAIL_REC=null, MAIL_CHUNKS=[];
+function mailToggleRec(){
+  const btn=document.getElementById('mailRecBtn');
+  const st=document.getElementById('mailRecStatus');
+  if(MAIL_REC){ try{MAIL_REC.stop();}catch(e){} return; }
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert('التسجيل غير مدعوم في هذا المتصفح.');return;}
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    MAIL_CHUNKS=[];
+    const rec=new MediaRecorder(stream);
+    MAIL_REC=rec;
+    rec.ondataavailable=function(ev){ if(ev.data&&ev.data.size) MAIL_CHUNKS.push(ev.data); };
+    rec.onstop=function(){
+      stream.getTracks().forEach(function(tr){tr.stop();});
+      MAIL_REC=null;
+      const blob=new Blob(MAIL_CHUNKS,{type:'audio/webm'});
+      if(blob.size>450000){alert('البصمة طويلة جداً. سجّل أقل من نصف دقيقة.'); if(st)st.textContent=''; if(btn)btn.textContent='🎤 بصمة صوتية'; return;}
+      const fr=new FileReader();
+      fr.onload=function(){ const hid=document.getElementById('mailAudioData'); if(hid)hid.value=fr.result; if(st)st.textContent='تم تسجيل البصمة — أرسل الرسالة'; };
+      fr.readAsDataURL(blob);
+      if(btn)btn.textContent='🎤 بصمة صوتية';
+    };
+    rec.start();
+    if(btn)btn.textContent='⏹ إيقاف التسجيل';
+    if(st)st.textContent='جاري التسجيل…';
+  }).catch(function(){alert('اسمح باستخدام الميكروفون لتسجيل البصمة.');});
 }
 function mailSend(){
   const me=authMe();if(!me)return;
   const toId=(document.getElementById('mailTo')||{}).value||'all';
   const text=String((document.getElementById('mailText')||{}).value||'').trim();
-  if(!text){alert('اكتب الرسالة.');return;}
+  const audio0=(document.getElementById('mailAudioData')||{}).value||'';
+  if(!text && !audio0){alert('اكتب رسالة أو سجّل بصمة صوتية.');return;}
   let toName='الجميع';
   if(toId!=='all'){
     const rec=(AUTH_STATE.accounts||[]).find(function(a){return a.id===toId;});
@@ -12384,7 +12628,8 @@ function mailSend(){
     toName=rec.name;
   }
   const now=new Date();
-  MAIL_STATE.unshift({id:authUid(),fromId:me.id,fromName:me.name,fromRole:me.role,to:toId,toName:toName,text:text,at:now.getTime(),when:now.toLocaleString('ar-IQ'),readBy:{}});
+  const audio=(document.getElementById('mailAudioData')||{}).value||'';
+  MAIL_STATE.unshift({id:authUid(),fromId:me.id,fromName:me.name,fromRole:me.role,to:toId,toName:toName,text:text,audio:audio,at:now.getTime(),when:now.toLocaleString('ar-IQ'),readBy:{}});
   saveMail();
   if(typeof liveAlertNow==='function')liveAlertNow('مراسلة جديدة', (me.name||'')+': '+text);
   renderMailHome();
@@ -12989,5 +13234,5 @@ try{document.addEventListener('visibilitychange',function(){if(!document.hidden)
 
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2ffffbfbab57a93',t:'MTc4NzU0OTc4Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3006a445c6e8dec',t:'MTc4NzU1NDE0NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
