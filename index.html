@@ -1584,6 +1584,30 @@
   .notif-panel.open{display:block}
   .notif-item{border:1px solid #eee;border-radius:10px;padding:10px;margin-top:8px}
   .notif-item.unread{border-color:#c62828;background:#ffebee}
+  .st-unread-dot{position:absolute;top:10px;left:10px;width:14px;height:14px;border-radius:50%;background:#e53935;box-shadow:0 0 0 3px rgba(229,57,53,.28);z-index:2}
+  .st-sub-card{position:relative}
+  #btnMainMenu{position:relative}
+  #hwDot{position:absolute;top:-3px;left:-3px;width:12px;height:12px;border-radius:50%;background:#e53935;border:2px solid #fff;display:none;z-index:3}
+  #hwDot.on{display:block}
+  .live-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#cfd8dc;margin-inline-start:6px;vertical-align:middle}
+  .live-dot.on{background:#2e7d32;box-shadow:0 0 0 4px rgba(46,125,50,.22);animation:livePulse 1.6s ease-out infinite}
+
+  .portal-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:flex-end}
+  .portal-fb,.portal-fb-top,.fb-head-btn{background:#1877f2!important;color:#fff!important;text-decoration:none;font-weight:800;border:0;cursor:pointer;font-family:inherit}
+  .fb-head-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:12px;white-space:nowrap;flex:0 0 auto;font-size:14px;min-height:42px}
+  .portal-logout{width:100%;margin:0 0 14px;min-height:44px}
+  #view-student .module-head, #view-teacher .module-head{align-items:center;flex-wrap:nowrap;gap:10px}
+  a.portal-fb{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:10px}
+  body.role-teacher #btnLogout, body.role-student #btnLogout{display:inline-flex!important;visibility:visible!important}
+  @media (max-width:760px){
+    body.role-teacher #topbar, body.role-student #topbar{
+      height:auto!important;max-height:none!important;flex-wrap:wrap!important;overflow:visible!important;
+    }
+    .portal-actions{width:100%;justify-content:stretch}
+    .portal-actions .material-btn, .portal-actions a.portal-fb{flex:1 1 140px;text-align:center;min-height:42px}
+    .module-head{align-items:flex-start}
+  }
+  @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(46,125,50,.45)}100%{box-shadow:0 0 0 8px rgba(46,125,50,0)}}
   body.role-teacher #btnGlobalMenu, body.role-student #btnGlobalMenu,
   body.role-teacher .top-search-btn, body.role-student .top-search-btn{ display:none !important; }
   body.role-student #btnNotif, body.role-teacher #btnNotif{ display:flex !important; align-items:center; justify-content:center; }
@@ -2332,6 +2356,32 @@
   @media print{#view-exams{display:none!important}}
 
   /* ================= Compact professional application bar ================= */
+
+  #topStack{position:sticky;top:0;z-index:50;width:100%;}
+  #topStack #topbar{position:relative!important;top:auto!important;}
+  #creditBar{
+    display:none;
+    width:100%;
+    box-sizing:border-box;
+    margin:0; padding:3px 8px;
+    min-height:20px; height:auto; line-height:1.35;
+    text-align:center;
+    font-family:"Noto Kufi Arabic","Reem Kufi",Tahoma,sans-serif;
+    font-size:clamp(10px, 3.1vw, 13px);
+    font-weight:700;
+    color:#6d1028;
+    background:linear-gradient(90deg,#f8eec8,#fff8e6,#f8eec8);
+    border-bottom:1px solid #e0c56a;
+    white-space:normal;
+    overflow:visible;
+    pointer-events:none; user-select:none;
+  }
+  html[data-ui-skin^="night"] #creditBar{
+    color:#f3d48a; background:linear-gradient(90deg,#1a1214,#2a1a20,#1a1214);
+    border-bottom-color:#5a3a28;
+  }
+  body.role-teacher #creditBar, body.role-student #creditBar{ display:block; }
+  body.auth-screen #creditBar, body.auth-screen #topStack #creditBar{ display:none !important; }
   #topbar{
     min-height:46px; max-height:46px; height:46px; flex-direction:row!important; align-items:center!important;
     padding:4px 10px!important; gap:6px!important;
@@ -2345,7 +2395,10 @@
     display:flex;align-items:center;justify-content:center;flex:0 0 auto;
     background:linear-gradient(135deg,#d4af37,#f1d778)!important;color:#4b1426!important;
     font-size:18px;font-weight:900;box-shadow:0 3px 10px rgba(0,0,0,.2);cursor:pointer;
+    overflow:hidden;
   }
+  #btnMainMenu img.topbar-school-logo{width:36px;height:36px;object-fit:cover;border-radius:10px;display:block;}
+  body.role-teacher #btnMainMenu, body.role-student #btnMainMenu{background:#fff!important;border:1px solid rgba(212,175,55,.75);}
   #topbar .topbar-nav{ flex:0 0 auto!important; width:auto!important; min-width:0; padding:0!important; overflow:visible!important; justify-content:flex-end!important; }
   #btnGlobalMenu{ background:linear-gradient(180deg,#d4af37,#a77e19)!important; color:#fff!important; font-weight:900; min-height:30px; padding:5px 10px; position:relative; z-index:2; }
   #topbar .quick-theme-btn,.quick-theme-btn{
@@ -2722,6 +2775,43 @@
   @keyframes barcodeLaser{0%,100%{top:16%}50%{top:80%}}
   .barcode-scan-box.got{outline:4px solid #00e676}
   .barcode-result-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.08);margin-top:12px}
+  html[data-ui-skin^="night"] .barcode-result-card,
+  html[data-ui-skin^="night"] .wifi-local-wrap .barcode-result-card{
+    background:var(--skin-surface)!important;
+    color:var(--skin-heading)!important;
+    border:1px solid var(--skin-border)!important;
+    box-shadow:0 8px 20px var(--skin-shadow)!important;
+  }
+  html[data-ui-skin^="night"] .barcode-result-card b,
+  html[data-ui-skin^="night"] .barcode-result-card h3,
+  html[data-ui-skin^="night"] .barcode-result-card p,
+  html[data-ui-skin^="night"] .barcode-result-card label,
+  html[data-ui-skin^="night"] .barcode-result-card small,
+  html[data-ui-skin^="night"] .mat-field label,
+  html[data-ui-skin^="night"] #view-teacher label,
+  html[data-ui-skin^="night"] #view-teacher p,
+  html[data-ui-skin^="night"] #view-student p,
+  html[data-ui-skin^="night"] #view-student label{
+    color:var(--skin-heading)!important;
+    opacity:1!important;
+  }
+  html[data-ui-skin^="night"] textarea,
+  html[data-ui-skin^="night"] input[type="text"],
+  html[data-ui-skin^="night"] input[type="password"],
+  html[data-ui-skin^="night"] input[type="url"],
+  html[data-ui-skin^="night"] input[type="number"],
+  html[data-ui-skin^="night"] input[type="search"],
+  html[data-ui-skin^="night"] select{
+    background:#141014!important;
+    color:#fff8ee!important;
+    border:1px solid var(--skin-border)!important;
+    caret-color:#ffe9b0;
+  }
+  html[data-ui-skin^="night"] textarea::placeholder,
+  html[data-ui-skin^="night"] input::placeholder{color:#c4b8a8!important;opacity:1;}
+  html[data-ui-skin^="night"] .module-title h2{color:var(--skin-heading)!important;}
+  html[data-ui-skin^="night"] .module-title p{color:var(--skin-muted)!important;}
+
   .barcode-result-card h3{margin:0 0 8px;font-size:20px}
   .barcode-result-card table{width:100%;border-collapse:collapse;margin-top:10px}
   .barcode-result-card th,.barcode-result-card td{border:1px solid #d5b83f;padding:8px;text-align:center}
@@ -4648,11 +4738,15 @@ return QRCode;
 if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLib; }
 
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+<div id="topStack">
 <div id="topbar">
-  <button type="button" id="btnMainMenu" class="top-main-menu-btn" onclick="openMainMenuFromTop()" title="القائمة الرئيسية" aria-label="القائمة الرئيسية">▦</button>
+  <button type="button" id="btnMainMenu" class="top-main-menu-btn" onclick="openMainMenuFromTop()" title="القائمة الرئيسية" aria-label="القائمة الرئيسية">▦<i id="hwDot"></i></button>
   <b id="topBrand" onclick="openMainMenuFromTop()">المنظومة المدرسية</b>
   <nav class="topbar-nav" aria-label="التنقل">
     <a class="apps-mini-link" href="https://t.me/hu_sain123" target="_blank" rel="noopener noreferrer" title="تطبيقاتي">تطبيقاتي</a>
@@ -4661,9 +4755,12 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
     <button type="button" id="btnWifi" class="top-search-btn" onclick="typeof openWifiFromBar==='function'&&openWifiFromBar()" title="المزامنة">📡<span id="wifiDot" style="display:none;position:absolute;top:2px;left:2px;width:8px;height:8px;border-radius:50%;background:#e53935"></span></button>
     <button type="button" id="btnNotif" class="top-search-btn" onclick="openNotifPanel();event.stopPropagation();" title="الإشعارات">🔔<i id="notifDot" class="notif-red-dot" hidden></i></button>
     <button type="button" id="btnMail" class="top-search-btn" onclick="openMailModule()" title="مراسلة">✉️<span id="mailBadge" class="top-unread-badge" hidden>0</span></button>
+    <a id="btnFacebook" class="logout-top-btn portal-fb-top" href="#" target="_blank" rel="noopener noreferrer" hidden>فيسبوك</a>
     <button type="button" id="btnLogout" class="logout-top-btn" onclick="authLogout()" title="تسجيل خروج">تسجيل خروج</button>
     <button type="button" id="btnGlobalMenu" onclick="openGlobalNav()">☰ القائمة</button>
   </nav>
+</div>
+<div id="creditBar" aria-hidden="true">تصميم الأستاذ حسين ناهي المسعودي</div>
 </div>
 <div id="notifPanel" class="notif-panel"></div>
 
@@ -6281,6 +6378,20 @@ function showSearchedStudentInfo(
   body.innerHTML='<div class="ss-selected"><h3>'+escapeHtml(entry.student.name)+'</h3><p>معلومات الطالب المسجلة</p><div class="student-detail-grid"><div><b>الصف</b>'+escapeHtml(entry.gradeLabel)+'</div><div><b>الشعبة</b>'+escapeHtml(entry.section.label)+'</div><div><b>التسلسل</b>'+String(entry.index+1)+'</div><div><b>اللقب</b>'+escapeHtml(entry.student.title||'—')+'</div><div><b>اسم الأم</b>'+escapeHtml(entry.student.motherName||'—')+'</div><div><b>المواليد</b>'+escapeHtml(entry.student.birthDate||'—')+'</div><div><b>العمر</b>'+escapeHtml(String(calculateStudentAge(entry.student.birthDate)||'—'))+'</div><div><b>هاتف ولي الأمر</b>'+escapeHtml(entry.student.guardianPhone||'—')+'</div><div><b>الحالة</b>'+escapeHtml(entry.student.status||'مستمر')+'</div><div><b>مسقط الرأس</b>'+escapeHtml(entry.student.birthPlace||'—')+'</div><div><b>مرشد الشعبة</b>'+escapeHtml(entry.section.guide||APP.school.guide||'—')+'</div><div><b>الرقم الامتحاني</b>'+escapeHtml(meta.examNo||'—')+'</div><div><b>رقم القيد</b>'+escapeHtml(meta.registrationNo||'—')+'</div><div><b>المواد المدخلة</b>'+String(entered)+' من '+String(subjects.length)+'</div><div><b>النتيجة الحالية</b>'+escapeHtml(status)+'</div></div><button class="ss-back" onclick="showSearchedStudentActions(currentSearchedStudent)">رجوع إلى الخيارات</button></div>';
 }
 
+function updateTopbarSchoolLogo(){
+  const btn=document.getElementById('btnMainMenu');
+  if(!btn)return;
+  const role=typeof authRole==='function'?authRole():'';
+  const logo=(typeof APP!=='undefined'&&APP.school&&APP.school.logo)?APP.school.logo:'';
+  if((role==='teacher'||role==='student')&&logo){
+    btn.innerHTML='<img class="topbar-school-logo" alt="شعار المدرسة" src="'+logo+'"><i id="hwDot"></i>';
+    btn.title='شعار المدرسة';
+  }else{
+    btn.innerHTML='▦<i id="hwDot"></i>';
+    btn.title='القائمة الرئيسية';
+  }
+  if(typeof updateHwDot==='function')updateHwDot();
+}
 function showView(id){
   closeGlobalNav();
   document.querySelectorAll('.view').forEach(v=> v.style.display = 'none');
@@ -6296,6 +6407,8 @@ function showView(id){
   updateGlobalNavActive();
   if(typeof updateStudentsNavLabel==='function')updateStudentsNavLabel();
   if(typeof updateMailBadges==='function')updateMailBadges();
+  if(typeof updateTopbarSchoolLogo==='function')updateTopbarSchoolLogo();
+  if(typeof updateFacebookBtn==='function')updateFacebookBtn();
   setTimeout(function(){if(typeof ensurePrintThemeBars==='function')ensurePrintThemeBars();},30);
   if(id === 'view-output') setTimeout(updatePreviewScale, 30);
 }
@@ -6305,6 +6418,8 @@ function authClampView(id){
   if(r==='teacher'){
     if(id==='view-teacher'||id==='view-auth'||id==='view-attendance'||id==='view-exams'||id==='view-mail') return id;
     if(id==='view-records'&&typeof teacherCanRecords==='function'&&teacherCanRecords()) return id;
+    if((id==='view-home'||id==='view-students')&&typeof teacherCanSheets==='function'&&teacherCanSheets()) return id;
+    if(id==='view-care'&&typeof teacherCanCare==='function'&&teacherCanCare()) return id;
     return 'view-teacher';
   }
   if(r==='student' && id!=='view-student' && id!=='view-auth') return 'view-student';
@@ -6486,14 +6601,12 @@ function initApp(){
   renderDashboard();
   navigateTo('view-dashboard', {}, true);
   }
+  try{initAppAfterCloud();}catch(e){try{renderAuthLogin();navigateTo('view-auth',{},true);}catch(e2){}}
   if(typeof cloudEnabled==='function'&&cloudEnabled()){
     try{
-      if(!authHasSession()){renderAuthLogin();navigateTo('view-auth',{},true);}
-      cloudPullNow(true).then(function(){initAppAfterCloud();}).catch(function(){initAppAfterCloud();});
-      return;
-    }catch(e){initAppAfterCloud();return;}
+      cloudPullNow(true).then(function(){try{cloudListen();}catch(e){} try{initAppAfterCloud();}catch(e){}}).catch(function(){try{cloudListen();}catch(e){}});
+    }catch(e){}
   }
-  initAppAfterCloud();
 }
 
 function goHome(){
@@ -6604,6 +6717,14 @@ function renderSettingsView(isOnboarding){
         '<option value="en"'+(currentNumeralStyle()==='en'?' selected':'')+'>إنجليزية (1234)</option>' +
       '</select>' +
       '<p style="color:#888;font-size:12px;margin:6px 0 0;">الوضع الافتراضي: أرقام عربية. يُطبَّق على أرقام التطبيق فوراً.</p>' +
+      '<label>ما يظهر في واجهة الطالب</label>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 10px;">' +
+        '<label><input type="checkbox" id="setStuGrades"'+((APP.school.studentShowGrades!==false)?' checked':'')+'> سجل درجاته</label>' +
+        '<label><input type="checkbox" id="setStuLevels"'+((APP.school.studentShowLevels!==false)?' checked':'')+'> سجل مستوياته</label>' +
+      '</div>' +
+      '<p style="color:#888;font-size:12px;margin:0 0 8px;">التحضير يبقى ظاهراً. ألغِ التحديد لإخفاء القسم عن الطالب.</p>' +
+      '<label>رابط صفحة فيسبوك (يظهر للمعلم والطالب)</label>' +
+      '<input type="url" id="setFacebook" dir="ltr" placeholder="https://facebook.com/yourpage" value="'+escapeHtml(APP.school.facebookUrl||'')+'">' +
       '<label>عدد دروس الإكمال</label>' +
       '<input type="number" id="setCompleteMax" min="1" max="20" value="'+(APP.school.completeMax!=null?APP.school.completeMax:2)+'">' +
       '<label>عدد دروس الرسوب</label>' +
@@ -6681,6 +6802,12 @@ function collectSettingsForm(){
   APP.school.attendanceStartDate=attStart?attStart.value:'';
   const mm=document.querySelector('input[name="setMainMenu"]:checked');
   if(mm) APP.school.mainMenu=mm.value;
+  const sg=document.getElementById('setStuGrades');
+  const sl=document.getElementById('setStuLevels');
+  if(sg) APP.school.studentShowGrades=!!sg.checked;
+  if(sl) APP.school.studentShowLevels=!!sl.checked;
+  const fb=document.getElementById('setFacebook');
+  if(fb) APP.school.facebookUrl=fb.value.trim();
   const preview = document.getElementById('logoPreview');
   APP.school.logo = preview.dataset.src || '';
   const st = document.querySelector('input[name="setStage"]:checked');
@@ -6972,17 +7099,23 @@ function renderHomeView(){
   el.innerHTML =
     '<div class="home-header">' +
       '<h2>الشعب الدراسية' + (STAGE_META[currentStage()] ? ' — ' + STAGE_META[currentStage()].title : '') + '</h2>' +
-      '<button onclick="openGradesEditor()">📚 تعديل الصفوف والشعب</button>' +
+      ((typeof authRole==='function'&&authRole()==='teacher')
+        ? '<button onclick="openTeacherHome()">رجوع لمهام المعلم</button>'
+        : '<button onclick="openGradesEditor()">📚 تعديل الصفوف والشعب</button>') +
     '</div>' +
     '<div id="homeStages"></div>';
   const stages = document.getElementById('homeStages');
   let any = false;
   visibleGradeGroups().forEach(group=>{
     const items = [];
+    const isTch=typeof authRole==='function'&&authRole()==='teacher';
     group.labels.forEach(label=>{
       const g = APP.grades.find(x=>x.label===label);
       if(!g) return;
-      g.sections.forEach(sec=> items.push({g, sec}));
+      g.sections.forEach(sec=>{
+        if(isTch && typeof teacherSheetAllowed==='function' && !teacherSheetAllowed(g.label, sec.id)) return;
+        items.push({g, sec});
+      });
     });
     if(!items.length) return;
     any = true;
@@ -7017,6 +7150,12 @@ function getCurrentSection(){
   return g ? g.sections.find(s=>s.id===currentSectionCtx.sectionId) : null;
 }
 function openStudents(gradeLabel, sectionId){
+  if(typeof authRole==='function'&&authRole()==='teacher'){
+    if(typeof teacherSheetAllowed==='function'&&!teacherSheetAllowed(gradeLabel, sectionId)){
+      alert('غير مسموح بعرض نتائج هذه الشعبة.');
+      return;
+    }
+  }
   const returnView=currentViewId==='view-grades'?'grades':'home';
   currentSectionCtx = { gradeLabel:gradeLabel, sectionId:sectionId, returnView:returnView };
   renderStudentsView();
@@ -8807,7 +8946,7 @@ function saveCareState(){try{localStorage.setItem(CARE_STORAGE_KEY,JSON.stringif
 let CARE_STATE=loadCareState();if(!Array.isArray(CARE_STATE.orphans))CARE_STATE.orphans=[];if(!Array.isArray(CARE_STATE.chronic))CARE_STATE.chronic=[];
 function openCareModule(){renderCareHome();navigateTo('view-care',{page:'home'});}
 function restoreCareView(meta){if(meta.page==='orphans')renderOrphansView();else if(meta.page==='chronic')renderChronicView();else renderCareHome();}
-function renderCareHome(){document.getElementById('view-care').innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🤍</span><div><h2>الرعاية والأيتام</h2><p>متابعة الأيتام وحالات الأمراض المزمنة</p></div></div><button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button></div><div class="care-home-grid"><button class="care-module-card orphans" onclick="openOrphansView()"><span>🫶</span><h3>الأيتام</h3><p>تسجيل ومتابعة بيانات الأيتام وأولياء أمورهم.</p></button><button class="care-module-card chronic" onclick="openChronicView()"><span>🩺</span><h3>المرض المزمن</h3><p>تسجيل الطلاب المصابين بأمراض مزمنة وملاحظاتهم.</p></button></div></div>';}
+function renderCareHome(){const careBack=(typeof authRole==='function'&&authRole()==='teacher')?'<button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button>':'<button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button>';document.getElementById('view-care').innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🤍</span><div><h2>الرعاية والأيتام</h2><p>متابعة الأيتام وحالات الأمراض المزمنة</p></div></div>'+careBack+'</div><div class="care-home-grid"><button class="care-module-card orphans" onclick="openOrphansView()"><span>🫶</span><h3>الأيتام</h3><p>تسجيل ومتابعة بيانات الأيتام وأولياء أمورهم.</p></button><button class="care-module-card chronic" onclick="openChronicView()"><span>🩺</span><h3>المرض المزمن</h3><p>تسجيل الطلاب المصابين بأمراض مزمنة وملاحظاتهم.</p></button></div></div>';}
 function allStudentSelectOptions(){let html='<option value="">اختر الطالب</option>';visibleGradeGroups().forEach(function(group){group.labels.forEach(function(label){const grade=APP.grades.find(function(g){return g.label===label;});if(!grade)return;(grade.sections||[]).forEach(function(sec){(sec.students||[]).forEach(function(st){html+='<option value="'+st.id+'">'+escapeHtml(st.name)+' — '+escapeHtml(label)+' / '+escapeHtml(sec.label)+'</option>';});});});});return html;}
 function locateStudentById(id){for(const grade of (APP.grades||[])){for(const sec of (grade.sections||[])){const st=(sec.students||[]).find(function(x){return x.id===id;});if(st)return {student:st,grade:grade.label,section:sec.label};}}return null;}
 function openCareForm(type){
@@ -11323,6 +11462,9 @@ function renderAuthTasksHome(){
   const nT=AUTH_STATE.accounts.filter(function(a){return a.role==='teacher';}).length;
   const nS=AUTH_STATE.accounts.filter(function(a){return a.role==='student';}).length;
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">📌</span><div><h2>المهام</h2><p>توزيع مهام المعلمين وإدارة حسابات الدخول</p></div></div><button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button></div>'+
+    '<div class="barcode-result-card" style="margin:0 0 16px"><h3>رابط صفحة فيسبوك</h3><p style="color:#546e7a;font-size:13px;margin:4px 0 10px">يظهر زر «صفحة فيسبوك» أعلى واجهة المعلم والطالب في المكان المحدد.</p>'+
+    '<div class="mat-field"><input id="taskFacebook" type="url" dir="ltr" placeholder="https://facebook.com/yourpage" value="'+escapeHtml((APP.school&&APP.school.facebookUrl)||'')+'"></div>'+
+    '<button type="button" class="material-btn" onclick="saveTaskFacebook()">حفظ رابط فيسبوك</button></div>'+
     '<div class="staff-home-grid">'+
     '<button class="staff-module-card info" onclick="renderAuthAssign();navigateTo(\'view-tasks\',{page:\'assign\'})"><span>🗂️</span><h3>توزيع المهام</h3><p>تكليف معلم/مدرس بمادة وشعبة: سجل درجات، مستويات، غياب، أسئلة، قائمة امتحان، واجب بيتي.</p></button>'+
     '<button class="staff-module-card raise" onclick="renderAuthAccounts();navigateTo(\'view-tasks\',{page:\'accounts\'})"><span>🔐</span><h3>حسابات دخول الملاك</h3><p>حسابات المدير والمعلمين فقط — اسم دخول إنجليزي ورقم سري. المعلمون: '+nT+'</p></button>'+
@@ -11405,7 +11547,7 @@ function renderAuthStudentAccounts(){
       if(!sts.length)return;
       const rows=sts.map(function(st,i){
         const acc=authEnsureStudentAccount(st,grade,sec.id);
-        return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(st.name||'—')+'</td><td dir="ltr"><b>'+escapeHtml(acc.login||'')+'</b></td><td><input data-acc="'+acc.id+'" class="st-pass-input" type="text" value="'+escapeHtml(acc.password||'')+'" style="width:110px;text-align:center;font-weight:800"></td><td><button class="material-btn secondary" onclick="authRegenStudentPass(\''+acc.id+'\')">توليد جديد</button></td></tr>';
+        return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(st.name||'—')+liveDotHtml(acc.id)+'</td><td dir="ltr"><b>'+escapeHtml(acc.login||'')+'</b></td><td><input data-acc="'+acc.id+'" class="st-pass-input" type="text" value="'+escapeHtml(acc.password||'')+'" style="width:110px;text-align:center;font-weight:800"></td><td><button class="material-btn secondary" onclick="authRegenStudentPass(\''+acc.id+'\')">توليد جديد</button></td></tr>';
       }).join('');
       blocks+='<h3 style="margin:16px 0 8px">الصف '+escapeHtml(grade)+' — شعبة '+escapeHtml(sec.label)+' <small style="color:#78909c">('+toArabicDigits(String(sts.length))+')</small></h3>'+
         '<div class="table-scroll"><table class="acc-table"><thead><tr><th>ت</th><th>اسم الطالب</th><th>اسم الدخول</th><th>الرقم السري</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>';
@@ -11435,7 +11577,7 @@ function renderAuthAccounts(){
   const staffAcc=AUTH_STATE.accounts.filter(function(a){return a.role==='admin'||a.role==='teacher';});
   const rows=staffAcc.map(function(a,i){
     const role=a.role==='admin'?'مدير':'معلم / مدرس';
-    return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(a.name)+'</td><td dir="ltr"><b>'+escapeHtml(a.login||'')+'</b></td><td>'+role+'</td><td>'+escapeHtml(a.password||'')+'</td><td>'+
+    return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(a.name)+liveDotHtml(a.id)+'</td><td dir="ltr"><b>'+escapeHtml(a.login||'')+'</b></td><td>'+role+'</td><td>'+escapeHtml(a.password||'')+'</td><td>'+
       '<button class="material-btn secondary" onclick="authEditAccount(\''+a.id+'\')">تعديل</button> '+
       (a.role==='admin'&&AUTH_STATE.accounts.filter(function(x){return x.role==='admin';}).length<2?'':'<button class="material-btn secondary" onclick="authDeleteAccount(\''+a.id+'\')">حذف</button>')+
       '</td></tr>';
@@ -11514,6 +11656,8 @@ function renderAuthAssign(){
       if(asg.examlist)tasks.push('قائمة امتحان');
       if(asg.homework)tasks.push('واجب بيتي');
       if(asg.records||t.canRecords)tasks.push('القيود');
+      if(asg.sheets)tasks.push('كشوف النتائج'+(asg.sheetScope==='stage'?' (المرحلة)':(asg.sheetScope==='grade'?' (كل الصف)':'')));
+      if(asg.care||t.canCare)tasks.push('الرعاية');
       rows+='<tr><td>'+escapeHtml(t.name)+'</td><td>'+escapeHtml(asg.grade)+'</td><td>'+escapeHtml(asg.sectionLabel||asg.sectionId)+'</td><td>'+escapeHtml(asg.subject)+'</td><td>'+escapeHtml(tasks.join('، '))+'</td><td><button class="material-btn secondary" onclick="authRemoveAssign(\''+t.id+'\',\''+asg.id+'\')">حذف التكليف</button></td></tr>';
     });
   });
@@ -11523,6 +11667,11 @@ function renderAuthAssign(){
       '<div class="mat-field"><label>الصف</label><select id="asgGrade" onchange="authAsgGradeChanged()"><option value="">اختر الصف</option>'+gOpts+'</select></div>'+
       '<div class="mat-field"><label>الشعبة</label><select id="asgSection"><option value="">اختر الشعبة</option></select></div>'+
       '<div class="mat-field"><label>المادة</label><select id="asgSubject"><option value="">اختر المادة</option></select></div>'+
+      '<div class="mat-field"><label>نطاق كشوف النتائج</label><select id="asgSheetScope">'+
+        '<option value="section">شعبة واحدة</option>'+
+        '<option value="grade">كل شعب الصف المختار</option>'+
+        '<option value="stage">كل صفوف المرحلة الحالية</option>'+
+      '</select></div>'+
     '</div>'+
     '<div class="slog-filters" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">'+
       '<label><input type="checkbox" id="asgGrades" checked> سجل الدرجات</label>'+
@@ -11532,8 +11681,11 @@ function renderAuthAssign(){
       '<label><input type="checkbox" id="asgExam"> إصدار قائمة امتحان</label>'+
       '<label><input type="checkbox" id="asgHw" checked> الواجب البيتي</label>'+
       '<label><input type="checkbox" id="asgRec"> إدارة قسم القيود</label>'+
+      '<label><input type="checkbox" id="asgSheets"> كشوف النتائج (الصف/الشعبة فقط)</label>'+
+      '<label><input type="checkbox" id="asgCare"> الرعاية والأيتام</label>'+
       '<button class="material-btn" onclick="authAddAssign()">حفظ التكليف</button>'+
       '<button class="material-btn secondary" onclick="authGrantRecords()">تكليف المعلم المختار بإدارة القيود فقط</button>'+
+      '<button class="material-btn secondary" onclick="authGrantCare()">تكليف المعلم المختار بالرعاية والأيتام</button>'+
     '</div>'+
     '<div class="table-scroll"><table class="acc-table"><thead><tr><th>المعلم</th><th>الصف</th><th>الشعبة</th><th>المادة</th><th>المهام</th><th></th></tr></thead><tbody>'+(rows||'<tr><td colspan="6">لا تكليفات بعد. أنشئ حساب معلم أولاً ثم أضف تكليفاً.</td></tr>')+'</tbody></table></div>';
 }
@@ -11552,6 +11704,14 @@ function authGrantRecords(){
   alert('تم تكليف «'+tch.name+'» بإدارة قسم القيود.');
   renderAuthAssign();
 }
+function authGrantCare(){
+  const tid=(document.getElementById('asgTeacher')||{}).value||'';
+  const tch=AUTH_STATE.accounts.find(function(a){return a.id===tid;});
+  if(!tch){alert('اختر معلماً أولاً.');return;}
+  tch.canCare=true; saveAuthState();
+  alert('تم تكليف «'+tch.name+'» بقسم الرعاية والأيتام.');
+  renderAuthAssign();
+}
 function authAddAssign(){
   const tid=(document.getElementById('asgTeacher')||{}).value||'';
   const t=AUTH_STATE.accounts.find(function(a){return a.id===tid;});
@@ -11559,20 +11719,52 @@ function authAddAssign(){
   const grade=(document.getElementById('asgGrade')||{}).value||'';
   const sectionId=(document.getElementById('asgSection')||{}).value||'';
   const subject=(document.getElementById('asgSubject')||{}).value||'';
-  if(!grade||!sectionId||!subject){alert('اختر الصف والشعبة والمادة.');return;}
+  const wantSheets=!!(document.getElementById('asgSheets')||{}).checked;
+  const wantCare=!!(document.getElementById('asgCare')||{}).checked;
+  const wantRec=!!(document.getElementById('asgRec')||{}).checked;
+  if(wantCare) t.canCare=true;
+  if(wantRec) t.canRecords=true;
+  const sheetScope=((document.getElementById('asgSheetScope')||{}).value)||'section';
+  if(wantCare && !grade && !sectionId && !subject && !wantSheets){
+    saveAuthState();renderAuthAssign();
+    alert('تم تكليف «'+t.name+'» بقسم الرعاية والأيتام.');
+    return;
+  }
+  if(wantSheets && sheetScope==='stage'){
+    if(!t.assignments)t.assignments=[];
+    t.assignments.push({
+      id:authUid(),grade:grade||'',sectionId:'',sectionLabel:'كل المرحلة',subject:subject||'كشوف النتائج',
+      grades:false,levels:false,attendance:false,questions:false,examlist:false,homework:false,
+      records:wantRec,sheets:true,care:wantCare,sheetScope:'stage',stage:typeof currentStage==='function'?currentStage():''
+    });
+    saveAuthState();renderAuthAssign();return;
+  }
+  if(!grade){alert('اختر الصف.');return;}
+  if(wantSheets && sheetScope==='grade'){
+    if(!t.assignments)t.assignments=[];
+    t.assignments.push({
+      id:authUid(),grade:grade,sectionId:'',sectionLabel:'كل الشعب',subject:subject||'كشوف النتائج',
+      grades:false,levels:false,attendance:false,questions:false,examlist:false,homework:false,
+      records:wantRec,sheets:true,care:wantCare,sheetScope:'grade'
+    });
+    saveAuthState();renderAuthAssign();return;
+  }
+  if(!sectionId){alert('اختر الشعبة.');return;}
+  if(!subject && !wantSheets && !wantCare){alert('اختر المادة أو مهمة كشوف النتائج.');return;}
   const sec=gbSectionsForGrade(grade).find(function(s){return s.id===sectionId;});
   if(!t.assignments)t.assignments=[];
   t.assignments.push({
-    id:authUid(),grade:grade,sectionId:sectionId,sectionLabel:sec?sec.label:'',subject:subject,
-    grades:!!(document.getElementById('asgGrades')||{}).checked,
-    levels:!!(document.getElementById('asgLevels')||{}).checked,
+    id:authUid(),grade:grade,sectionId:sectionId,sectionLabel:sec?sec.label:'',subject:subject||'مرشد الصف',sheetScope:wantSheets?'section':'',
+    grades:!!(document.getElementById('asgGrades')||{}).checked && !!subject,
+    levels:!!(document.getElementById('asgLevels')||{}).checked && !!subject,
     attendance:!!(document.getElementById('asgAtt')||{}).checked,
     questions:!!(document.getElementById('asgQ')||{}).checked,
     examlist:!!(document.getElementById('asgExam')||{}).checked,
     homework:!!(document.getElementById('asgHw')||{}).checked,
-    records:!!(document.getElementById('asgRec')||{}).checked
+    records:wantRec,
+    sheets:wantSheets,
+    care:wantCare
   });
-  if((document.getElementById('asgRec')||{}).checked) t.canRecords=true;
   saveAuthState();renderAuthAssign();
 }
 function authRemoveAssign(tid,aid){
@@ -11595,13 +11787,15 @@ function renderTeacherHome(){
     if(asg.questions) btns.push('<button class="material-btn secondary" onclick="teacherOpenQuestions(\''+asg.id+'\')">الأسئلة</button>');
     if(asg.examlist) btns.push('<button class="material-btn secondary" onclick="teacherOpenExam(\''+asg.id+'\')">قائمة الامتحان</button>');
     if(asg.homework) btns.push('<button class="material-btn secondary" onclick="teacherOpenHw(\''+asg.id+'\')">الواجب البيتي</button>');
+    if(asg.sheets) btns.push('<button class="material-btn secondary" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>');
     btns.push('<button class="material-btn secondary" onclick="teacherOpenEval(\''+asg.id+'\')">التقييمات</button>');
     return '<article class="grade-report-card" style="cursor:default"><div class="grc-title"><strong>'+escapeHtml(asg.subject)+'</strong><span class="grc-badge">'+escapeHtml(asg.grade)+' / '+escapeHtml(asg.sectionLabel)+'</span></div><div class="grc-results" style="grid-template-columns:1fr;gap:8px;margin-top:10px">'+btns.join('')+'</div></article>';
   }).join('');
   const canAtt=asgs.some(function(a){return a.attendance;});
   const canRec=teacherCanRecords();
-  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>لوحة المعلم</h2><p>مرحباً '+escapeHtml(me.name)+' — المواد والمهام المكلّف بها فقط</p></div></div><button class="material-btn secondary" onclick="authLogout()">تسجيل خروج</button></div>'+
+  const canCareT=teacherCanCare(); const canSheets=teacherCanSheets();
+  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>لوحة المعلم</h2><p>مرحباً '+escapeHtml(me.name)+' — المواد والمهام المكلّف بها فقط</p></div></div>'+facebookHeadBtn()+'</div>'+portalLogoutBtn()+
     wifiTeacherBar()+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px">'+attBar+'</div>'+
     '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مهام بعد. يطلب من المدير توزيع المواد من قسم المهام.</div>')+'</div></div>';
 }
@@ -11622,6 +11816,35 @@ function teacherCanRecords(){
   const me=authMe(); if(!me)return false;
   if(me.canRecords)return true;
   return (me.assignments||[]).some(function(a){return a.records;});
+}
+function teacherCanCare(){
+  const me=authMe(); if(!me)return false;
+  if(me.canCare)return true;
+  return (me.assignments||[]).some(function(a){return a.care;});
+}
+function teacherCanSheets(){
+  const me=authMe(); if(!me)return false;
+  return (me.assignments||[]).some(function(a){return a.sheets;});
+}
+function teacherSheetAllowed(grade, sectionId){
+  const me=authMe(); if(!me)return false;
+  const st=typeof currentStage==='function'?currentStage():'';
+  return (me.assignments||[]).some(function(a){
+    if(!a.sheets)return false;
+    if(a.sheetScope==='stage') return !a.stage || a.stage===st;
+    if(a.sheetScope==='grade') return String(a.grade)===String(grade);
+    return String(a.grade)===String(grade) && String(a.sectionId)===String(sectionId);
+  });
+}
+function teacherOpenCare(){
+  if(!teacherCanCare()){alert('لم تُكلَّف بقسم الرعاية والأيتام.');return;}
+  if(typeof openCareModule==='function') openCareModule();
+}
+function teacherOpenSheets(){
+  if(!teacherCanSheets()){alert('لم تُكلَّف بكشوف النتائج.');return;}
+  if(!stageHasAnySection()){alert('لا توجد شعب بعد.');return;}
+  renderHomeView();
+  navigateTo('view-home',{fromTeacher:1});
 }
 function teacherOpenRecords(){
   if(!teacherCanRecords()){alert('لم تُكلَّف بإدارة القيود.');return;}
@@ -11860,7 +12083,7 @@ function authSaveHw(asgId){
   const title=authNorm((document.getElementById('hwTitle')||{}).value);
   const body=String((document.getElementById('hwBody')||{}).value||'').trim();
   if(!title||!body){alert('أدخل عنوان الواجب ونصه.');return;}
-  AUTH_HW.unshift({id:authUid(),teacherId:me.id,teacherName:me.name,asgKey:asg.id,grade:asg.grade,sectionId:asg.sectionId,subject:asg.subject,title:title,body:body,date:new Date().toISOString().slice(0,10)});
+  AUTH_HW.unshift({id:authUid(),at:Date.now(),teacherId:me.id,teacherName:me.name,asgKey:asg.id,grade:asg.grade,sectionId:asg.sectionId,subject:asg.subject,title:title,body:body,date:new Date().toISOString().slice(0,10)});
   saveAuthHw();renderTeacherHw(asg);
 }
 function authDeleteHw(id,asgId){
@@ -11920,6 +12143,43 @@ function studentHwUnread(sub,ctx){
     return !rb[ctx.me.id] && !rb[ctx.studentId];
   });
 }
+function studentShowGrades(){return !(APP.school&&APP.school.studentShowGrades===false);}
+function schoolFacebookUrl(){
+  let u=String((APP.school&&APP.school.facebookUrl)||'').trim();
+  if(!u)return '';
+  if(!/^https?:\/\//i.test(u)) u='https://'+u.replace(/^\/+/, '');
+  return u;
+}
+function facebookHeadBtn(){
+  const u=schoolFacebookUrl();
+  if(u) return '<a class="fb-head-btn" href="'+escapeHtml(u)+'" target="_blank" rel="noopener noreferrer">صفحة فيسبوك</a>';
+  return '<button type="button" class="fb-head-btn" onclick="alert(\'لم يحدّد المدير رابط فيسبوك بعد من صفحة المهام.\')">صفحة فيسبوك</button>';
+}
+function portalActionBtns(){ return facebookHeadBtn(); }
+function portalLogoutBtn(){
+  return '<button type="button" class="material-btn secondary portal-logout" onclick="authLogout()">تسجيل خروج</button>';
+}
+function saveTaskFacebook(){
+  const el=document.getElementById('taskFacebook');
+  if(!el)return;
+  if(!APP.school)APP.school={};
+  APP.school.facebookUrl=String(el.value||'').trim();
+  if(typeof saveApp==='function')saveApp();
+  if(typeof cloudOnSave==='function')cloudOnSave();
+  if(typeof updateFacebookBtn==='function')updateFacebookBtn();
+  alert(APP.school.facebookUrl?'حُفظ رابط فيسبوك وسيظهر للمعلم والطالب.':'أُزيل الرابط.');
+}
+
+function updateFacebookBtn(){
+  const a=document.getElementById('btnFacebook');
+  if(!a)return;
+  const role=typeof authRole==='function'?authRole():'';
+  const u=schoolFacebookUrl();
+  if((role==='teacher'||role==='student')&&u){
+    a.href=u; a.hidden=false;
+  }else{ a.hidden=true; }
+}
+function studentShowLevels(){return !(APP.school&&APP.school.studentShowLevels===false);}
 function renderStudentHome(){
   const el=document.getElementById('view-student');if(!el)return;
   const ctx=studentCtx();if(!ctx||!ctx.me){authLogout();return;}
@@ -11930,13 +12190,14 @@ function renderStudentHome(){
     if(row&&typeof usesSixthGradeLayout==='function'&&usesSixthGradeLayout(ctx.grade)&&typeof gbCompute56==='function')gbCompute56(row);
     const final=row?(usesSixthGradeLayout(ctx.grade)?row.finalGrade:row.finalExam):'';
     const unread=studentHwUnread(sub,ctx);
+    const showG=studentShowGrades(); const showL=studentShowLevels();
     return '<article class="grade-report-card st-sub-card" onclick="openStudentSubjectAt('+i+')">'+
       (unread?'<span class="st-unread-dot" title="تحضير جديد"></span>':'')+
       '<div class="grc-title"><strong>'+escapeHtml(sub)+'</strong></div>'+
-      '<div class="grc-total"><b>'+(final===''||final==null?'—':toArabicDigits(String(final)))+'</b> الدرجة النهائية</div>'+
-      '<p style="margin:8px 0 0;color:#546e7a;font-size:12px">اضغط لعرض درجاتك والمستويات والتحضير</p></article>';
+      (showG?('<div class="grc-total"><b>'+(final===''||final==null?'—':toArabicDigits(String(final)))+'</b> الدرجة النهائية</div>'):'')+
+      '<p style="margin:8px 0 0;color:#546e7a;font-size:12px">اضغط لعرض '+[showG?'درجاتك':'',showL?'المستويات':'','التحضير'].filter(Boolean).join(' و ')+'</p></article>';
   }).join('');
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🎓</span><div><h2>واجهة الطالب</h2><p>مرحباً '+escapeHtml(ctx.studentName)+(ctx.grade?(' — '+escapeHtml(ctx.grade)):'')+'</p></div></div><button class="material-btn secondary" onclick="authLogout()">تسجيل خروج</button></div>'+
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🎓</span><div><h2>واجهة الطالب</h2><p>مرحباً '+escapeHtml(ctx.studentName)+(ctx.grade?(' — '+escapeHtml(ctx.grade)):'')+'</p></div></div>'+facebookHeadBtn()+'</div>'+portalLogoutBtn()+
     '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مواد أو لم يُربط حسابك بطالب.</div>')+'</div></div>';
 }
 function studentNotifList(me){
@@ -11995,10 +12256,11 @@ function renderStudentSubject(sub){
   const hwHtml=hws.length?hws.map(function(h){
     return '<div class="barcode-result-card"><h3>'+escapeHtml(h.title)+'</h3><p style="white-space:pre-wrap">'+escapeHtml(h.body)+'</p><small>'+escapeHtml(h.date||'')+' — '+escapeHtml(h.teacherName||'')+'</small></div>';
   }).join(''):'<p class="empty-hint">لا تحضير مرسل لهذه المادة بعد.</p>';
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">📘</span><div><h2>'+escapeHtml(sub)+'</h2><p>درجاتك ومستوياتك وتحضير المعلم</p></div></div><button class="material-btn secondary" onclick="openStudentHome()">رجوع إلى موادي</button></div>'+
-    '<div class="barcode-result-card"><h3>درجاتي</h3>'+gradeHtml+'<p style="margin:10px 0 0">التقييم: '+escapeHtml(row.remarks||'—')+'</p></div>'+
-    '<div class="barcode-result-card"><h3>المستويات الأسبوعية</h3>'+weeklyHtml+'</div>'+
-    '<div class="barcode-result-card"><h3>المستويات الشهرية</h3>'+monthlyHtml+'</div>'+
+  const showG=studentShowGrades(); const showL=studentShowLevels();
+  const subHint=[showG?'درجاتك':'',showL?'مستوياتك':'','تحضير المعلم'].filter(Boolean).join(' و ');
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">📘</span><div><h2>'+escapeHtml(sub)+'</h2><p>'+subHint+'</p></div></div><button class="material-btn secondary" onclick="openStudentHome()">رجوع إلى موادي</button></div>'+
+    (showG?('<div class="barcode-result-card"><h3>درجاتي</h3>'+gradeHtml+'<p style="margin:10px 0 0">التقييم: '+escapeHtml(row.remarks||'—')+'</p></div>'):'')+
+    (showL?('<div class="barcode-result-card"><h3>المستويات الأسبوعية</h3>'+weeklyHtml+'</div><div class="barcode-result-card"><h3>المستويات الشهرية</h3>'+monthlyHtml+'</div>'):'')+
     '<div class="barcode-result-card"><h3>التحضير من المعلم</h3>'+hwHtml+'</div>';
 }
 
@@ -12050,6 +12312,7 @@ function notifUnreadCount(){
 function updateMailBadges(){
   const mc=typeof mailUnreadCount==='function'?mailUnreadCount():0;
   const nc=typeof notifUnreadCount==='function'?notifUnreadCount():0;
+  try{if(typeof updateHwDot==='function')updateHwDot();}catch(e){}
   const mb=document.getElementById('mailBadge');
   if(mb){mb.style.display=mc<1?'none':'flex'; mb.textContent=mc>9?'9+':String(mc);}
   const nbtn=document.getElementById('btnNotif');
@@ -12079,8 +12342,8 @@ function openNotifPanel(){
   panel.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><strong>الإشعارات</strong><button type="button" class="material-btn secondary" onclick="document.getElementById(\'notifPanel\').classList.remove(\'open\')">✕</button></div>'+
     (list.length?list.map(function(n){
       const unread=!(n.readBy&&n.readBy[me.id]);
-      return '<div class="notif-item'+(unread?' unread':'')+'"><b>'+escapeHtml(n.title||'إشعار')+'</b><p style="margin:6px 0 0;white-space:pre-wrap">'+escapeHtml(n.text)+'</p><small>'+escapeHtml(n.when||'')+' — '+(n.target==='students'?'للطلاب':n.target==='teachers'?'للمعلمين':'لكل المدرسة')+'</small></div>';
-    }).join(''):'<p class="empty-hint">لا إشعارات.</p>');
+      return '<div class="notif-item'+(unread?' unread':'')+'"><b>'+escapeHtml(n.title||'إشعار')+'</b><p style="margin:6px 0 0;white-space:pre-wrap">'+escapeHtml(n.text)+'</p><small>'+escapeHtml(n.when||'')+' — '+(n.target==='students'?'للطلاب':n.target==='teachers'?'للمعلمين':'لكل المدرسة')+'</small>'+(me.role==='admin'?'<div style="margin-top:8px"><button type="button" class="material-btn secondary" onclick="notifDelete(\''+n.id+'\')">حذف</button></div>':'')+'</div>';
+    }).join(''):'<p class="empty-hint">لا إشعارات.</p>')+(me.role==='admin'&&list.length?'<button type="button" class="material-btn secondary" style="margin-top:10px;width:100%" onclick="notifClearAll()">حذف كل الإشعارات السابقة</button>':'');
   panel.classList.add('open');
   list.forEach(function(n){if(!n.readBy)n.readBy={};n.readBy[me.id]=1;});
   saveNotif();updateMailBadges();
@@ -12123,6 +12386,7 @@ function mailSend(){
   const now=new Date();
   MAIL_STATE.unshift({id:authUid(),fromId:me.id,fromName:me.name,fromRole:me.role,to:toId,toName:toName,text:text,at:now.getTime(),when:now.toLocaleString('ar-IQ'),readBy:{}});
   saveMail();
+  if(typeof liveAlertNow==='function')liveAlertNow('مراسلة جديدة', (me.name||'')+': '+text);
   renderMailHome();
 }
 function notifSend(){
@@ -12136,6 +12400,7 @@ function notifSend(){
   saveNotif();
   updateMailBadges();
   alert('نُشر الإشعار في الشريط العلوي.');
+  if(typeof liveAlertNow==='function')liveAlertNow('إشعار مدرسي',title+': '+text);
   renderMailHome();
 }
 
@@ -12271,6 +12536,8 @@ function cloudPack(){
 }
 function cloudApplyFull(pack){
   if(!pack||typeof pack!=='object')return;
+  CLOUD_APPLYING=true;
+  try{
   if(typeof wifiApply==='function') wifiApply(pack, pack.role||'admin');
   try{
     if(pack.APP_FULL){
@@ -12300,6 +12567,8 @@ function cloudApplyFull(pack){
       localStorage.setItem(AUTH_KEY,JSON.stringify(AUTH_STATE));
     }
   }catch(e){}
+  if(pack.at) CLOUD_SEEN=Number(pack.at)||CLOUD_SEEN;
+  } finally { CLOUD_APPLYING=false; }
 }
 async function cloudPushNow(){
   if(!cloudEnabled()){cloudSetStatus('فعّل السحابة والصق رابط Firebase أولاً',false);return false;}
@@ -12321,12 +12590,16 @@ async function cloudPullNow(silent){
   if(!cloudEnabled()){if(!silent)cloudSetStatus('السحابة غير مفعّلة',false);return false;}
   cloudSetStatus('جاري السحب…');
   try{
-    const res=await fetch(cloudEndpoint());
+    const ac=typeof AbortController==='function'?new AbortController():null;
+    const to=ac?setTimeout(function(){try{ac.abort();}catch(e){}},12000):null;
+    const res=await fetch(cloudEndpoint(), ac?{signal:ac.signal}:{});
+    if(to)clearTimeout(to);
     if(!res.ok) throw new Error('HTTP '+res.status);
     const pack=await res.json();
     if(!pack){if(!silent)cloudSetStatus('السحابة فارغة — ارفع من جهاز المدير أولاً',false);return false;}
     cloudApplyFull(pack);
     cloudSetStatus('تم تحديث البيانات من السحابة',true);
+    try{cloudListen();}catch(e){}
     return true;
   }catch(e){
     if(!silent)cloudSetStatus('فشل السحب — تحقق من الإنترنت والرابط',false);
@@ -12334,9 +12607,60 @@ async function cloudPullNow(silent){
   }
 }
 function cloudOnSave(){
-  if(!cloudEnabled())return;
+  if(!cloudEnabled()||CLOUD_APPLYING)return;
   clearTimeout(CLOUD_PUSH_T);
-  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},1200);
+  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},800);
+}
+function cloudRefreshUi(){
+  if(!authHasSession())return;
+  const ae=document.activeElement;
+  if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable)){
+    clearTimeout(CLOUD_UI_T);
+    CLOUD_UI_T=setTimeout(cloudRefreshUi,1200);
+    return;
+  }
+  try{
+    const entry=Array.isArray(appStack)&&appStack.length?appStack[appStack.length-1]:null;
+    if(!entry||entry.id==='view-auth')return;
+    if(typeof restoreEntry==='function') restoreEntry(entry);
+    if(typeof showView==='function') showView(entry.id);
+    if(typeof refreshNotifBell==='function') refreshNotifBell();
+    else if(typeof updateNotifDot==='function') updateNotifDot();
+  }catch(e){}
+}
+function cloudHandleRemote(pack){
+  if(!pack||typeof pack!=='object')return;
+  const at=Number(pack.at||0);
+  if(at && at<=CLOUD_SEEN)return;
+  if(at && at===CLOUD_LAST)return;
+  cloudApplyFull(pack);
+  cloudRefreshUi();
+  try{if(typeof liveCheckIncoming==='function')liveCheckIncoming();}catch(e){}
+}
+function cloudListen(){
+  if(!cloudEnabled())return;
+  try{if(CLOUD_ES){CLOUD_ES.close();CLOUD_ES=null;}}catch(e){}
+  try{
+    const es=new EventSource(cloudEndpoint());
+    CLOUD_ES=es;
+    function onEv(ev){
+      let wrap; try{wrap=JSON.parse(ev.data);}catch(e){return;}
+      const pack=wrap&&wrap.data!==undefined?wrap.data:wrap;
+      if(pack&&typeof pack==='object'&&(pack.APP||pack.APP_FULL||pack.AUTH||pack.at)) cloudHandleRemote(pack);
+    }
+    es.addEventListener('put', onEv);
+    es.addEventListener('patch', onEv);
+    es.onmessage=onEv;
+    es.onerror=function(){ /* يبقى يعيد الاتصال تلقائياً */ };
+  }catch(e){}
+  if(!window._cloudPoll){
+    window._cloudPoll=setInterval(function(){
+      if(!cloudEnabled()||CLOUD_BUSY||CLOUD_APPLYING||document.hidden)return;
+      fetch(cloudEndpoint()).then(function(r){return r.json();}).then(function(pack){
+        cloudHandleRemote(pack);
+      }).catch(function(){});
+    },3500);
+  }
 }
 function cloudSaveCfgFromForm(){
   const urlEl=document.getElementById('setCloudUrl');
@@ -12489,13 +12813,23 @@ function renderWifiSync(){
     '<div class="table-scroll"><table class="acc-table"><thead><tr><th>الاسم</th><th>الصفة</th><th>آخر مزامنة</th></tr></thead><tbody>'+(rows||'<tr><td colspan="3">لا أجهزة بعد</td></tr>')+'</tbody></table></div>';
   wifiSetStatus(WIFI_STATUS);
 }
+function wifiToggleLocalBox(){
+  const b=document.getElementById('wifiLocalBox');
+  const btn=document.getElementById('wifiLocalToggle');
+  if(!b)return;
+  const open=b.style.display==='none'||!b.style.display;
+  b.style.display=open?'block':'none';
+  if(btn) btn.textContent=open?'إخفاء المزامنة المحلية':'📶 مزامنة محلية (واي فاي)';
+}
 function wifiTeacherBar(){
-  return '<div class="barcode-result-card" style="margin-bottom:12px"><b>مزامنة محلية بدون إنترنت</b><p id="wifiStatusText" style="margin:6px 0">على نفس الواي فاي: الصق رمز المدير أو امسح صورته</p>'+
+  return '<div class="wifi-local-wrap" style="margin-bottom:12px">'+
+    '<button type="button" id="wifiLocalToggle" class="material-btn secondary" style="width:100%" onclick="wifiToggleLocalBox()">📶 مزامنة محلية (واي فاي)</button>'+
+    '<div id="wifiLocalBox" class="barcode-result-card" style="display:none;margin-top:10px"><b>مزامنة محلية بدون إنترنت</b><p id="wifiStatusText" style="margin:6px 0">على نفس الواي فاي: الصق رمز المدير أو امسح صورته</p>'+
     '<div class="mat-field"><label>رمز المدير</label><textarea id="wifiOfferIn" rows="3"></textarea></div>'+
     '<label class="material-btn secondary">مسح صورة الرمز<input type="file" accept="image/*" style="display:none" onchange="wifiReadOfferFile(this)"></label> '+
     '<button class="material-btn" onclick="wifiTeacherFromOffer()">إنشاء رمز الإجابة</button>'+
     '<div id="wifiQrBoxT" style="margin:10px 0"></div>'+
-    '<div class="mat-field"><label>رمز إجابتك (أعطِه للمدير)</label><textarea id="wifiAnswerOut" rows="3"></textarea></div></div>';
+    '<div class="mat-field"><label>رمز إجابتك (أعطِه للمدير)</label><textarea id="wifiAnswerOut" rows="3"></textarea></div></div></div>';
 }
 function wifiTeacherJoin(){wifiTeacherFromOffer();}
 function wifiBoot(){ wifiSetStatus(Object.keys(WIFI_CONNS).length?'on':'off'); }
@@ -12506,9 +12840,154 @@ wifiBoot();
 document.addEventListener('click',function(e){const p=document.getElementById('notifPanel');const b=document.getElementById('btnNotif');if(!p||!p.classList.contains('open'))return;if(p.contains(e.target)||(b&&b.contains(e.target)))return;p.classList.remove('open');});
 try{window.addEventListener('orientationchange',function(){setTimeout(dashSidebarFit,200);});window.addEventListener('resize',function(){if(typeof dashSidebarFit==='function')dashSidebarFit();});}catch(e){}
 if(typeof getPrintTheme==='function'&&typeof setPrintTheme==='function')try{setPrintTheme(getPrintTheme());}catch(e){}
+
+function notifDelete(id){
+  if(typeof authRole==='function'&&authRole()!=='admin')return;
+  if(!confirm('حذف هذا الإشعار؟'))return;
+  NOTIF_STATE=(NOTIF_STATE||[]).filter(function(n){return n.id!==id;});
+  window.NOTIF_STATE=NOTIF_STATE;
+  saveNotif();
+  try{const p=document.getElementById('notifPanel'); if(p){p.classList.remove('open'); if(typeof openNotifPanel==='function')openNotifPanel();}}catch(e){}
+  if(typeof renderMailHome==='function'&&typeof currentViewId!=='undefined'&&currentViewId==='view-mail')renderMailHome();
+}
+function notifClearAll(){
+  if(typeof authRole==='function'&&authRole()!=='admin')return;
+  if(!confirm('حذف كل الإشعارات السابقة؟'))return;
+  NOTIF_STATE=[]; window.NOTIF_STATE=NOTIF_STATE; saveNotif();
+  const p=document.getElementById('notifPanel'); if(p) p.classList.remove('open');
+  if(typeof renderMailHome==='function'&&typeof currentViewId!=='undefined'&&currentViewId==='view-mail')renderMailHome();
+}
+function studentHwAnyUnread(){
+  try{
+    const ctx=typeof studentCtx==='function'?studentCtx():null;
+    if(!ctx||!ctx.me)return false;
+    const subs=ctx.grade&&typeof gbSubjects==='function'?gbSubjects(ctx.grade):[];
+    return (subs||[]).some(function(sub){return studentHwUnread(sub,ctx);});
+  }catch(e){return false;}
+}
+function updateHwDot(){
+  const d=document.getElementById('hwDot');
+  if(!d)return;
+  const on=(typeof authRole==='function'&&authRole()==='student'&&studentHwAnyUnread());
+  d.classList.toggle('on', !!on);
+}
+let LIVE_WHO={}, LIVE_WHO_T=null, LIVE_HB=null;
+function liveWhoUrl(id){
+  if(typeof cloudEnabled!=='function'||!cloudEnabled())return '';
+  const u=String(CLOUD_CFG.url||'').replace(/\/$/,'');
+  const room=encodeURIComponent(String(CLOUD_CFG.room||'karbala1').replace(/[^A-Za-z0-9_\-]/g,'')||'karbala1');
+  return u+'/'+room+'_who'+(id?('/'+encodeURIComponent(id)):'')+'.json';
+}
+function liveDotHtml(id){
+  const on=!!(id&&LIVE_WHO[id]&&(Date.now()-(LIVE_WHO[id].at||0)<50000));
+  return '<span class="live-dot'+(on?' on':'')+'" title="'+(on?'نشط الآن':'غير متصل')+'"></span>';
+}
+function liveHeartbeat(){
+  const me=typeof authMe==='function'?authMe():null;
+  const url=me&&liveWhoUrl(me.id);
+  if(!url)return;
+  fetch(url,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:me.id,name:me.name,role:me.role,login:me.login||'',at:Date.now()})}).catch(function(){});
+}
+function liveFetchWho(){
+  const url=liveWhoUrl();
+  if(!url)return;
+  fetch(url).then(function(r){return r.json();}).then(function(obj){
+    LIVE_WHO=obj&&typeof obj==='object'?obj:{};
+    document.querySelectorAll('#view-tasks .live-dot').forEach(function(el){
+      const nameCell=el.closest('td');
+    });
+    if(typeof authRole==='function'&&authRole()==='admin'&&typeof currentViewId!=='undefined'&&currentViewId==='view-tasks'){
+      const ae=document.activeElement;
+      if(ae&&(ae.tagName==='INPUT'||ae.tagName==='SELECT'||ae.tagName==='TEXTAREA'))return;
+      try{
+        if(document.querySelector('#view-tasks h2')&&/حسابات/.test(document.querySelector('#view-tasks h2').textContent||'')){
+          if(typeof renderAuthAccounts==='function') renderAuthAccounts();
+        }
+      }catch(e){}
+    }
+  }).catch(function(){});
+}
+function liveStart(){
+  try{liveRequestNotif();}catch(e){}
+  liveHeartbeat();
+  if(LIVE_HB)clearInterval(LIVE_HB);
+  LIVE_HB=setInterval(function(){ if(!document.hidden) liveHeartbeat(); },15000);
+  if(LIVE_WHO_T)clearInterval(LIVE_WHO_T);
+  LIVE_WHO_T=setInterval(function(){ if(!document.hidden) liveFetchWho(); },12000);
+  liveFetchWho();
+  liveCheckIncoming(true);
+}
+const LIVE_SEEN_KEY='schoolResultsAlertSeen_v1';
+function liveSeen(){try{return JSON.parse(localStorage.getItem(LIVE_SEEN_KEY)||'{}')||{};}catch(e){return {};}}
+function liveSaveSeen(s){try{localStorage.setItem(LIVE_SEEN_KEY,JSON.stringify(s));}catch(e){}}
+function liveBeep(){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(); const g=ctx.createGain();
+    o.type='sine'; o.frequency.value=880; g.gain.value=0.08;
+    o.connect(g); g.connect(ctx.destination); o.start();
+    setTimeout(function(){try{o.stop();ctx.close();}catch(e){}},420);
+  }catch(e){}
+  try{if(navigator.vibrate)navigator.vibrate([120,60,120]);}catch(e){}
+}
+function liveRequestNotif(){
+  if(!('Notification' in window))return;
+  if(Notification.permission==='default') Notification.requestPermission();
+}
+function liveAlertNow(title,body){
+  liveBeep();
+  try{
+    if('Notification' in window && Notification.permission==='granted'){
+      const n=new Notification(title||'المنظومة المدرسية',{body:String(body||'').slice(0,140),dir:'rtl',lang:'ar',tag:'school-live',renotify:true});
+      n.onclick=function(){try{window.focus();n.close();}catch(e){}};
+    }
+  }catch(e){}
+}
+function liveCheckIncoming(silent){
+  const me=typeof authMe==='function'?authMe():null;
+  if(!me)return;
+  const seen=liveSeen();
+  const uid=me.id;
+  if(!seen[uid]) seen[uid]={notif:0,mail:0,hw:0};
+  let bestN=seen[uid].notif||0, bestM=seen[uid].mail||0, bestH=seen[uid].hw||0;
+  let ping=null;
+  (typeof NOTIF_STATE!=='undefined'&&NOTIF_STATE?NOTIF_STATE:[]).forEach(function(n){
+    if(!n||!n.at)return;
+    if(n.at>bestN) bestN=n.at;
+    if(!silent && n.at>(seen[uid].notif||0) && n.fromId!==uid && typeof notifTargetOk==='function' && notifTargetOk(n,me))
+      ping={t:n.title||'إشعار مدرسي',b:n.text||''};
+  });
+  (typeof MAIL_STATE!=='undefined'&&MAIL_STATE?MAIL_STATE:[]).forEach(function(m){
+    if(!m||!m.at)return;
+    if(m.at>bestM) bestM=m.at;
+    const forMe=m.to==='all'||m.to===uid;
+    if(!silent && m.at>(seen[uid].mail||0) && m.fromId!==uid && forMe)
+      ping={t:'مراسلة جديدة',b:(m.fromName||'')+': '+(m.text||'')};
+  });
+  if(me.role==='student'){
+    (typeof AUTH_HW!=='undefined'&&AUTH_HW?AUTH_HW:[]).forEach(function(h){
+      const at=h.at||h.when||0; const ts=typeof at==='number'?at:Date.parse(at)||0;
+      if(ts>bestH) bestH=ts;
+      const ctx=typeof studentCtx==='function'?studentCtx():null;
+      if(!ctx)return;
+      if(h.grade!==ctx.grade||h.sectionId!==ctx.sectionId)return;
+      const rb=h.readBy||{};
+      if(!silent && ts>(seen[uid].hw||0) && !rb[uid] && !rb[ctx.studentId])
+        ping={t:'تحضير جديد',b:(h.subject||'')+' — '+(h.title||'')};
+    });
+  }
+  if(ping) liveAlertNow(ping.t,ping.b);
+  seen[uid]={notif:bestN,mail:bestM,hw:bestH};
+  liveSaveSeen(seen);
+  if(typeof updateHwDot==='function')updateHwDot();
+}
+
 loadUiTheme();
 initApp();
+setTimeout(function(){try{liveStart();}catch(e){}},800);
+try{document.addEventListener('visibilitychange',function(){if(!document.hidden){liveHeartbeat();liveCheckIncoming();}}); }catch(e){}
+
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2ff66a31a142845',t:'MTc4NzU0MzUxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2ffffbfbab57a93',t:'MTc4NzU0OTc4Mg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
