@@ -1580,6 +1580,97 @@
   #btnNotif.has-unread .notif-red-dot{display:block!important}
   #btnNotif.has-unread{box-shadow:0 0 0 2px rgba(229,57,53,.35)}
   .mail-unread{border:2px solid #c62828!important;background:#ffebee!important;box-shadow:0 0 0 2px rgba(198,40,40,.18)}
+
+  #view-mail{max-width:none!important;padding:0 0 8px!important;}
+  .wa-shell{display:flex;width:100%;height:100%;min-height:0}
+  .wa-list{width:min(340px,100%);flex:0 0 min(340px,100%);background:#fff;display:flex;flex-direction:column;min-height:0;border-inline-end:1px solid #d1d7db}
+  html[data-ui-skin^="night"] .wa-list{background:#111b21;border-color:#222}
+  .wa-list-head{padding:12px 14px;background:#008069;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:space-between}
+  html[data-ui-skin^="night"] .wa-list-head{background:#202c33}
+  .wa-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #f0f2f5;cursor:pointer;text-align:right}
+  html[data-ui-skin^="night"] .wa-row{border-color:#222;color:#e9edef}
+  .wa-row.on{background:#f0f2f5}
+  html[data-ui-skin^="night"] .wa-row.on{background:#202c33}
+  .wa-row b{display:block;font-size:15px}
+  .wa-row small{color:#667781;font-size:12px}
+  .wa-badge{min-width:20px;height:20px;border-radius:10px;background:#25d366;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-inline-start:auto}
+  .wa-rows{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
+  @media (max-width:799px){
+    body.mail-pane-list .wa-app{display:none!important}
+    body.mail-pane-chat .wa-list{display:none!important}
+    .wa-list,.wa-app{flex:1 1 100%;width:100%!important;max-width:none!important}
+  }
+  @media (min-width:800px){
+    .wa-list{display:flex!important}
+    .wa-app{flex:1 1 auto!important;max-width:none!important}
+    .wa-back-list{display:none!important}
+  }
+
+  body.mail-full{overflow:hidden!important;padding:0!important;margin:0!important;background:#0b141a!important}
+  body.mail-full #topStack, body.mail-full #topbar, body.mail-full #creditBar,
+  body.mail-full #notifPanel, body.mail-full #globalNavDrawer, body.mail-full #globalNavBackdrop,
+  body.mail-full #btnMainMenu, body.mail-full .dashboard-sidebar{display:none!important}
+  body.mail-full #view-mail{
+    display:flex!important;position:fixed!important;inset:0!important;z-index:70!important;
+    max-width:none!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;
+    background:#efeae2!important
+  }
+  html[data-ui-skin^="night"] body.mail-full #view-mail{background:#0b141a!important}
+  body.mail-full .wa-wrap{display:none}
+  body.mail-full .wa-app{
+    height:100%!important;max-width:100%!important;width:100%!important;margin:0!important;
+    display:flex!important;flex-direction:column!important
+  }
+  body.mail-full .wa-head{position:sticky;top:0;z-index:2;flex:0 0 auto}
+  body.mail-full .wa-thread{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
+  body.mail-full .wa-bar, body.mail-full #mailRecStatus{
+    position:sticky;bottom:0;z-index:2;flex:0 0 auto;
+    padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))
+  }
+  .wa-x{width:28px;height:28px;min-width:28px;border:0;border-radius:50%;background:#ffffff22;color:#fff;font-size:14px;cursor:pointer;margin-inline-end:4px}
+  #mailRecBtn{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+  #mailRecBtn.rec{background:#e53935!important;color:#fff!important}
+  .wa-wrap{padding:8px 10px 0}
+  .wa-app{display:flex;flex-direction:column;height:calc(100vh - 78px);max-width:560px;margin:0 auto;background:#efeae2;border-radius:0;overflow:hidden;box-shadow:0 0 0 1px #0001}
+  html[data-ui-skin^="night"] .wa-app{background:#0b141a}
+  .wa-head{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#008069;color:#fff;flex:0 0 auto}
+  html[data-ui-skin^="night"] .wa-head{background:#202c33}
+  .wa-ava{width:40px;height:40px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;font-size:20px}
+  .wa-head h2{margin:0;font-size:16px;font-weight:700;color:#fff}
+  .wa-head p{margin:2px 0 0;font-size:12px;color:#d0eadf}
+  .wa-thread{flex:1;overflow-y:auto;padding:10px 8px 16px;background:#e5ddd5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' opacity='.06'%3E%3Cpath d='M0 30h60M30 0v60' stroke='%23000'/%3E%3C/svg%3E")}
+  html[data-ui-skin^="night"] .wa-thread{background:#0b141a}
+  .wa-b{max-width:78%;margin:4px 8px;padding:4px 6px 3px;border-radius:8px;box-shadow:0 1px 1px #0002;clear:both}
+  .wa-in{background:#fff;float:right;border-top-right-radius:0}
+  .wa-out{background:#d9fdd3;float:left;border-top-left-radius:0}
+  html[data-ui-skin^="night"] .wa-in{background:#202c33;color:#e9edef}
+  html[data-ui-skin^="night"] .wa-out{background:#005c4b;color:#e9edef}
+  .wa-nm{font-size:12.5px;font-weight:700;color:#e2606f;margin:2px 4px 4px}
+  .wa-tx{margin:2px 6px 2px;white-space:pre-wrap;word-break:break-word;font-size:14.5px;line-height:1.4;color:inherit}
+  .wa-meta{display:flex;justify-content:flex-end;gap:6px;align-items:center;font-size:11px;color:#667781;padding:0 4px 2px}
+  html[data-ui-skin^="night"] .wa-meta{color:#ffffff99}
+  .wa-del{border:0;background:none;color:#8696a0;font-size:11px;cursor:pointer}
+  .wa-dl{display:block;width:100%;border:0;background:#00000014;color:inherit;font-size:12px;font-weight:700;padding:6px 8px;margin:2px 0 4px;border-radius:6px;cursor:pointer;text-align:center}
+  .wa-img{display:block;width:100%;max-width:260px;max-height:320px;object-fit:cover;border-radius:6px;margin:2px;cursor:zoom-in}
+  .wa-file{display:flex;align-items:center;gap:10px;background:#0000000d;margin:4px;padding:10px 12px;border-radius:8px;color:inherit;text-decoration:none;min-width:180px}
+  .wa-file i{width:40px;height:40px;border-radius:8px;background:#f44336;color:#fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:800}
+  .wa-aud{width:220px;margin:4px 6px;height:36px}
+  .wa-bar{display:flex;align-items:flex-end;gap:6px;padding:6px 8px 10px;background:#f0f2f5;flex:0 0 auto}
+  html[data-ui-skin^="night"] .wa-bar{background:#202c33}
+  .wa-bar textarea{flex:1;min-height:42px;max-height:100px;border:0;border-radius:24px;padding:11px 16px;background:#fff;color:#111;resize:none;font-size:15px}
+  html[data-ui-skin^="night"] .wa-bar textarea{background:#2a3942;color:#e9edef}
+  .wa-ico{width:44px;height:44px;border:0;border-radius:50%;background:#008069;color:#fff;font-size:18px;cursor:pointer}
+  .wa-ico.ghost{background:transparent;color:#54656f;font-size:20px}
+  html[data-ui-skin^="night"] .wa-ico.ghost{color:#8696a0}
+  .wa-on{position:fixed;inset:0;background:#0006;z-index:160;display:flex;align-items:flex-end;justify-content:center}
+  .wa-on-box{width:min(460px,100%);max-height:72vh;overflow:auto;background:#fff;border-radius:16px 16px 0 0;padding:14px}
+  html[data-ui-skin^="night"] .wa-on-box{background:#111b21;color:#e9edef}
+  .wa-mem{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #eee}
+  .wa-dot{width:10px;height:10px;border-radius:50%;background:#b0bec5}
+  .wa-dot.on{background:#25d366}
+  .wa-zoom{position:fixed;inset:0;z-index:180;background:#000d;display:flex;align-items:center;justify-content:center;padding:16px}
+  .wa-zoom img{max-width:96vw;max-height:92vh;border-radius:8px}
+
   html[data-ui-skin^="night"] .mail-unread{background:#3a1518!important;color:#ffe8e8!important;}
   @media (max-width:760px){.dashboard-main{padding:12px!important}.grade-report-grid,.section-grid,.staff-home-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
   @media (max-width:520px){.grade-report-grid,.section-grid,.staff-home-grid{grid-template-columns:1fr!important}}
@@ -1605,6 +1696,18 @@
   .par-wa,.par-call{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;text-decoration:none;font-size:18px;margin-inline-start:6px}
   .par-wa{background:#25d366;color:#fff}
   .par-call{background:#1565c0;color:#fff}
+
+  .tt-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+  .tt-paste{width:100%;min-height:88px;border:1px dashed #90a4ae;border-radius:12px;padding:10px;margin:0 0 12px;background:#fafafa}
+  .tt-table{width:100%;border-collapse:collapse;background:#fff}
+  .tt-table{direction:rtl}
+  .tt-table th,.tt-table td{border:1px solid #b0bec5;padding:6px 8px;min-width:64px;text-align:center;vertical-align:middle;white-space:pre-line;font-size:13px;line-height:1.35}
+  .tt-table th{background:#00695c;color:#fff}
+  .tt-table td[contenteditable]{outline:none}
+  .tt-img{max-width:100%;border-radius:12px;margin:8px 0}
+  html[data-ui-skin^="night"] .tt-paste{background:#1a1418;color:#fff8ee;border-color:#5a4450}
+  html[data-ui-skin^="night"] .tt-table td{background:#1c161c;color:#fff8ee;border-color:#5a4450}
+  html[data-ui-skin^="night"] .tt-table th{background:#004d40;color:#fff}
   html[data-ui-skin^="night"] .parents-tab{background:#241c22;color:#fff8ee}
   html[data-ui-skin^="night"] #view-parents .acc-table td{color:#fff8ee!important}
   html[data-ui-skin^="night"] #view-parents .acc-table tbody tr:nth-child(even) td{background:#2a1e28!important;color:#fff8ee!important}
@@ -4876,6 +4979,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
     <button type="button" data-nav="properties" onclick="closeGlobalNav();openPropertiesModule()"><span>🏫</span>الممتلكات</button>
     <button type="button" data-nav="care" onclick="closeGlobalNav();openCareModule()"><span>🤍</span>الرعاية والأيتام</button>
     <button type="button" data-nav="parents" onclick="closeGlobalNav();openParentsModule()"><span>👨‍👩‍👧</span>أولياء الأمور</button>
+    <button type="button" data-nav="timetable" onclick="closeGlobalNav();openTimetableModule()"><span>🗓️</span>جدول الحصص</button>
     <button type="button" data-nav="records" onclick="closeGlobalNav();openRecordsModule()"><span>📑</span>القيود</button>
     <button type="button" data-nav="notes" onclick="closeGlobalNav();openNotesModule()"><span>📝</span>الملاحظات</button>
     <button type="button" data-nav="accounts" onclick="closeGlobalNav();openAccountsModule()"><span>💰</span>الحسابات</button>
@@ -4960,6 +5064,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
 <div class="view wide" id="view-properties"></div>
 <div class="view wide" id="view-care"></div>
 <div class="view wide" id="view-parents"></div>
+<div class="view wide" id="view-timetable"></div>
 <div class="view wide" id="view-records"></div>
 <div class="view wide" id="view-notes"></div>
 <div class="view wide" id="view-accounts"></div>
@@ -6496,6 +6601,7 @@ function showView(id){
   document.body.classList.toggle('dashboard-active', id === 'view-dashboard');
   document.body.classList.toggle('menu-cards', !!(APP.school&&APP.school.mainMenu==='cards'));
   document.body.classList.toggle('auth-screen', id === 'view-auth');
+  document.body.classList.toggle('mail-full', id === 'view-mail');
   document.body.classList.toggle('role-teacher', typeof authRole==='function'&&authRole()==='teacher');
   document.body.classList.toggle('role-student', typeof authRole==='function'&&authRole()==='student');
   currentViewId = id;
@@ -6516,9 +6622,10 @@ function authClampView(id){
     if((id==='view-home'||id==='view-students')&&typeof teacherCanSheets==='function'&&teacherCanSheets()) return id;
     if(id==='view-care'&&typeof teacherCanCare==='function'&&teacherCanCare()) return id;
     if(id==='view-parents'&&typeof teacherCanParents==='function'&&teacherCanParents()) return id;
+    if(id==='view-timetable') return id;
     return 'view-teacher';
   }
-  if(r==='student' && id!=='view-student' && id!=='view-auth') return 'view-student';
+  if(r==='student' && id!=='view-student' && id!=='view-auth' && id!=='view-timetable') return 'view-student';
   return id;
 }
 function navigateTo(id, meta, replace){
@@ -6574,6 +6681,8 @@ function restoreEntry(entry){
     restoreCareView(entry.meta||{});
   } else if(entry.id === 'view-parents'){
     if(typeof renderParentsView==='function') renderParentsView(entry.meta&&entry.meta.tab);
+  } else if(entry.id === 'view-timetable'){
+    if(typeof renderTimetableView==='function') renderTimetableView();
   } else if(entry.id === 'view-records'){
     restoreRecordsView(entry.meta||{});
   } else if(entry.id === 'view-notes'){
@@ -8114,6 +8223,7 @@ function dashMenuItems(){
     ['🏛','الممتلكات','عهدة المدرسة','openPropertiesModule()','linear-gradient(135deg,#ef6c00,#ffa726)'],
     ['🤍','الرعاية والأيتام','المشمولون بالرعاية','openCareModule()','linear-gradient(135deg,#ad1457,#ec407a)'],
     ['👨‍👩‍👧','أولياء الأمور','أرقام التواصل واتساب واتصال','openParentsModule()','linear-gradient(135deg,#1565c0,#42a5f5)'],
+    ['🗓️','جدول الحصص','استيراد ولصق وصورة ذكية','openTimetableModule()','linear-gradient(135deg,#00695c,#26a69a)'],
     ['📑','القيود','أرقام القيد والكشوف','openRecordsModule()','linear-gradient(135deg,#37474f,#78909c)'],
     ['📝','الملاحظات','ملاحظات الطلاب','openNotesModule()','linear-gradient(135deg,#5d4037,#a1887f)'],
     ['💰','الحسابات','النقدي والأقساط','openAccountsModule()','linear-gradient(135deg,#c62828,#ef6c00)'],
@@ -8169,6 +8279,7 @@ function renderDashboard(){
       '<button onclick="openPropertiesModule()"><span class="dni">🏫</span>الممتلكات</button>'+
       '<button onclick="openCareModule()"><span class="dni">🤍</span>الرعاية والأيتام</button>'+
       '<button onclick="openParentsModule()"><span class="dni">👨‍👩‍👧</span>أولياء الأمور</button>'+
+      '<button onclick="openTimetableModule()"><span class="dni">🗓️</span>جدول الحصص</button>'+
       '<button onclick="openRecordsModule()"><span class="dni">📑</span>القيود</button>'+
       '<button onclick="openNotesModule()"><span class="dni">📝</span>الملاحظات</button>'+
       '<button onclick="openAccountsModule()"><span class="dni">💰</span>الحسابات</button>'+
@@ -9044,6 +9155,330 @@ const CARE_STORAGE_KEY='schoolResultsCare_v1';
 function loadCareState(){try{return JSON.parse(localStorage.getItem(CARE_STORAGE_KEY)||'{}')||{};}catch(e){return {};}}
 function saveCareState(){try{localStorage.setItem(CARE_STORAGE_KEY,JSON.stringify(CARE_STATE));}catch(e){}}
 let CARE_STATE=loadCareState();if(!Array.isArray(CARE_STATE.orphans))CARE_STATE.orphans=[];if(!Array.isArray(CARE_STATE.chronic))CARE_STATE.chronic=[];
+
+const TIMETABLE_KEY='schoolResultsTimetable_v1';
+function loadTimetable(){try{const o=JSON.parse(localStorage.getItem(TIMETABLE_KEY)||'{}')||{}; if(!Array.isArray(o.rows))o.rows=[['الحصة','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس']]; return o;}catch(e){return {rows:[['الحصة','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس']]};}}
+function saveTimetable(){try{localStorage.setItem(TIMETABLE_KEY,JSON.stringify(TIMETABLE_STATE));}catch(e){} if(typeof wifiOnSave==='function')wifiOnSave(); if(typeof cloudOnSave==='function')cloudOnSave();}
+let TIMETABLE_STATE=loadTimetable();
+function openTimetableModule(){
+  renderTimetableView(); navigateTo('view-timetable',{});
+}
+function ttCollectGrid(){
+  const tb=document.getElementById('ttGrid'); if(!tb)return;
+  const rows=[];
+  tb.querySelectorAll('tr').forEach(function(tr){
+    const cells=[];
+    tr.querySelectorAll('th,td').forEach(function(c){cells.push(c.innerText.replace(/\u00a0/g,' ').trim());});
+    if(cells.length) rows.push(cells);
+  });
+  if(rows.length){TIMETABLE_STATE.rows=rows; saveTimetable();}
+}
+function ttMaxCols(rows){let m=1; (rows||[]).forEach(function(r){if(r.length>m)m=r.length;}); return m;}
+function ttNormalize(rows){
+  const cols=ttMaxCols(rows);
+  return (rows||[]).map(function(r){const a=r.slice(); while(a.length<cols)a.push(''); return a;});
+}
+function ttSetRows(rows){
+  TIMETABLE_STATE.rows=ttNormalize(rows&&rows.length?rows:[['الحصة','الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس']]);
+  saveTimetable(); renderTimetableView();
+}
+function ttCellText(c){
+  return String((c&&(c.innerText||c.textContent))||'').replace(/\u00a0/g,' ').replace(/\r/g,'').replace(/[ \t]+\n/g,'\n').trim();
+}
+function ttGridHtml(){
+  const rows=ttNormalize(TIMETABLE_STATE.rows||[]);
+  if(!rows.length)return '';
+  function cellHtml(c){return escapeHtml(String(c||'')).replace(/\n/g,'<br>');}
+  let h='<table class="tt-table" id="ttGrid" dir="rtl"><thead><tr>';
+  rows[0].forEach(function(c){h+='<th contenteditable="true">'+cellHtml(c)+'</th>';});
+  h+='</tr></thead><tbody>';
+  rows.slice(1).forEach(function(r){
+    h+='<tr>'; r.forEach(function(c){h+='<td contenteditable="true">'+cellHtml(c)+'</td>';}); h+='</tr>';
+  });
+  return h+'</tbody></table>';
+}
+function ttParseHtmlTable(html){
+  const d=document.createElement('div'); d.innerHTML=html;
+  const table=d.querySelector('table'); if(!table)return null;
+  const trs=[].slice.call(table.querySelectorAll('tr'));
+  const grid=[];
+  trs.forEach(function(tr,r){
+    if(!grid[r]) grid[r]=[];
+    let col=0;
+    [].slice.call(tr.cells||tr.querySelectorAll('th,td')).forEach(function(cell){
+      while(grid[r][col]!=null) col++;
+      const rs=Math.max(1,parseInt(cell.getAttribute('rowspan')||'1',10)||1);
+      const cs=Math.max(1,parseInt(cell.getAttribute('colspan')||'1',10)||1);
+      const val=ttCellText(cell);
+      for(let i=0;i<rs;i++){
+        if(!grid[r+i]) grid[r+i]=[];
+        for(let j=0;j<cs;j++){
+          if(grid[r+i][col+j]==null) grid[r+i][col+j]=(j===0?val:'');
+        }
+      }
+      col+=cs;
+    });
+  });
+  const max=grid.reduce(function(m,row){return Math.max(m,(row||[]).length);},0);
+  const rows=grid.map(function(row){
+    const a=[]; for(let i=0;i<max;i++) a.push(row&&row[i]!=null?row[i]:'');
+    return a;
+  }).filter(function(row){return row.some(function(x){return String(x).trim();});});
+  return rows.length?rows:null;
+}
+function ttParseText(text){
+  text=String(text||'').replace(/\r/g,'');
+  const lines=text.split('\n').map(function(l){return l.replace(/\u00a0/g,' ');});
+  const rows=[];
+  lines.forEach(function(l){
+    if(l.indexOf('\t')>=0){
+      rows.push(l.split('\t').map(function(x){return x.replace(/[ \t]+\n/g,'\n').trim();}));
+      return;
+    }
+    if(!l.trim()) return;
+    rows.push(l.split(/\s{2,}|\s*\|\s*/).map(function(x){return x.trim();}));
+  });
+  return rows;
+}
+function ttReverseCols(){
+  const rows=ttNormalize(TIMETABLE_STATE.rows||[]);
+  ttSetRows(rows.map(function(r){return r.slice().reverse();}));
+}
+
+function ttOnPasteBox(ev){
+  const cd=ev.clipboardData||window.clipboardData; if(!cd)return;
+  const html=cd.getData('text/html');
+  const text=cd.getData('text/plain');
+  const items=cd.items||[];
+  for(let i=0;i<items.length;i++){
+    if(items[i].type&&items[i].type.indexOf('image')===0){
+      ev.preventDefault();
+      const f=items[i].getAsFile(); if(f) ttFromImageFile(f);
+      return;
+    }
+  }
+  ev.preventDefault();
+  const fromHtml=html?ttParseHtmlTable(html):null;
+  if(fromHtml){ttSetRows(fromHtml); return;}
+  if(text){ttSetRows(ttParseText(text));}
+}
+function ttLoadXlsx(cb){
+  if(window.XLSX){cb(true);return;}
+  const urls=[
+    'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+    'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'
+  ];
+  let i=0;
+  function next(){
+    if(i>=urls.length){cb(false);return;}
+    const s=document.createElement('script');
+    s.src=urls[i++];
+    s.onload=function(){cb(!!window.XLSX);};
+    s.onerror=next;
+    document.head.appendChild(s);
+  }
+  next();
+}
+function ttRowsFromAoA(data){
+  return (data||[]).map(function(r){
+    return (r||[]).map(function(c){return String(c==null?'':c).replace(/\r/g,'').trim();});
+  }).filter(function(r){return r.some(function(x){return String(x).trim();});});
+}
+function ttImportExcel(input){
+  const f=input.files&&input.files[0]; input.value='';
+  if(!f)return;
+  const name=(f.name||'').toLowerCase();
+  const reader=new FileReader();
+  reader.onerror=function(){alert('تعذر فتح الملف من الجهاز.');};
+  reader.onload=function(e){
+    const buf=e.target.result;
+    function fail(msg){alert(msg||'تعذر قراءة ملف الإكسل. جرّب: حفظه من إكسل بصيغة .xlsx أو انسخ الجدول والصقه.');}
+    const asText=function(){
+      try{
+        const u8=buf instanceof ArrayBuffer?new Uint8Array(buf):null;
+        let txt='';
+        if(typeof buf==='string') txt=buf;
+        else if(u8){
+          try{txt=new TextDecoder('utf-8').decode(u8);}catch(er){txt='';}
+          if(!txt||txt.indexOf('�')===0){
+            try{txt=new TextDecoder('windows-1256').decode(u8);}catch(er2){}
+          }
+        }
+        if(txt&&/<(table|html|Workbook|ss:Workbook)/i.test(txt)){
+          const rows=ttParseHtmlTable(txt);
+          if(rows&&rows.length){ttSetRows(rows);return true;}
+        }
+        if(txt&&(txt.indexOf('\t')>=0||txt.indexOf(',')>=0||txt.indexOf(';')>=0)){
+          const rows=ttParseText(txt.replace(/;/g,'\t').replace(/,/g, function(m,i,s){
+            return (s.split('\n')[0]||'').split(',').length>2?'\t':m;
+          }));
+          if(rows&&rows.length>=2){ttSetRows(rows);return true;}
+        }
+      }catch(er){}
+      return false;
+    };
+    ttLoadXlsx(function(ok){
+      if(ok){
+        try{
+          let wb=null;
+          try{wb=XLSX.read(new Uint8Array(buf),{type:'array',cellDates:true,raw:false});}catch(e1){
+            try{wb=XLSX.read(buf,{type:'array'});}catch(e2){
+              try{wb=XLSX.read(buf,{type:'binary'});}catch(e3){wb=null;}
+            }
+          }
+          if(wb&&wb.SheetNames&&wb.SheetNames.length){
+            const sh=wb.Sheets[wb.SheetNames[0]];
+            const data=XLSX.utils.sheet_to_json(sh,{header:1,raw:false,defval:''});
+            const rows=ttRowsFromAoA(data);
+            if(rows.length){ttSetRows(rows);return;}
+          }
+        }catch(err){}
+      }
+      if(asText()) return;
+      fail(name.indexOf('.xls')>=0&&name.indexOf('.xlsx')<0
+        ?'هذا الملف قد يكون بصيغة إكسل القديمة. افتحه في إكسل واحفظه «مصنف Excel (.xlsx)» أو انسخ الجدول والصقه.'
+        :'تعذر قراءة الملف. انسخ الجدول من التطبيق والصقه في صندوق اللصق ثم اضغط «لصق إكسل».');
+    });
+  };
+  reader.readAsArrayBuffer(f);
+}
+function ttApplyPaste(){
+  const box=document.getElementById('ttPasteBox');
+  const raw=box?box.value:'';
+  if(!raw.trim()){alert('الصق الجدول في الصندوق أولاً.');return;}
+  const rows=ttParseText(raw);
+  if(!rows.length){alert('لم يُتعرف على جدول.');return;}
+  ttSetRows(rows);
+}
+function ttAddRow(){const rows=ttNormalize(TIMETABLE_STATE.rows||[]); const cols=ttMaxCols(rows); const r=[]; for(let i=0;i<cols;i++)r.push(''); rows.push(r); ttSetRows(rows);}
+function ttAddCol(){const rows=ttNormalize(TIMETABLE_STATE.rows||[]); rows.forEach(function(r){r.push('');}); ttSetRows(rows);}
+function ttClear(){if(!confirm('حذف الجدول بالكامل؟'))return; TIMETABLE_STATE.image=''; TIMETABLE_STATE.rows=[]; saveTimetable(); renderTimetableView();}
+function ttLoadTesseract(cb){
+  if(window.Tesseract){cb();return;}
+  const st=document.getElementById('ttOcrStatus'); if(st)st.textContent='جاري تحميل محرك التعرف…';
+  const s=document.createElement('script');
+  s.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+  s.onload=function(){cb();};
+  s.onerror=function(){alert('تعذر تحميل محرك التعرف. تحقق من الإنترنت.'); if(st)st.textContent='';};
+  document.head.appendChild(s);
+}
+function ttFromImageFile(file){
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(){
+    TIMETABLE_STATE.image=reader.result;
+    saveTimetable();
+    const imgEl=document.getElementById('ttPreview'); if(imgEl){imgEl.src=reader.result; imgEl.style.display='block';}
+    ttOcrImage(reader.result);
+  };
+  reader.readAsDataURL(file);
+}
+function ttOcrImage(dataUrl){
+  const st=document.getElementById('ttOcrStatus');
+  ttLoadTesseract(function(){
+    if(st)st.textContent='جاري قراءة الصورة (عربي + إنجليزي)…';
+    Tesseract.recognize(dataUrl,'ara+eng',{logger:function(m){
+      if(st&&m&&m.status) st.textContent=(m.status==='recognizing text'?('قراءة الصورة… '+Math.round((m.progress||0)*100)+'%'):m.status);
+    }}).then(function(res){
+      const text=(res&&res.data&&res.data.text)||'';
+      const rows=ttParseText(text);
+      if(rows.length>=2){ ttSetRows(rows); if(st)st.textContent='تم التعرف على الجدول من الصورة.'; }
+      else { renderTimetableView(); if(st)st.textContent='ظهرت الصورة. إن لم يُستخرج الجدول بدقة الصق إكسل أو عدّل الخلايا يدوياً.'; }
+    }).catch(function(){if(st)st.textContent='فشل التعرف. استخدم لصق إكسل.';});
+  });
+}
+function ttGradeNum(grade){
+  const g=String(grade||'');
+  const map=[['السادس',6],['الخامس',5],['الرابع',4],['الثالث',3],['الثاني',2],['الأول',1]];
+  for(let i=0;i<map.length;i++){ if(g.indexOf(map[i][0])!==-1) return map[i][1]; }
+  const m=g.match(/[1-6]/); return m?parseInt(m[0],10):'';
+}
+function ttSecLetter(label){
+  const s=String(label||'');
+  if(/ب/.test(s)) return 'ب';
+  if(/أ|ا/.test(s)) return 'أ';
+  return (s.replace(/\s+/g,'')||'').charAt(0);
+}
+function ttHeaderIsMeta(h){
+  const x=String(h||'').replace(/\s+/g,'');
+  return /يوم|#|حصة|الحصة|تسلسل/.test(x) || x==='';
+}
+function ttMatchStudentCol(header, grade, secLabel){
+  const h=String(header||'').replace(/\s+/g,'');
+  if(!h||ttHeaderIsMeta(h)) return false;
+  const n=String(ttGradeNum(grade));
+  const L=ttSecLetter(secLabel);
+  if(n && L && (h===n+L || h===L+n || h===n+'-'+L || h===n+'/'+L)) return true;
+  if(n && h.indexOf(n)!==-1 && L && h.indexOf(L)!==-1) return true;
+  const g=String(grade||'').replace(/\s+/g,'');
+  if(g && h.indexOf(g)!==-1 && L && h.indexOf(L)!==-1) return true;
+  return false;
+}
+function ttStudentRows(){
+  const ctx=typeof studentCtx==='function'?studentCtx():null;
+  const all=ttNormalize(TIMETABLE_STATE.rows||[]);
+  if(!all.length||!ctx) return {title:'',rows:[]};
+  const head=all[0];
+  const keep=[];
+  head.forEach(function(h,i){ if(ttHeaderIsMeta(h)||ttMatchStudentCol(h,ctx.grade,ctx.sectionLabel)) keep.push(i); });
+  if(!keep.some(function(i){return ttMatchStudentCol(head[i],ctx.grade,ctx.sectionLabel);})){
+    return {title:(ctx.grade||'')+' / '+(ctx.sectionLabel||''),rows:[]};
+  }
+  const rows=all.map(function(r){return keep.map(function(i){return r[i]||'';});});
+  return {title:'شعبة '+(ctx.sectionLabel||'')+' — '+(ctx.grade||''),rows:rows};
+}
+function renderTimetableView(){
+  const el=document.getElementById('view-timetable'); if(!el)return;
+  const role=typeof authRole==='function'?authRole():'';
+  const ro=role==='teacher'||role==='student';
+  const back=role==='teacher'
+    ? '<button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button>'
+    : (role==='student'
+      ? '<button class="material-btn secondary" onclick="renderStudentHome();navigateTo(\'view-student\',{page:\'home\'})">رجوع لموادي</button>'
+      : '<button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button>');
+  let pack={title:'',rows:ttNormalize(TIMETABLE_STATE.rows||[])};
+  if(role==='student') pack=ttStudentRows();
+  const empty=!pack.rows||!pack.rows.length||!pack.rows.some(function(r){return r.some(function(c){return String(c||'').trim();});});
+  function cellHtml(c){return escapeHtml(String(c||'')).replace(/\n/g,'<br>');}
+  let grid='';
+  if(empty){
+    grid='<div class="empty-hint">'+(role==='student'?'لا يوجد جدول لشعبتك بعد، أو لم يُرفع الجدول من المدير.':'لا يوجد جدول. استخدم الاستيراد أو اللصق.')+'</div>';
+  }else{
+    const rows=pack.rows;
+    const ed=ro?'':' contenteditable="true"';
+    grid='<table class="tt-table" id="ttGrid" dir="rtl"><thead><tr>';
+    rows[0].forEach(function(c){grid+='<th'+ed+'>'+cellHtml(c)+'</th>';});
+    grid+='</tr></thead><tbody>';
+    rows.slice(1).forEach(function(r){
+      grid+='<tr>'; r.forEach(function(c){grid+='<td'+ed+'>'+cellHtml(c)+'</td>';}); grid+='</tr>';
+    });
+    grid+='</tbody></table>';
+  }
+  const img=(!ro && TIMETABLE_STATE.image)?'<img id="ttPreview" class="tt-img" alt="صورة الجدول" src="'+TIMETABLE_STATE.image+'">':'';
+  const tools=ro?'':(
+    '<div class="tt-toolbar">'+
+    '<label class="material-btn">📥 استيراد إكسل<input type="file" accept=".xlsx,.xls,.csv" style="display:none" onchange="ttImportExcel(this)"></label>'+
+    '<button type="button" class="material-btn secondary" onclick="ttApplyPaste()">📋 لصق إكسل</button>'+
+    '<label class="material-btn secondary">🖼️ صورة ذكية<input type="file" accept="image/*" capture="environment" style="display:none" onchange="ttFromImageFile(this.files[0])"></label>'+
+    '<button type="button" class="material-btn secondary" onclick="ttAddRow()">＋ صف</button>'+
+    '<button type="button" class="material-btn secondary" onclick="ttAddCol()">＋ عمود</button>'+
+    '<button type="button" class="material-btn secondary" onclick="ttReverseCols()">⇄ عكس الأعمدة</button>'+
+    '<button type="button" class="material-btn" style="background:#b71c1c" onclick="ttClear()">🗑️ حذف الجدول</button>'+
+    '</div>'+
+    '<textarea id="ttPasteBox" class="tt-paste" placeholder="الصق هنا جدول إكسل (Ctrl+V) كما هو، ثم اضغط «لصق إكسل»."></textarea>'+
+    '<p id="ttOcrStatus" style="font-size:12px;color:#546e7a;margin:0 0 8px"></p>'
+  );
+  const sub=role==='student'?('جدول شعبتك فقط'+(pack.title?(' — '+pack.title):'')):(role==='teacher'?'عرض للقراءة فقط — بدون تعديل':'استيراد إكسل أو لصق الجدول أو صورة ذكية');
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🗓️</span><div><h2>جدول الحصص</h2><p>'+escapeHtml(sub)+'</p></div></div>'+back+'</div>'+
+    tools+img+'<div class="table-scroll">'+grid+'</div></div>';
+  if(!ro){
+    const box=document.getElementById('ttPasteBox');
+    if(box) box.addEventListener('paste',ttOnPasteBox);
+    const g=document.getElementById('ttGrid');
+    if(g) g.addEventListener('focusout',function(){ttCollectGrid();});
+  }
+}
+
 function parentPhoneDigits(raw){
   let d=String(raw||'').replace(/\D+/g,'');
   if(!d)return '';
@@ -11815,6 +12250,7 @@ function renderAuthAssign(){
     if(asg.sheets)tasks.push('كشوف النتائج'+(asg.sheetScope==='stage'?' (المرحلة)':(asg.sheetScope==='grade'?' (كل الصف)':'')));
     if(asg.care||t.canCare)tasks.push('الرعاية');
       if(asg.parents||t.canParents)tasks.push('أولياء الأمور');
+      if(asg.timetable||t.canTimetable)tasks.push('جدول الحصص');
     return tasks.join('، ')||'—';
   }
   let teacherTables='';
@@ -11824,6 +12260,7 @@ function renderAuthAssign(){
     if(t.canRecords && !list.some(function(a){return a.records;})) extras.push('إدارة القيود');
     if(t.canCare && !list.some(function(a){return a.care;})) extras.push('الرعاية والأيتام');
     if(t.canParents && !list.some(function(a){return a.parents;})) extras.push('أولياء الأمور');
+    if(t.canTimetable && !list.some(function(a){return a.timetable;})) extras.push('جدول الحصص');
     if(!list.length && !extras.length) return;
     let body='';
     list.forEach(function(asg,i){
@@ -11861,10 +12298,12 @@ function renderAuthAssign(){
       '<label><input type="checkbox" id="asgSheets"> كشوف النتائج (الصف/الشعبة فقط)</label>'+
       '<label><input type="checkbox" id="asgCare"> الرعاية والأيتام</label>'+
       '<label><input type="checkbox" id="asgParents"> أولياء الأمور</label>'+
+      '<label><input type="checkbox" id="asgTime"> جدول الحصص</label>'+
       '<button class="material-btn" onclick="authAddAssign()">حفظ التكليف</button>'+
       '<button class="material-btn secondary" onclick="authGrantRecords()">تكليف المعلم المختار بإدارة القيود فقط</button>'+
       '<button class="material-btn secondary" onclick="authGrantCare()">تكليف المعلم المختار بالرعاية والأيتام</button>'+
       '<button class="material-btn secondary" onclick="authGrantParents()">تكليف المعلم المختار بأولياء الأمور</button>'+
+      '<button class="material-btn secondary" onclick="authGrantTimetable()">تكليف المعلم المختار بجدول الحصص</button>'+
     '</div>'+
     teacherTables;
 }
@@ -11900,6 +12339,15 @@ function authGrantParents(){
   alert('تم تكليف «'+tch.name+'» بقسم أولياء الأمور.');
   renderAuthAssign();
 }
+function authGrantTimetable(){
+  const tid=(document.getElementById('asgTeacher')||{}).value||'';
+  const tch=AUTH_STATE.accounts.find(function(a){return a.id===tid;});
+  if(!tch){alert('اختر معلماً أولاً.');return;}
+  tch.canTimetable=true; saveAuthState();
+  if(typeof wifiOnSave==='function')wifiOnSave();
+  alert('تم تكليف «'+tch.name+'» بقسم جدول الحصص.');
+  renderAuthAssign();
+}
 function authAddAssign(){
   const tid=(document.getElementById('asgTeacher')||{}).value||'';
   const t=AUTH_STATE.accounts.find(function(a){return a.id===tid;});
@@ -11910,14 +12358,16 @@ function authAddAssign(){
   const wantSheets=!!(document.getElementById('asgSheets')||{}).checked;
   const wantCare=!!(document.getElementById('asgCare')||{}).checked;
   const wantParents=!!(document.getElementById('asgParents')||{}).checked;
+  const wantTime=!!(document.getElementById('asgTime')||{}).checked;
   const wantRec=!!(document.getElementById('asgRec')||{}).checked;
   if(wantCare) t.canCare=true;
   if(wantParents) t.canParents=true;
+  if(wantTime) t.canTimetable=true;
   if(wantRec) t.canRecords=true;
   const sheetScope=((document.getElementById('asgSheetScope')||{}).value)||'section';
-  if((wantCare||wantParents) && !grade && !sectionId && !subject && !wantSheets){
+  if((wantCare||wantParents||wantTime) && !grade && !sectionId && !subject && !wantSheets){
     saveAuthState();renderAuthAssign();
-    alert('تم تكليف «'+t.name+'»'+(wantCare?' بالرعاية':'')+(wantParents?' بأولياء الأمور':'')+'.');
+    alert('تم تكليف «'+t.name+'»'+(wantCare?' بالرعاية':'')+(wantParents?' بأولياء الأمور':'')+(wantTime?' بجدول الحصص':'')+'.');
     return;
   }
   if(wantSheets && sheetScope==='stage'){
@@ -11953,7 +12403,7 @@ function authAddAssign(){
     homework:!!(document.getElementById('asgHw')||{}).checked,
     records:wantRec,
     sheets:wantSheets,
-    care:wantCare,parents:wantParents
+    care:wantCare,parents:wantParents,timetable:wantTime
   });
   saveAuthState();renderAuthAssign();
 }
@@ -11984,7 +12434,7 @@ function renderTeacherHome(){
   const canAtt=asgs.some(function(a){return a.attendance;});
   const canRec=teacherCanRecords();
   const canCareT=teacherCanCare(); const canSheets=teacherCanSheets();
-  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(typeof teacherCanParents==='function'&&teacherCanParents()?'<button class="material-btn" onclick="teacherOpenParents()">👨‍👩‍👧 أولياء الأمور</button>':'')+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
+  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(typeof teacherCanParents==='function'&&teacherCanParents()?'<button class="material-btn" onclick="teacherOpenParents()">👨‍👩‍👧 أولياء الأمور</button>':'')+'<button class="material-btn" onclick="openTimetableModule()">🗓️ جدول الحصص</button>'+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>لوحة المعلم</h2><p>مرحباً '+escapeHtml(me.name)+' — المواد والمهام المكلّف بها فقط</p></div></div>'+facebookHeadBtn()+'</div>'+
     wifiTeacherBar()+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px">'+attBar+'</div>'+
     '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مهام بعد. يطلب من المدير توزيع المواد من قسم المهام.</div>')+'</div></div>';
@@ -12020,6 +12470,15 @@ function teacherCanParents(){
 function teacherOpenParents(){
   if(!teacherCanParents()){alert('لم تُكلَّف بقسم أولياء الأمور.');return;}
   openParentsModule();
+}
+function teacherCanTimetable(){
+  const me=authMe(); if(!me)return false;
+  if(me.canTimetable)return true;
+  return (me.assignments||[]).some(function(a){return a.timetable;});
+}
+function teacherOpenTimetable(){
+  if(!teacherCanTimetable()){alert('لم تُكلَّف بجدول الحصص.');return;}
+  openTimetableModule();
 }
 function teacherCanSheets(){
   const me=authMe(); if(!me)return false;
@@ -12317,7 +12776,9 @@ function studentCtx(){
       });
     });
   }
-  return {me:me,grade:grade,sectionId:sectionId,studentId:studentId,studentName:studentName};
+  let sectionLabel='';
+  if(grade&&sectionId){const secs=typeof gbSectionsForGrade==='function'?gbSectionsForGrade(grade):[]; const sec=(secs||[]).find(function(s){return s.id===sectionId;}); if(sec) sectionLabel=sec.label||'';}
+  return {me:me,grade:grade,sectionId:sectionId,sectionLabel:sectionLabel,studentId:studentId,studentName:studentName};
 }
 function studentLevelsRow(ctx,sub){
   if(!ctx||!sub||typeof getLevelsRecord!=='function')return {weekly:{oct:['','','',''],nov:['','','',''],dec:['','','',''],mid:'',feb:['','','',''],apr:['','','',''],final:''},monthly:{oct:'',nov:'',dec:'',mid:'',feb:'',apr:'',final:''}};
@@ -12395,7 +12856,7 @@ function renderStudentHome(){
       '<p style="margin:8px 0 0;color:#546e7a;font-size:12px">اضغط لعرض '+[showG?'درجاتك':'',showL?'المستويات':'','التحضير'].filter(Boolean).join(' و ')+'</p></article>';
   }).join('');
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🎓</span><div><h2>واجهة الطالب</h2><p>مرحباً '+escapeHtml(ctx.studentName)+(ctx.grade?(' — '+escapeHtml(ctx.grade)):'')+'</p></div></div>'+facebookHeadBtn()+'</div>'+
-    '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مواد أو لم يُربط حسابك بطالب.</div>')+'</div></div>';
+    '<div class="grade-report-grid"><article class="grade-report-card st-sub-card" onclick="openTimetableModule()"><div class="grc-title"><strong>🗓️ جدول الحصص</strong></div><p style="margin:8px 0 0;color:#546e7a;font-size:12px">جدول شعبتك فقط — للقراءة</p></article>'+(cards||'<div class="empty-hint">لا توجد مواد أو لم يُربط حسابك بطالب.</div>')+'</div></div>';
 }
 function studentNotifList(me){
   const all=(typeof NOTIF_STATE!=='undefined'&&NOTIF_STATE)?NOTIF_STATE:(window.NOTIF_STATE||[]);
@@ -12545,32 +13006,180 @@ function openNotifPanel(){
   list.forEach(function(n){if(!n.readBy)n.readBy={};n.readBy[me.id]=1;});
   saveNotif();updateMailBadges();
 }
+function mailOnlineList(){
+  const me=authMe();
+  const now=Date.now();
+  return (AUTH_STATE.accounts||[]).filter(function(a){return a.role==='admin'||a.role==='teacher';}).map(function(a){
+    const p=LIVE_WHO&&LIVE_WHO[a.id];
+    const on=!!(p&&(now-(p.at||0)<50000));
+    return {id:a.id,name:a.name,role:a.role,on:on,me:me&&a.id===me.id};
+  }).sort(function(x,y){return (y.on-x.on)||x.name.localeCompare(y.name,'ar');});
+}
+function mailShowOnline(ev){
+  if(ev) ev.stopPropagation();
+  if(typeof liveFetchWho==='function') liveFetchWho();
+  if(typeof liveHeartbeat==='function') liveHeartbeat();
+  const list=mailOnlineList();
+  const n=list.filter(function(x){return x.on;}).length;
+  const box=document.createElement('div');
+  box.className='wa-on';
+  box.onclick=function(e){if(e.target===box) box.remove();};
+  box.innerHTML='<div class="wa-on-box"><div style="display:flex;justify-content:space-between;align-items:center"><strong>أعضاء المجموعة</strong><button type="button" class="wa-ico ghost" onclick="this.closest(\'.wa-on\').remove()">✕</button></div><p style="color:#8696a0;font-size:13px">النشطون الآن: '+n+'</p>'+
+    list.map(function(m){
+      return '<div class="wa-mem"><span class="wa-dot'+(m.on?' on':'')+'"></span><div><b>'+escapeHtml(m.name)+(m.me?' (أنت)':'')+'</b><div style="font-size:12px;color:#8696a0">'+(m.role==='admin'?'مدير':"معلم / مدرس")+' — '+(m.on?'متصل الآن':'غير متصل')+'</div></div></div>';
+    }).join('')+'</div>';
+  document.body.appendChild(box);
+}
+function mailPickFile(kind){
+  const inp=document.createElement('input');
+  inp.type='file';
+  inp.accept=kind==='img'?'image/*':(kind==='xls'?'.xlsx,.xls,.csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':'application/pdf,.pdf');
+  inp.onchange=function(){
+    const f=inp.files&&inp.files[0]; if(!f)return;
+    if(kind==='img'){
+      const img=new Image();
+      const fr=new FileReader();
+      fr.onload=function(){
+        img.onload=function(){
+          const c=document.createElement('canvas');
+          let w=img.width,h=img.height,max=1000;
+          if(w>max){h=h*max/w;w=max;}
+          if(h>max){w=w*max/h;h=max;}
+          c.width=w;c.height=h;
+          c.getContext('2d').drawImage(img,0,0,w,h);
+          const data=c.toDataURL('image/jpeg',0.72);
+          mailAttachSet(data,'image',f.name||'صورة.jpg');
+        };
+        img.src=fr.result;
+      };
+      fr.readAsDataURL(f);
+      return;
+    }
+    if(kind==='xls'){
+      if(f.size>900000){alert('ملف إكسل كبير. اختر ملفاً أصغر من 900 ك.ب.');return;}
+      const fr=new FileReader();
+      fr.onload=function(){ mailAttachSet(fr.result,'excel',f.name||'جدول.xlsx'); };
+      fr.readAsDataURL(f);
+      return;
+    }
+    if(f.size>700000){alert('ملف PDF كبير. اختر ملفاً أصغر من 700 ك.ب.');return;}
+    const fr=new FileReader();
+    fr.onload=function(){ mailAttachSet(fr.result,'pdf',f.name||'ملف.pdf'); };
+    fr.readAsDataURL(f);
+  };
+  inp.click();
+}
+function mailAttachSet(data,type,name){
+  const d=document.getElementById('mailFileData');
+  const t=document.getElementById('mailFileType');
+  const n=document.getElementById('mailFileName');
+  const s=document.getElementById('mailRecStatus');
+  if(d)d.value=data; if(t)t.value=type; if(n)n.value=name;
+  if(s)s.textContent=(type==='img'||type==='image'?'صورة جاهزة':(type==='excel'?'ملف إكسل جاهز':'ملف PDF جاهز'))+' — أرسل';
+}
+function mailDownloadMsg(id,kind){
+  const m=(MAIL_STATE||[]).find(function(x){return x.id===id;});
+  if(!m)return;
+  const src=kind==='pdf'?m.pdf:((kind==='xls'||kind==='excel')?m.excel:(m.image||m.file));
+  const name=m.fileName||(kind==='pdf'?'ملف.pdf':((kind==='xls'||kind==='excel')?'جدول.xlsx':'صورة.jpg'));
+  if(!src){alert('لا يوجد ملف للتحميل.');return;}
+  try{
+    const a=document.createElement('a');
+    a.href=src; a.download=name; a.target='_blank'; a.rel='noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+  }catch(e){
+    try{window.open(src,'_blank');}catch(e2){alert('اضغط مطولاً على الصورة واختر حفظ.');}
+  }
+}
+function mailExitChat(){
+  document.body.classList.remove('mail-full');
+  if(typeof authRole==='function'&&authRole()==='teacher'){openTeacherHome();return;}
+  if(typeof goDashboard==='function') goDashboard();
+}
+function mailZoomImg(src){const z=document.createElement("div");z.className="wa-zoom";z.onclick=function(){z.remove();};z.innerHTML="<img src=\""+src+"\" alt=\"\">";document.body.appendChild(z);}
+function mailOpenPeer(id){
+  MAIL_PEER=id||'all'; MAIL_PANE='chat';
+  renderMailHome();
+}
+function mailShowList(){
+  MAIL_PANE='list';
+  renderMailHome();
+}
 function renderMailHome(){
   const el=document.getElementById('view-mail');if(!el)return;
   const me=authMe();if(!me){authLogout();return;}
-  const back=me.role==='admin'?'<button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button>':'<button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button>';
-  const opts='<option value="all">مراسلة جماعية — كل المعلمين والمدير</option>'+mailPeople().map(function(a){return '<option value="'+a.id+'">'+escapeHtml(a.name)+' ('+(a.role==='admin'?'مدير':'معلم')+')</option>';}).join('');
+  if(me.role!=='admin'&&me.role!=='teacher'){alert('المراسلة للمدير والمعلمين.');return;}
+  const back=me.role==='admin'?'<button class="material-btn secondary" onclick="goDashboard()">رجوع</button>':'<button class="material-btn secondary" onclick="openTeacherHome()">رجوع</button>';
+  if(typeof MAIL_PEER==='undefined') window.MAIL_PEER='all';
+  if(typeof MAIL_PANE==='undefined') window.MAIL_PANE='list';
+  const peer=MAIL_PEER||'all';
   const items=MAIL_STATE.filter(function(m){
-    if(m.to==='all')return true;
-    return m.to===me.id||m.fromId===me.id;
-  }).slice().sort(function(a,b){return (b.at||0)-(a.at||0);});
-  const html=items.map(function(m){
-    const grp=m.to==='all'?'جماعية':'خاصة';
-    const unread=mailIsUnread(m,me);
-    const canDel=me.role==='admin'||m.fromId===me.id;
-    return '<article class="barcode-result-card'+(unread?' mail-unread':'')+'" onclick="mailOpenOne(\''+m.id+'\')"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>'+escapeHtml(m.fromName)+(unread?' <span style="color:#c62828">• غير مقروءة</span>':'')+'</strong><small>'+escapeHtml(m.when||'')+' — '+grp+'</small></div>'+(m.text?'<p style="margin:8px 0 0;white-space:pre-wrap">'+escapeHtml(m.text)+'</p>':'')+(m.audio?'<audio controls preload="metadata" style="width:100%;margin-top:8px" src="'+m.audio+'"></audio>':'')+(m.to!=='all'?'<small>إلى: '+escapeHtml(m.toName||'')+'</small>':'<small>إلى الجميع</small>')+(canDel?'<div style="margin-top:8px"><button type="button" class="material-btn secondary" onclick="event.stopPropagation();mailDelete(\''+m.id+'\')">حذف الرسالة</button></div>':'')+'</article>';
-  }).join('');
-  const notifBox=me.role==='admin'?'<div class="barcode-result-card" style="margin:12px 0"><h3>إشعار من المدير</h3><p>يظهر في الشريط العلوي للطلاب أو المعلمين أو كل المدرسة</p><div class="slog-filters"><div class="mat-field"><label>إلى</label><select id="notifTo"><option value="students">الطلاب فقط</option><option value="teachers">المعلمين / المدرسين فقط</option><option value="all">كل المدرسة</option></select></div><div class="mat-field"><label>عنوان الإشعار</label><input id="notifTitle" type="text" placeholder="عنوان"></div></div><div class="mat-field"><label>نص الإشعار</label><textarea id="notifText" rows="3"></textarea></div><button class="material-btn" onclick="notifSend()">نشر الإشعار في الشريط العلوي</button></div>':'';
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">✉️</span><div><h2>مراسلة</h2><p>الرسائل غير المقروءة تظهر بالأحمر في الشريط العلوي</p></div></div>'+back+'</div>'+notifBox+
-    '<div class="slog-filters"><div class="mat-field"><label>إلى</label><select id="mailTo">'+opts+'</select></div></div>'+
-    '<div class="mat-field"><label>الرسالة</label><textarea id="mailText" rows="4" placeholder="اكتب الرسالة..."></textarea></div>'+
-    '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0">'+
-    '<button class="material-btn" onclick="mailSend()">إرسال</button>'+
-    '<button type="button" class="material-btn secondary" id="mailRecBtn" onclick="mailToggleRec()">🎤 بصمة صوتية</button>'+
-    '<span id="mailRecStatus" style="font-size:12px;color:#546e7a"></span></div>'+
+    if(peer==='all') return m.to==='all';
+    return (m.fromId===me.id && m.to===peer) || (m.fromId===peer && m.to===me.id);
+  }).slice().sort(function(a,b){return (a.at||0)-(b.at||0);});
+  const onN=mailOnlineList().filter(function(x){return x.on;}).length;
+  function lastOf(pid){
+    const arr=MAIL_STATE.filter(function(m){
+      if(pid==='all') return m.to==='all';
+      return (m.fromId===me.id&&m.to===pid)||(m.fromId===pid&&m.to===me.id);
+    }).sort(function(a,b){return (b.at||0)-(a.at||0);});
+    return arr[0]||null;
+  }
+  function unreadOf(pid){
+    return MAIL_STATE.filter(function(m){
+      if(!mailIsUnread(m,me)) return false;
+      if(pid==='all') return m.to==='all';
+      return m.fromId===pid && m.to===me.id;
+    }).length;
+  }
+  const people=mailPeople();
+  const lg=lastOf('all'); const ug=unreadOf('all');
+  let listHtml='<div class="wa-list-head"><span>المحادثات</span><button type="button" class="wa-x" onclick="mailExitChat()">✕</button></div><div class="wa-rows">';
+  listHtml+='<div class="wa-row'+(peer==='all'?' on':'')+'" onclick="mailOpenPeer(\'all\')"><div class="wa-ava">👥</div><div style="flex:1;min-width:0"><b>مراسلة عامة</b><small>'+escapeHtml((lg&&(lg.text||lg.fileName||'مرفق'))||'مجموعة الملاك')+'</small></div>'+(ug?'<span class="wa-badge">'+ug+'</span>':'')+'</div>';
+  people.forEach(function(a){
+    const lm=lastOf(a.id); const un=unreadOf(a.id);
+    const on=mailOnlineList().some(function(x){return x.id===a.id&&x.on;});
+    listHtml+='<div class="wa-row'+(peer===a.id?' on':'')+'" onclick="mailOpenPeer(\''+a.id+'\')"><span class="wa-dot'+(on?' on':'')+'"></span><div style="flex:1;min-width:0"><b>'+escapeHtml(a.name)+'</b><small>'+(a.role==='admin'?'مدير':'معلم')+' — '+escapeHtml((lm&&(lm.text||lm.fileName||'مرفق'))||'محادثة خاصة')+'</small></div>'+(un?'<span class="wa-badge">'+un+'</span>':'')+'</div>';
+  });
+  listHtml+='</div>';
+  const bubbles=items.map(function(m){
+    const mine=m.fromId===me.id;
+    const canDel=me.role==='admin'||mine;
+    const imgSrc=m.image||((m.fileType==='image'||(m.file||'').indexOf('data:image')===0)?(m.file||''):'');
+    const file=imgSrc?'<img class="wa-img" src="'+imgSrc+'" alt="صورة" onclick="mailZoomImg(this.src)"><button type="button" class="wa-dl" onclick="mailDownloadMsg(\''+m.id+'\',\'img\')">⬇️ تحميل الصورة</button>':'';
+    const pdf=m.pdf?'<a class="wa-file" href="'+m.pdf+'" download="'+escapeHtml(m.fileName||'ملف.pdf')+'" target="_blank" rel="noopener"><i>PDF</i><span>'+escapeHtml(m.fileName||'مستند PDF')+'<br><small>فتح / تحميل</small></span></a><button type="button" class="wa-dl" onclick="mailDownloadMsg(\''+m.id+'\',\'pdf\')">⬇️ تحميل PDF</button>':'';
+        const xls=m.excel?'<a class="wa-file" href="'+m.excel+'" download="'+escapeHtml(m.fileName||'جدول.xlsx')+'" target="_blank" rel="noopener"><i style="background:#1d6f42">XLS</i><span>'+escapeHtml(m.fileName||'ملف إكسل')+'<br><small>فتح / تحميل</small></span></a><button type="button" class="wa-dl" onclick="mailDownloadMsg(\''+m.id+'\',\'excel\')">⬇️ تحميل إكسل</button>':'';
+    const aud=m.audio?'<audio class="wa-aud" controls preload="metadata" src="'+m.audio+'"></audio>':'';
+    return '<div class="wa-b '+(mine?'wa-out':'wa-in')+'">'+(mine?'':'<div class="wa-nm">'+escapeHtml(m.fromName||'')+'</div>')+
+      file+pdf+xls+aud+(m.text?'<p class="wa-tx">'+escapeHtml(m.text)+'</p>':'')+
+      '<div class="wa-meta"><span>'+escapeHtml((m.when||'').split(',').pop()||m.when||'')+'</span>'+(canDel?'<button type="button" class="wa-del" onclick="mailDelete(\''+m.id+'\')">حذف</button>':'')+' ✓</div></div>';
+  }).join('')||'<p style="color:#8696a0;text-align:center">ابدأ المحادثة الجماعية</p>';
+  const notifMini=me.role==='admin'?'<details style="margin:8px 12px;color:#e9edef"><summary>إشعار للطلاب / المعلمين</summary><div class="mat-field"><select id="notifTo"><option value="students">الطلاب</option><option value="teachers">المعلمون</option><option value="all">الكل</option></select><input id="notifTitle" placeholder="عنوان"><textarea id="notifText" rows="2" placeholder="النص"></textarea><button class="material-btn" onclick="notifSend()">نشر</button></div></details>':'';
+  const peerRec=(peer!=='all')?(AUTH_STATE.accounts||[]).find(function(a){return a.id===peer;}):null;
+  const chatTitle=peer==='all'?'مجموعة الملاك':(peerRec?peerRec.name:'محادثة خاصة');
+  const chatSub=peer==='all'?('عامة — النشطون: '+onN):('خاصة — '+(peerRec&&peerRec.role==='admin'?'مدير':'معلم / مدرس'));
+  document.body.classList.toggle('mail-pane-list', MAIL_PANE!=='chat');
+  document.body.classList.toggle('mail-pane-chat', MAIL_PANE==='chat');
+  el.innerHTML='<div class="wa-shell"><div class="wa-list">'+listHtml+'</div><div class="wa-app">'+
+    '<div class="wa-head"><button type="button" class="wa-x wa-back-list" onclick="event.stopPropagation();mailShowList()" title="المحادثات">›</button><div class="wa-ava" onclick="mailShowOnline(event)">'+(peer==='all'?'👥':'👤')+'</div><div onclick="mailShowOnline(event)" style="flex:1;min-width:0"><h2>'+escapeHtml(chatTitle)+'</h2><p>'+escapeHtml(chatSub)+'</p></div></div>'+
+    notifMini+
+    '<div class="wa-thread" id="waThread">'+bubbles+'</div>'+
+    '<div class="wa-bar">'+
+    '<button type="button" class="wa-ico ghost" title="صورة" onclick="mailPickFile(\'img\')">🖼️</button>'+
+    '<button type="button" class="wa-ico ghost" title="PDF" onclick="mailPickFile(\'pdf\')">📄</button>'+
+    '<button type="button" class="wa-ico ghost" title="إكسل" onclick="mailPickFile(\'xls\')">📊</button>'+
+    '<textarea id="mailText" rows="1" placeholder="رسالة"></textarea>'+
+    '<button type="button" class="wa-ico ghost" id="mailRecBtn" type="button" onclick="mailToggleRec(event)" oncontextmenu="return false" ontouchstart="event.stopPropagation()">🎤</button>'+
+    '<button type="button" class="wa-ico" onclick="mailSend()">➤</button>'+
+    '</div><div id="mailRecStatus" style="color:#8696a0;font-size:11px;padding:0 12px 8px;background:#202c33"></div>'+
     '<input type="hidden" id="mailAudioData" value="">'+
-    '<h3 style="margin:18px 0 8px">الوارد والصادر</h3>'+
-    '<div style="display:grid;gap:10px">'+(html||'<div class="empty-hint">لا رسائل بعد.</div>')+'</div>';
+    '<input type="hidden" id="mailFileData" value="">'+
+    '<input type="hidden" id="mailFileType" value="">'+
+    '<input type="hidden" id="mailFileName" value="">'+
+    '<input type="hidden" id="mailTo" value="'+escapeHtml(peer)+'">'+
+    '</div></div>';
+  const th=document.getElementById('waThread');
+  if(th) th.scrollTop=th.scrollHeight;
   updateMailBadges();
 }
 function mailDelete(id){
@@ -12590,37 +13199,55 @@ function mailOpenOne(id){
   if(!m.readBy[me.id]){m.readBy[me.id]=1; saveMail(); renderMailHome();}
 }
 let MAIL_REC=null, MAIL_CHUNKS=[];
-function mailToggleRec(){
+function mailToggleRec(ev){
+  if(ev){ev.preventDefault();ev.stopPropagation();}
   const btn=document.getElementById('mailRecBtn');
   const st=document.getElementById('mailRecStatus');
-  if(MAIL_REC){ try{MAIL_REC.stop();}catch(e){} return; }
-  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){alert('التسجيل غير مدعوم في هذا المتصفح.');return;}
+  if(MAIL_REC){
+    try{if(MAIL_REC.state==='recording') MAIL_REC.requestData(); MAIL_REC.stop();}catch(e){}
+    return;
+  }
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+    alert('التسجيل يحتاج متصفحاً حديثاً ورابط https.');
+    return;
+  }
   navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
     MAIL_CHUNKS=[];
-    const rec=new MediaRecorder(stream);
+    let mime='';
+    const cands=['audio/webm;codecs=opus','audio/webm','audio/mp4','audio/ogg'];
+    if(window.MediaRecorder){
+      for(let i=0;i<cands.length;i++){ if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(cands[i])){mime=cands[i];break;} }
+    }
+    const rec=mime?new MediaRecorder(stream,{mimeType:mime}):new MediaRecorder(stream);
     MAIL_REC=rec;
-    rec.ondataavailable=function(ev){ if(ev.data&&ev.data.size) MAIL_CHUNKS.push(ev.data); };
+    rec.ondataavailable=function(e){ if(e.data&&e.data.size) MAIL_CHUNKS.push(e.data); };
     rec.onstop=function(){
       stream.getTracks().forEach(function(tr){tr.stop();});
       MAIL_REC=null;
-      const blob=new Blob(MAIL_CHUNKS,{type:'audio/webm'});
-      if(blob.size>450000){alert('البصمة طويلة جداً. سجّل أقل من نصف دقيقة.'); if(st)st.textContent=''; if(btn)btn.textContent='🎤 بصمة صوتية'; return;}
+      if(btn){btn.classList.remove('rec'); btn.textContent='🎤';}
+      const blob=new Blob(MAIL_CHUNKS,{type:rec.mimeType||'audio/webm'});
+      if(!blob.size){if(st)st.textContent='لم يُسجل صوت. اضغط مطولاً أو أعد المحاولة.';return;}
+      if(blob.size>700000){alert('البصمة طويلة. سجّل أقصر.'); if(st)st.textContent=''; return;}
       const fr=new FileReader();
-      fr.onload=function(){ const hid=document.getElementById('mailAudioData'); if(hid)hid.value=fr.result; if(st)st.textContent='تم تسجيل البصمة — أرسل الرسالة'; };
+      fr.onload=function(){
+        const hid=document.getElementById('mailAudioData');
+        if(hid) hid.value=fr.result;
+        if(st) st.textContent='البصمة جاهزة — اضغط إرسال';
+      };
       fr.readAsDataURL(blob);
-      if(btn)btn.textContent='🎤 بصمة صوتية';
     };
-    rec.start();
-    if(btn)btn.textContent='⏹ إيقاف التسجيل';
-    if(st)st.textContent='جاري التسجيل…';
-  }).catch(function(){alert('اسمح باستخدام الميكروفون لتسجيل البصمة.');});
+    rec.start(200);
+    if(btn){btn.classList.add('rec'); btn.textContent='⏹';}
+    if(st)st.textContent='جاري التسجيل… اضغط الميكروفون للإيقاف';
+  }).catch(function(){alert('اسمح باستخدام الميكروفون من إعدادات المتصفح.');});
 }
 function mailSend(){
   const me=authMe();if(!me)return;
   const toId=(document.getElementById('mailTo')||{}).value||'all';
   const text=String((document.getElementById('mailText')||{}).value||'').trim();
   const audio0=(document.getElementById('mailAudioData')||{}).value||'';
-  if(!text && !audio0){alert('اكتب رسالة أو سجّل بصمة صوتية.');return;}
+  const file0=(document.getElementById('mailFileData')||{}).value||'';
+  if(!text && !audio0 && !file0){alert('اكتب رسالة أو أرسل بصمة أو صورة أو ملفاً.');return;}
   let toName='الجميع';
   if(toId!=='all'){
     const rec=(AUTH_STATE.accounts||[]).find(function(a){return a.id===toId;});
@@ -12629,7 +13256,10 @@ function mailSend(){
   }
   const now=new Date();
   const audio=(document.getElementById('mailAudioData')||{}).value||'';
-  MAIL_STATE.unshift({id:authUid(),fromId:me.id,fromName:me.name,fromRole:me.role,to:toId,toName:toName,text:text,audio:audio,at:now.getTime(),when:now.toLocaleString('ar-IQ'),readBy:{}});
+  const fdata=(document.getElementById('mailFileData')||{}).value||'';
+  const ftype=(document.getElementById('mailFileType')||{}).value||'';
+  const fname=(document.getElementById('mailFileName')||{}).value||'';
+  MAIL_STATE.unshift({id:authUid(),fromId:me.id,fromName:me.name,fromRole:me.role,to:toId||'all',toName:toName,text:text,audio:audio,image:ftype==='image'?fdata:'',pdf:ftype==='pdf'?fdata:'',excel:(ftype==='excel'||ftype==='xls')?fdata:'',fileName:fname,at:now.getTime(),when:now.toLocaleString('ar-IQ'),readBy:{}});
   saveMail();
   if(typeof liveAlertNow==='function')liveAlertNow('مراسلة جديدة', (me.name||'')+': '+text);
   renderMailHome();
@@ -12777,6 +13407,7 @@ function cloudPack(){
   try{p.RECORDS=RECORDS_STATE;}catch(e){}
   try{p.ACCOUNTS=ACCOUNTS_STATE;}catch(e){}
   try{p.ORDERS=JSON.parse(localStorage.getItem('schoolResultsSchoolOrders_v1')||'null');}catch(e){}
+  try{p.TIMETABLE=typeof TIMETABLE_STATE!=='undefined'?{rows:TIMETABLE_STATE.rows}:null;}catch(e){}
   return p;
 }
 function cloudApplyFull(pack){
@@ -12806,6 +13437,7 @@ function cloudApplyFull(pack){
   try{if(pack.RECORDS){RECORDS_STATE=pack.RECORDS; localStorage.setItem(RECORDS_STORAGE_KEY,JSON.stringify(RECORDS_STATE));}}catch(e){}
   try{if(pack.ACCOUNTS){ACCOUNTS_STATE=pack.ACCOUNTS; localStorage.setItem(ACCOUNTS_STORAGE_KEY,JSON.stringify(ACCOUNTS_STATE));}}catch(e){}
   try{if(pack.ORDERS){window.ORDERS_STATE=pack.ORDERS; localStorage.setItem('schoolResultsSchoolOrders_v1',JSON.stringify(pack.ORDERS));}}catch(e){}
+  try{if(pack.TIMETABLE&&pack.TIMETABLE.rows){TIMETABLE_STATE.rows=pack.TIMETABLE.rows; saveTimetable();}}catch(e){}
   try{
     if(pack.AUTH&&pack.AUTH.accounts){
       AUTH_STATE.accounts=pack.AUTH.accounts;
@@ -13234,5 +13866,5 @@ try{document.addEventListener('visibilitychange',function(){if(!document.hidden)
 
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3006a445c6e8dec',t:'MTc4NzU1NDE0NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a301243f8d0eae02',t:'MTc4NzU2MTc2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
