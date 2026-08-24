@@ -1623,10 +1623,10 @@
   }
   body.mail-full .wa-head{position:sticky;top:0;z-index:2;flex:0 0 auto}
   body.mail-full .wa-thread{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
-  body.mail-full .wa-bar, body.mail-full #mailRecStatus{
-    position:sticky;bottom:0;z-index:2;flex:0 0 auto;
-    padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))
-  }
+  body.mail-full .wa-app{position:relative!important;min-height:0!important}
+  body.mail-full .wa-bar{display:flex!important;position:absolute!important;left:0;right:0;bottom:0;z-index:8!important;flex:0 0 auto!important;min-height:56px;padding:6px 8px calc(8px + env(safe-area-inset-bottom,0px))!important;background:#202c33!important}
+  body.mail-full #mailRecStatus{display:block!important;position:absolute!important;left:0;right:0;bottom:56px;z-index:7}
+  body.mail-full .wa-thread{flex:1 1 auto!important;min-height:0!important;padding-bottom:88px!important}
   .wa-x{width:28px;height:28px;min-width:28px;border:0;border-radius:50%;background:#ffffff22;color:#fff;font-size:14px;cursor:pointer;margin-inline-end:4px}
   #mailRecBtn{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
   #mailRecBtn.rec{background:#e53935!important;color:#fff!important}
@@ -4987,6 +4987,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
     <button type="button" data-nav="barcode" onclick="closeGlobalNav();openBarcodeModule()"><span>📷</span>باركود</button>
     <button type="button" data-nav="tasks" onclick="closeGlobalNav();openAuthTasks()"><span>📌</span>المهام</button>
     <button type="button" data-nav="mail" onclick="closeGlobalNav();openMailModule()"><span>✉️</span>مراسلة</button>
+    <button type="button" data-nav="privmail" onclick="closeGlobalNav();openPrivMailModule()"><span>🕵️</span>المراسلات الخاصة</button>
 
     <button type="button" data-nav="exams" onclick="closeGlobalNav();openExamsModule()"><span>📝</span>الامتحانات</button>
     <button type="button" data-nav="results" onclick="closeGlobalNav();openResultsSectionsFromDashboard()"><span>🖨️</span>كشوف النتائج</button>
@@ -5065,6 +5066,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
 <div class="view wide" id="view-care"></div>
 <div class="view wide" id="view-parents"></div>
 <div class="view wide" id="view-timetable"></div>
+<div class="view wide" id="view-privmail"></div>
 <div class="view wide" id="view-records"></div>
 <div class="view wide" id="view-notes"></div>
 <div class="view wide" id="view-accounts"></div>
@@ -6654,6 +6656,8 @@ function restoreEntry(entry){
     renderAuthLogin();
   } else if(entry.id === 'view-tasks'){
     restoreTasksView(entry.meta||{});
+  } else if(entry.id === 'view-privmail'){
+    if(typeof renderPrivMailHome==='function') renderPrivMailHome();
   } else if(entry.id === 'view-mail'){
     renderMailHome();
 
@@ -8231,6 +8235,7 @@ function dashMenuItems(){
     ['📷','باركود','مسح نتائج الطلاب','openBarcodeModule()','linear-gradient(135deg,#004d40,#00897b)'],
     ['📌','المهام','تكليف المعلمين والحسابات','openAuthTasks()','linear-gradient(135deg,#b71c1c,#e53935)'],
     ['✉️','مراسلة','رسائل وإشعارات','openMailModule()','linear-gradient(135deg,#4527a0,#7e57c2)'],
+    ['🕵️','المراسلات الخاصة','عرض محادثات كل معلم','openPrivMailModule()','linear-gradient(135deg,#4a148c,#9c27b0)'],
     ['📝','الامتحانات','قوائم وأسئلة وجداول','openExamsModule()','linear-gradient(135deg,#01579b,#29b6f6)'],
     ['🖨️','كشوف النتائج','طباعة النتائج','openResultsSectionsFromDashboard()','linear-gradient(135deg,#4a148c,#8e24aa)'],
     ['📚','المواد الدراسية','مواد كل صف','openSubjectsEditor()','linear-gradient(135deg,#1b5e20,#43a047)'],
@@ -8287,6 +8292,7 @@ function renderDashboard(){
       '<button onclick="openBarcodeModule()"><span class="dni">📷</span>باركود</button>'+
       '<button onclick="openAuthTasks()"><span class="dni">📌</span>المهام</button>'+
       '<button onclick="openMailModule()"><span class="dni">✉️</span>مراسلة</button>'+
+      '<button onclick="openPrivMailModule()"><span class="dni">🕵️</span>المراسلات الخاصة</button>'+
       '<button onclick="authLogout()"><span class="dni">🚪</span>تسجيل خروج</button>'+
       '<button onclick="openExamsModule()"><span class="dni">📝</span>الامتحانات</button>'+
       '<button onclick="openResultsSectionsFromDashboard()"><span class="dni">🖨️</span>كشوف النتائج</button>'+
@@ -10283,21 +10289,31 @@ function printThemeSelectHtml(){
   return '<label class="print-theme-wrap"><span>قالب الألوان</span><select class="print-theme-select" onchange="setPrintTheme(this.value)">'+examColorThemeOptions(getPrintTheme())+'</select></label>';
 }
 function ensurePrintThemeBars(){
-  if(typeof printThemeSelectHtml!=='function')return;
-  if(!document.getElementById('view-auth')|| (typeof currentViewId!=='undefined'&&currentViewId==='view-auth'))return;
-  const views=document.querySelectorAll('.view');
-  let host=null;
-  views.forEach(function(v){if(v&&v.style&&v.style.display!=='none'&&v.offsetParent!==null)host=v;});
-  if(!host)host=document.querySelector('.view[style*="display: block"], .view[style*="display:block"]');
-  if(!host)return;
-  if(host.querySelector('.print-theme-wrap'))return;
-  const btns=Array.prototype.slice.call(host.querySelectorAll('button'));
-  const printBtn=btns.find(function(b){return /طباعة|عمودي|أفقي|🖨️/.test((b.textContent||'')+(b.getAttribute('title')||''));});
-  if(!printBtn||!printBtn.parentNode)return;
-  const box=document.createElement('span');
-  box.style.cssText='display:inline-flex;align-items:center;margin-inline:6px';
-  box.innerHTML=printThemeSelectHtml();
-  printBtn.parentNode.insertBefore(box, printBtn);
+  try{
+    if(typeof printThemeSelectHtml!=='function')return;
+    if(typeof currentViewId!=='undefined'&&/view-(auth|mail|dashboard|teacher|student|privmail)$/.test(currentViewId||''))return;
+    const views=document.querySelectorAll('.view');
+    let host=null;
+    views.forEach(function(v){if(v&&v.style&&v.style.display!=='none'&&v.offsetParent!==null)host=v;});
+    if(!host)return;
+    const skip=host.querySelector('.attendance-home-grid,.staff-home-grid,.care-home-grid,.acc-home-grid,.records-home-grid');
+    const btns=Array.prototype.slice.call(host.querySelectorAll('button'));
+    const printBtns=btns.filter(function(b){
+      if(!b||!b.parentNode)return false;
+      if(/module-card|grade-select-card|staff-module-card|care-module-card|attendance-module-card/.test(b.className||''))return false;
+      const tx=((b.textContent||'')+(b.getAttribute('title')||'')).replace(/\s+/g,' ').trim();
+      if(tx.length>32)return false;
+      return /طباعة|🖨️|عمودي|أفقي/.test(tx);
+    });
+    printBtns.forEach(function(printBtn){
+      const par=printBtn.parentNode;
+      if(par.querySelector(':scope > .print-theme-wrap, :scope > span > .print-theme-wrap'))return;
+      const box=document.createElement('span');
+      box.style.cssText='display:inline-flex;align-items:center;margin-inline:6px;vertical-align:middle';
+      box.innerHTML=printThemeSelectHtml();
+      par.insertBefore(box, printBtn);
+    });
+  }catch(e){}
 }
 
 function examColorThemeOptions(sel){
@@ -12685,10 +12701,12 @@ function renderTeacherGrades(asg){
   const body=students.map(function(st,i){
     const row=rec.rows[st.id]||(rec.rows[st.id]={});
     if(sixth&&typeof gbCompute56==='function')gbCompute56(row,rec);
-    function cell(k){return '<td contenteditable="true" onblur="teacherSetScore(\''+asg.id+'\',\''+st.id+'\',\''+k+'\',this)">'+escapeHtml(row[k]==null||row[k]===''?'':String(row[k]))+'</td>';}
-    function ro(v){return '<td style="font-weight:900;background:#fff8e1">'+(v===''||v==null?'—':escapeHtml(String(v)))+'</td>';}
-    if(sixth) return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(st.name)+'</td>'+cell('oct')+cell('nov')+cell('dec')+ro(row.term1)+cell('mid')+cell('feb')+cell('apr')+ro(row.term2)+ro(row.coursework)+cell('finalExam')+ro(row.finalGrade)+'</tr>';
-    return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(st.name)+'</td>'+cell('mid')+cell('finalExam')+'</tr>';
+    const night=(document.documentElement.getAttribute('data-ui-skin')||'').indexOf('night')===0;
+    const ns=night?('background:'+(i%2?'#2a1e28':'#141018')+'!important;color:#fff8ee!important'):'';
+    function cell(k){return '<td contenteditable="true" style="'+ns+'" onblur="teacherSetScore(\''+asg.id+'\',\''+st.id+'\',\''+k+'\',this)">'+escapeHtml(row[k]==null||row[k]===''?'':String(row[k]))+'</td>';}
+    function ro(v){return '<td style="font-weight:900;'+(night?ns:'background:#fff8e1')+'">'+(v===''||v==null?'—':escapeHtml(String(v)))+'</td>';}
+    if(sixth) return '<tr><td style="'+ns+'">'+(i+1)+'</td><td class="name" style="'+ns+'">'+escapeHtml(st.name)+'</td>'+cell('oct')+cell('nov')+cell('dec')+ro(row.term1)+cell('mid')+cell('feb')+cell('apr')+ro(row.term2)+ro(row.coursework)+cell('finalExam')+ro(row.finalGrade)+'</tr>';
+    return '<tr><td style="'+ns+'">'+(i+1)+'</td><td class="name" style="'+ns+'">'+escapeHtml(st.name)+'</td>'+cell('mid')+cell('finalExam')+'</tr>';
   }).join('');
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">📊</span><div><h2>سجل درجات '+escapeHtml(asg.subject)+'</h2><p>'+escapeHtml(asg.grade)+' / '+escapeHtml(asg.sectionLabel)+'</p></div></div><button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button></div>'+(sixth?'<label style="display:flex;align-items:center;gap:8px;margin:8px 0;font-weight:800"><input type="checkbox"'+(rec.term1BestTwo?' checked':'')+' onchange="teacherSetTerm1BestTwo(\''+asg.id+'\',this.checked)"> احتساب معدل الفصل الأول من أعلى درجتين</label>':'')+
     '<div class="table-scroll"><table class="slog-table"><thead><tr>'+head+'</tr></thead><tbody>'+(body||'<tr><td>لا طلاب</td></tr>')+'</tbody></table></div>';
@@ -12926,10 +12944,14 @@ function renderStudentSubject(sub){
 function loadMail(){try{const a=JSON.parse(localStorage.getItem(MAIL_KEY)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}}
 function saveMail(){try{localStorage.setItem(MAIL_KEY,JSON.stringify(MAIL_STATE));}catch(e){} if(typeof wifiOnSave==='function')wifiOnSave('mail');}
 let MAIL_STATE=loadMail();
+var MAIL_VIEW_AS=null, MAIL_PEER='all', MAIL_PANE='list';
 function openMailModule(){
   const r=typeof authRole==='function'?authRole():'';
   if(r==='student'){openNotifPanel();return;}
   if(r!=='admin'&&r!=='teacher'){alert('المراسلة للمدير والمعلمين.');return;}
+  try{MAIL_VIEW_AS=null;}catch(e){}
+  if(typeof MAIL_PANE==='undefined') MAIL_PANE='list';
+  MAIL_PEER=MAIL_PEER||'all';
   renderMailHome();navigateTo('view-mail',{page:'home'});
 }
 function mailPeople(){
@@ -13093,6 +13115,7 @@ function mailDownloadMsg(id,kind){
 }
 function mailExitChat(){
   document.body.classList.remove('mail-full');
+  if(typeof MAIL_VIEW_AS!=='undefined'&&MAIL_VIEW_AS){MAIL_VIEW_AS=null; openPrivMailModule();return;}
   if(typeof authRole==='function'&&authRole()==='teacher'){openTeacherHome();return;}
   if(typeof goDashboard==='function') goDashboard();
 }
@@ -13105,10 +13128,38 @@ function mailShowList(){
   MAIL_PANE='list';
   renderMailHome();
 }
+function openPrivMailModule(){
+  const r=typeof authRole==='function'?authRole():'';
+  if(r!=='admin'){alert('هذا القسم للمدير فقط.');return;}
+  MAIL_VIEW_AS=null;
+  renderPrivMailHome();
+  navigateTo('view-privmail',{});
+}
+function renderPrivMailHome(){
+  const el=document.getElementById('view-privmail'); if(!el)return;
+  const teachers=(AUTH_STATE.accounts||[]).filter(function(a){return a.role==='teacher'||a.role==='admin';});
+  const cards=teachers.map(function(a){
+    const n=MAIL_STATE.filter(function(m){return m.fromId===a.id||m.to===a.id;}).length;
+    return '<article class="grade-report-card" style="cursor:pointer" onclick="mailInspect(\''+a.id+'\')"><div class="grc-title"><strong>'+escapeHtml(a.name)+'</strong><span class="grc-badge">'+(a.role==='admin'?'مدير':'معلم')+'</span></div><p style="margin:8px 0 0;color:#546e7a">محادثاته الخاصة والعامة — '+toArabicDigits(String(n))+' رسالة</p></article>';
+  }).join('')||'<div class="empty-hint">لا حسابات معلمين بعد.</div>';
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🕵️</span><div><h2>المراسلات الخاصة</h2><p>اختر معلماً لعرض محادثاته كما تظهر على جهازه</p></div></div><button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button></div><div class="grade-report-grid">'+cards+'</div></div>';
+}
+function mailInspect(id){
+  const real=authMe();
+  if(!real||real.role!=='admin'){alert('للمدير فقط.');return;}
+  MAIL_VIEW_AS=id; MAIL_PEER='all'; MAIL_PANE='list';
+  renderMailHome(); navigateTo('view-mail',{inspect:id});
+}
 function renderMailHome(){
   const el=document.getElementById('view-mail');if(!el)return;
-  const me=authMe();if(!me){authLogout();return;}
-  if(me.role!=='admin'&&me.role!=='teacher'){alert('المراسلة للمدير والمعلمين.');return;}
+  const real=authMe();if(!real){authLogout();return;}
+  if(real.role!=='admin'&&real.role!=='teacher'){alert('المراسلة للمدير والمعلمين.');return;}
+  const inspectId=(typeof MAIL_VIEW_AS!=='undefined')?MAIL_VIEW_AS:null;
+  const inspect=inspectId?(AUTH_STATE.accounts||[]).find(function(a){return a.id===inspectId;}):null;
+  if(inspectId&&!inspect){MAIL_VIEW_AS=null;}
+  if(inspect&&real.role!=='admin'){MAIL_VIEW_AS=null;}
+  const me=inspect||real;
+  const inspecting=!!inspect;
   const back=me.role==='admin'?'<button class="material-btn secondary" onclick="goDashboard()">رجوع</button>':'<button class="material-btn secondary" onclick="openTeacherHome()">رجوع</button>';
   if(typeof MAIL_PEER==='undefined') window.MAIL_PEER='all';
   if(typeof MAIL_PANE==='undefined') window.MAIL_PANE='list';
@@ -13132,7 +13183,7 @@ function renderMailHome(){
       return m.fromId===pid && m.to===me.id;
     }).length;
   }
-  const people=mailPeople();
+  const people=(AUTH_STATE.accounts||[]).filter(function(a){return (a.role==='admin'||a.role==='teacher')&&a.id!==me.id;});
   const lg=lastOf('all'); const ug=unreadOf('all');
   let listHtml='<div class="wa-list-head"><span>المحادثات</span><button type="button" class="wa-x" onclick="mailExitChat()">✕</button></div><div class="wa-rows">';
   listHtml+='<div class="wa-row'+(peer==='all'?' on':'')+'" onclick="mailOpenPeer(\'all\')"><div class="wa-ava">👥</div><div style="flex:1;min-width:0"><b>مراسلة عامة</b><small>'+escapeHtml((lg&&(lg.text||lg.fileName||'مرفق'))||'مجموعة الملاك')+'</small></div>'+(ug?'<span class="wa-badge">'+ug+'</span>':'')+'</div>';
@@ -13154,7 +13205,7 @@ function renderMailHome(){
       file+pdf+xls+aud+(m.text?'<p class="wa-tx">'+escapeHtml(m.text)+'</p>':'')+
       '<div class="wa-meta"><span>'+escapeHtml((m.when||'').split(',').pop()||m.when||'')+'</span>'+(canDel?'<button type="button" class="wa-del" onclick="mailDelete(\''+m.id+'\')">حذف</button>':'')+' ✓</div></div>';
   }).join('')||'<p style="color:#8696a0;text-align:center">ابدأ المحادثة الجماعية</p>';
-  const notifMini=me.role==='admin'?'<details style="margin:8px 12px;color:#e9edef"><summary>إشعار للطلاب / المعلمين</summary><div class="mat-field"><select id="notifTo"><option value="students">الطلاب</option><option value="teachers">المعلمون</option><option value="all">الكل</option></select><input id="notifTitle" placeholder="عنوان"><textarea id="notifText" rows="2" placeholder="النص"></textarea><button class="material-btn" onclick="notifSend()">نشر</button></div></details>':'';
+  const notifMini=(!inspecting&&real.role==='admin')?'<details style="margin:8px 12px;color:#e9edef"><summary>إشعار للطلاب / المعلمين</summary><div class="mat-field"><select id="notifTo"><option value="students">الطلاب</option><option value="teachers">المعلمون</option><option value="all">الكل</option></select><input id="notifTitle" placeholder="عنوان"><textarea id="notifText" rows="2" placeholder="النص"></textarea><button class="material-btn" onclick="notifSend()">نشر</button></div></details>':'';
   const peerRec=(peer!=='all')?(AUTH_STATE.accounts||[]).find(function(a){return a.id===peer;}):null;
   const chatTitle=peer==='all'?'مجموعة الملاك':(peerRec?peerRec.name:'محادثة خاصة');
   const chatSub=peer==='all'?('عامة — النشطون: '+onN):('خاصة — '+(peerRec&&peerRec.role==='admin'?'مدير':'معلم / مدرس'));
@@ -13164,14 +13215,14 @@ function renderMailHome(){
     '<div class="wa-head"><button type="button" class="wa-x wa-back-list" onclick="event.stopPropagation();mailShowList()" title="المحادثات">›</button><div class="wa-ava" onclick="mailShowOnline(event)">'+(peer==='all'?'👥':'👤')+'</div><div onclick="mailShowOnline(event)" style="flex:1;min-width:0"><h2>'+escapeHtml(chatTitle)+'</h2><p>'+escapeHtml(chatSub)+'</p></div></div>'+
     notifMini+
     '<div class="wa-thread" id="waThread">'+bubbles+'</div>'+
-    '<div class="wa-bar">'+
+    (inspecting?'':('<div class="wa-bar">'+
     '<button type="button" class="wa-ico ghost" title="صورة" onclick="mailPickFile(\'img\')">🖼️</button>'+
     '<button type="button" class="wa-ico ghost" title="PDF" onclick="mailPickFile(\'pdf\')">📄</button>'+
     '<button type="button" class="wa-ico ghost" title="إكسل" onclick="mailPickFile(\'xls\')">📊</button>'+
     '<textarea id="mailText" rows="1" placeholder="رسالة"></textarea>'+
     '<button type="button" class="wa-ico ghost" id="mailRecBtn" type="button" onclick="mailToggleRec(event)" oncontextmenu="return false" ontouchstart="event.stopPropagation()">🎤</button>'+
     '<button type="button" class="wa-ico" onclick="mailSend()">➤</button>'+
-    '</div><div id="mailRecStatus" style="color:#8696a0;font-size:11px;padding:0 12px 8px;background:#202c33"></div>'+
+    '</div>'))+'<div id="mailRecStatus" style="color:#8696a0;font-size:11px;padding:0 12px 8px;background:#202c33"></div>'+
     '<input type="hidden" id="mailAudioData" value="">'+
     '<input type="hidden" id="mailFileData" value="">'+
     '<input type="hidden" id="mailFileType" value="">'+
@@ -13490,15 +13541,20 @@ function cloudOnSave(){
 }
 function cloudRefreshUi(){
   if(!authHasSession())return;
+  if(document.body.classList.contains('mail-full')){try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){} return;}
   const ae=document.activeElement;
   if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable)){
     clearTimeout(CLOUD_UI_T);
-    CLOUD_UI_T=setTimeout(cloudRefreshUi,1200);
+    CLOUD_UI_T=setTimeout(cloudRefreshUi,2500);
     return;
   }
   try{
     const entry=Array.isArray(appStack)&&appStack.length?appStack[appStack.length-1]:null;
     if(!entry||entry.id==='view-auth')return;
+    if(/view-(teacher|student|gradebook|gradebook-detail|attendance|levels|mail|exams)/.test(entry.id||'')){
+      try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
+      return;
+    }
     if(typeof restoreEntry==='function') restoreEntry(entry);
     if(typeof showView==='function') showView(entry.id);
     if(typeof refreshNotifBell==='function') refreshNotifBell();
@@ -13866,5 +13922,5 @@ try{document.addEventListener('visibilitychange',function(){if(!document.hidden)
 
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a301243f8d0eae02',t:'MTc4NzU2MTc2Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a3028c7e8b75ae02',t:'MTc4NzU3NjUxOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
