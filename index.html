@@ -2277,27 +2277,27 @@
   .remark-input{ min-width:130px; width:100%; border:1px solid #cfd8dc; border-radius:7px; padding:7px; font-family:inherit; }
   .empty-module{ padding:52px 20px; text-align:center; color:#78909c; }
   /* ===== Alternating table rows like exam lists ===== */
-  table.students-table tbody tr:nth-child(even) td,
-  .staff-table tbody tr:nth-child(even) td,
-  .gradebook-table tbody tr:nth-child(even) td,
-  .levels-table tbody tr:nth-child(even) td,
-  .attendance-register-table tbody tr:nth-child(even) td,
-  .attendance-records-table tbody tr:nth-child(even) td,
-  .properties-table tbody tr:nth-child(even) td,
-  .care-table tbody tr:nth-child(even) td,
-  .records-table tbody tr:nth-child(even) td,
-  .acc-table tbody tr:nth-child(even) td,
-  .slog-table tbody tr:nth-child(even) td,
-  .ss-mini-table tbody tr:nth-child(even) td,
-  table.exam-list-table tbody tr:nth-child(even) td{
+  html:not([data-ui-skin^="night"]) table.students-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .staff-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .gradebook-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .levels-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .attendance-register-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .attendance-records-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .properties-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .care-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .records-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .acc-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .slog-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) .ss-mini-table tbody tr:nth-child(even) td,
+  html:not([data-ui-skin^="night"]) table.exam-list-table tbody tr:nth-child(even) td{
     background:#fff8e1;
   }
-  table.students-table tbody tr:nth-child(odd) td,
-  .staff-table tbody tr:nth-child(odd) td,
-  .gradebook-table tbody tr:nth-child(odd) td,
-  .levels-table tbody tr:nth-child(odd) td,
-  .attendance-register-table tbody tr:nth-child(odd) td,
-  .attendance-records-table tbody tr:nth-child(odd) td{
+  html:not([data-ui-skin^="night"]) table.students-table tbody tr:nth-child(odd) td,
+  html:not([data-ui-skin^="night"]) .staff-table tbody tr:nth-child(odd) td,
+  html:not([data-ui-skin^="night"]) .gradebook-table tbody tr:nth-child(odd) td,
+  html:not([data-ui-skin^="night"]) .levels-table tbody tr:nth-child(odd) td,
+  html:not([data-ui-skin^="night"]) .attendance-register-table tbody tr:nth-child(odd) td,
+  html:not([data-ui-skin^="night"]) .attendance-records-table tbody tr:nth-child(odd) td{
     background:#fff;
   }
   body.theme-dark table.students-table tbody tr:nth-child(even) td,
@@ -2310,6 +2310,60 @@
   body.theme-dark .acc-table tbody tr:nth-child(even) td,
   body.theme-dark .slog-table tbody tr:nth-child(even) td{
     background:#1b2831!important;
+  }
+  @media screen{
+    html[data-ui-skin^="night"] table.students-table td,
+    html[data-ui-skin^="night"] .staff-table td,
+    html[data-ui-skin^="night"] .gradebook-table td,
+    html[data-ui-skin^="night"] .levels-table td,
+    html[data-ui-skin^="night"] .attendance-register-table td,
+    html[data-ui-skin^="night"] .attendance-records-table td,
+    html[data-ui-skin^="night"] .properties-table td,
+    html[data-ui-skin^="night"] .care-table td,
+    html[data-ui-skin^="night"] .records-table td,
+    html[data-ui-skin^="night"] .acc-table td,
+    html[data-ui-skin^="night"] .slog-table td,
+    html[data-ui-skin^="night"] .ss-mini-table td,
+    html[data-ui-skin^="night"] .monthly-exam-table td{
+      color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] table.students-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .staff-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .gradebook-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .levels-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .attendance-register-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .attendance-records-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .properties-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .care-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .records-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .acc-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .slog-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .ss-mini-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .monthly-exam-table tbody tr:nth-child(even) td{
+      background:#241820!important;color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] table.students-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .staff-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .gradebook-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .levels-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .attendance-register-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .attendance-records-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .properties-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .care-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .records-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .acc-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .slog-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .monthly-exam-table tbody tr:nth-child(odd) td{
+      background:#141018!important;color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] .module-title p,
+    html[data-ui-skin^="night"] .empty-hint,
+    html[data-ui-skin^="night"] .transfer-note,
+    html[data-ui-skin^="night"] .records-table-tools span{color:#e8dcc8!important}
+    html[data-ui-skin^="night"] .mat-field label{color:#efe4d4!important}
+    html[data-ui-skin^="night"] input, html[data-ui-skin^="night"] select, html[data-ui-skin^="night"] textarea{
+      color:#fff8ee;
+    }
   }
 
   .gb-sum-row td{background:#e8f5e9!important;font-weight:900;color:#004d40}
@@ -2449,7 +2503,77 @@
   .exam-theme-coppernight{--list-dark:#2a160f;--list-mid:#8a3f16;--list-accent:#e09f3e;--list-row:#faf3e8}
   .exam-theme-mintink{--list-dark:#0f3d3a;--list-mid:#0f766e;--list-accent:#7ee0d0;--list-row:#f0fdfa}
   .exam-theme-plumgold{--list-dark:#2d0f3a;--list-mid:#6b2d73;--list-accent:#e6c35c;--list-row:#faf5ff}.exam-list-table[class*="exam-theme-"] th{background:linear-gradient(135deg,var(--list-dark),var(--list-mid))!important;color:#fff!important}.exam-list-table[class*="exam-theme-"] th.islamic-final,.exam-list-table[class*="exam-theme-"] th.sport-final,.exam-list-table[class*="exam-theme-"] th.moral-final,.exam-list-table[class*="exam-theme-"] th.art-final,.exam-list-table[class*="exam-theme-"] th.simple-final,.exam-list-table[class*="exam-theme-"] th.unified-total,.exam-list-table[class*="exam-theme-"] th.islamic-upper-final{background:linear-gradient(135deg,var(--list-dark),var(--list-accent))!important;color:#fff!important}.exam-list-table[class*="exam-theme-"] tbody tr:nth-child(even) td{background:var(--list-row)}.exam-stats-section{margin-top:18px;padding:13px;background:#fff;border:2px solid #00695c;border-radius:13px;box-shadow:0 4px 0 #d4af37}.exam-stats-section h3{margin:0 0 10px;text-align:center;color:#00695c;font-size:17px;outline:none}.exam-stats-table{width:100%;min-width:650px;border-collapse:collapse}.exam-stats-table th,.exam-stats-table td{border:1px solid #d4af37;padding:10px;text-align:center;font-size:13px}.exam-stats-table th{background:linear-gradient(135deg,#00695c,#26a69a);color:#fff;font-weight:900}.exam-stats-section[class*="exam-theme-"]{border-color:var(--list-mid);box-shadow:0 4px 0 var(--list-accent)}.exam-stats-section[class*="exam-theme-"] h3{color:var(--list-dark)}.exam-stats-section[class*="exam-theme-"] .exam-stats-table th{background:linear-gradient(135deg,var(--list-dark),var(--list-mid))}.exam-stats-table td{background:#fffdf4;min-height:40px;outline:none}.exam-stats-table [contenteditable]:focus{background:#fff3c4;box-shadow:inset 0 0 0 2px #c9a13b}.exam-list-table td.name.compound-name{white-space:normal;line-height:1.45}.exam-list-table.islamic-exam-list th:nth-child(2),.exam-list-table.islamic-exam-list td:nth-child(2),.exam-list-table.arabic-exam-list th:nth-child(2),.exam-list-table.arabic-exam-list td:nth-child(2){width:240px;min-width:240px}.exam-list-table.islamic-exam-list th:last-child,.exam-list-table.islamic-exam-list td:last-child,.exam-list-table.arabic-exam-list th:last-child,.exam-list-table.arabic-exam-list td:last-child{width:180px;min-width:180px}.exam-list-table.arabic-fourth-exam-list th:nth-child(2),.exam-list-table.arabic-fourth-exam-list td:nth-child(2){width:240px;min-width:240px}.exam-list-table.arabic-fourth-exam-list th:last-child,.exam-list-table.arabic-fourth-exam-list td:last-child{width:180px;min-width:180px}.exam-list-table.arabic-fourth-exam-list th{font-size:11px;padding:7px 3px}.exam-list-table.english-primary-exam-list th:nth-child(2),.exam-list-table.english-primary-exam-list td:nth-child(2){width:240px;min-width:240px}.exam-list-table.english-primary-exam-list th:last-child,.exam-list-table.english-primary-exam-list td:last-child{width:180px;min-width:180px}.exam-list-table.english-primary-exam-list th[lang="en"]{direction:ltr;font-family:Arial,sans-serif}.exam-list-table.english-upper-exam-list th:first-child,.exam-list-table.english-upper-exam-list td:first-child{width:80px;min-width:80px}.exam-list-table.english-upper-exam-list th:nth-child(2),.exam-list-table.english-upper-exam-list td:nth-child(2){width:120px;min-width:120px}.exam-list-table.english-upper-exam-list th:nth-child(3),.exam-list-table.english-upper-exam-list td:nth-child(3){width:240px;min-width:240px}.exam-list-table.english-upper-exam-list th:last-child,.exam-list-table.english-upper-exam-list td:last-child{width:180px;min-width:180px}.exam-list-table.english-upper-exam-list th[lang="en"]{direction:ltr;font-family:Arial,sans-serif}.exam-list-table.simple-primary-exam-list th{background:linear-gradient(135deg,#00695c,#26a69a);color:#fff}.exam-list-table.simple-primary-exam-list th.simple-final{background:linear-gradient(135deg,#b08d2a,#f0d46c);color:#263238}.exam-list-table.simple-primary-exam-list th:nth-child(2),.exam-list-table.simple-primary-exam-list td:nth-child(2){width:320px;min-width:320px}.exam-list-table.simple-primary-exam-list th:nth-child(4),.exam-list-table.simple-primary-exam-list td:nth-child(4){width:200px;min-width:200px}.exam-list-table.simple-primary-exam-list th:last-child,.exam-list-table.simple-primary-exam-list td:last-child{width:220px;min-width:220px}.exam-list-table.simple-primary-exam-list tbody tr:nth-child(even) td{background:#fff8e1}.exam-list-table.sport-primary-exam-list th{background:linear-gradient(135deg,#111827,#0288d1);color:#fff}.exam-list-table.sport-primary-exam-list th.sport-final{background:linear-gradient(135deg,#0f1f3a,#039be5)}.exam-list-table.sport-primary-exam-list th:nth-child(2),.exam-list-table.sport-primary-exam-list td:nth-child(2){width:240px;min-width:240px}.exam-list-table.sport-primary-exam-list th:last-child,.exam-list-table.sport-primary-exam-list td:last-child{width:180px;min-width:180px}.exam-list-table.sport-primary-exam-list th{font-size:11px;padding:7px 3px}.exam-list-table.sport-primary-exam-list tbody tr:nth-child(even) td{background:#e4f5ff}.exam-list-table.sport-upper-exam-list th{background:linear-gradient(135deg,#111827,#0288d1);color:#fff;font-size:11px;padding:7px 3px}.exam-list-table.sport-upper-exam-list th.sport-final{background:linear-gradient(135deg,#0f1f3a,#039be5)}.exam-list-table.sport-upper-exam-list th.sport-vertical{height:145px;padding:4px 2px}.exam-list-table.sport-upper-exam-list th.sport-vertical span{display:inline-block;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;line-height:1.1}.exam-list-table.sport-upper-exam-list th.sport-vertical b{display:block;margin-top:5px;font-size:12px}.exam-list-table.sport-upper-exam-list th.sport-wrap{height:145px;max-width:82px;padding:5px 3px;white-space:normal;line-height:1.25}.exam-list-table.sport-upper-exam-list th.sport-wrap span{display:block;white-space:normal;overflow-wrap:normal;word-break:keep-all;hyphens:none}.exam-list-table.sport-upper-exam-list th.sport-wrap b{display:block;margin-top:6px;font-size:12px}.exam-list-table.sport-upper-exam-list th:nth-child(2),.exam-list-table.sport-upper-exam-list td:nth-child(2){width:240px;min-width:240px}.exam-list-table.sport-upper-exam-list th:last-child,.exam-list-table.sport-upper-exam-list td:last-child{width:180px;min-width:180px}.exam-list-table.sport-upper-exam-list tbody tr:nth-child(even) td{background:#e4f5ff}.exam-list-table.moral-primary-exam-list th{background:linear-gradient(135deg,#111827,#0288d1);color:#fff}.exam-list-table.moral-primary-exam-list th.moral-final{background:linear-gradient(135deg,#0f1f3a,#039be5)}.exam-list-table.moral-primary-exam-list th:nth-child(2),.exam-list-table.moral-primary-exam-list td:nth-child(2){width:240px;min-width:240px}.exam-list-table.moral-primary-exam-list th:nth-last-child(2),.exam-list-table.moral-primary-exam-list td:nth-last-child(2){width:180px;min-width:180px}.exam-list-table.moral-primary-exam-list th:last-child,.exam-list-table.moral-primary-exam-list td:last-child{width:210px;min-width:210px}.exam-list-table.moral-primary-exam-list tbody tr:nth-child(even) td{background:#e4f5ff}.exam-list-table.art-primary-exam-list th{background:linear-gradient(135deg,#111827,#0288d1);color:#fff}.exam-list-table.art-primary-exam-list th.art-final{background:linear-gradient(135deg,#0f1f3a,#039be5)}.exam-list-table.art-primary-exam-list th:nth-child(2),.exam-list-table.art-primary-exam-list td:nth-child(2){width:280px;min-width:280px}.exam-list-table.art-primary-exam-list th:nth-last-child(2),.exam-list-table.art-primary-exam-list td:nth-last-child(2){width:180px;min-width:180px}.exam-list-table.art-primary-exam-list th:last-child,.exam-list-table.art-primary-exam-list td:last-child{width:210px;min-width:210px}.exam-list-table.art-primary-exam-list tbody tr:nth-child(even) td{background:#e4f5ff}.exam-list-table.unified-primary-exam-list{min-width:1250px}.exam-list-table.unified-primary-exam-list th{background:linear-gradient(135deg,#111827,#0288d1);color:#fff}.exam-list-table.unified-primary-exam-list th.unified-total{background:linear-gradient(135deg,#0f1f3a,#039be5)}.exam-list-table.unified-primary-exam-list th:nth-child(2),.exam-list-table.unified-primary-exam-list td:nth-child(2){width:260px;min-width:260px}.exam-list-table.unified-primary-exam-list th.unified-vertical{width:72px;min-width:72px;height:180px;padding:5px 2px}.exam-list-table.unified-primary-exam-list th.unified-vertical span{display:inline-block;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;line-height:1.25}.exam-list-table.unified-primary-exam-list th:nth-last-child(2),.exam-list-table.unified-primary-exam-list td:nth-last-child(2){width:170px;min-width:170px}.exam-list-table.unified-primary-exam-list th:last-child,.exam-list-table.unified-primary-exam-list td:last-child{width:150px;min-width:150px}.exam-list-table.unified-primary-exam-list tbody tr:nth-child(even) td{background:#e4f5ff}.exam-list-table.islamic-upper-exam-list th{background:linear-gradient(135deg,#111827,#0288d1);color:#fff}.exam-list-table.islamic-upper-exam-list th.islamic-upper-final{background:linear-gradient(135deg,#0f1f3a,#039be5)}.exam-list-table.islamic-upper-exam-list th:nth-child(2),.exam-list-table.islamic-upper-exam-list td:nth-child(2){width:280px;min-width:280px}.exam-list-table.islamic-upper-exam-list th:nth-last-child(2),.exam-list-table.islamic-upper-exam-list td:nth-last-child(2){width:180px;min-width:180px}.exam-list-table.islamic-upper-exam-list th:last-child,.exam-list-table.islamic-upper-exam-list td:last-child{width:210px;min-width:210px}.exam-list-table.islamic-upper-exam-list tbody tr:nth-child(even) td{background:#e4f5ff}.exam-list-table[class*="exam-theme-"] th{background:linear-gradient(135deg,var(--list-dark),var(--list-mid))!important;color:#fff!important}.exam-list-table[class*="exam-theme-"] th.islamic-final,.exam-list-table[class*="exam-theme-"] th.sport-final,.exam-list-table[class*="exam-theme-"] th.moral-final,.exam-list-table[class*="exam-theme-"] th.art-final,.exam-list-table[class*="exam-theme-"] th.simple-final,.exam-list-table[class*="exam-theme-"] th.unified-total,.exam-list-table[class*="exam-theme-"] th.islamic-upper-final{background:linear-gradient(135deg,var(--list-dark),var(--list-accent))!important;color:#fff!important}.exam-list-table[class*="exam-theme-"] tbody tr:nth-child(even) td{background:var(--list-row)!important}.theme-dark .exam-lists-controls{background:#182028}.theme-dark .exam-list-table td{background:#151e25;color:#e8eef2;border-color:#43535d}.theme-dark .exam-list-table[class*="exam-theme-"] tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-stats-section{background:#182028;border-color:#d4af37}.theme-dark .exam-stats-section h3{color:#ffe083}.theme-dark .exam-stats-table td{background:#111920;color:#fff}.theme-dark .exam-list-table.simple-primary-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-list-table.sport-primary-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-list-table.sport-upper-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-list-table.moral-primary-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-list-table.art-primary-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-list-table.unified-primary-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}.theme-dark .exam-list-table.islamic-upper-exam-list tbody tr:nth-child(even) td{background:#1b2831!important}@media(max-width:700px){.exam-lists-controls{grid-template-columns:1fr 1fr}}@media(max-width:480px){.exam-lists-controls{grid-template-columns:1fr}.exam-lists-actions{flex-direction:column}.exam-lists-actions button{width:100%}}
-  .monthly-config{background:#fff;border-radius:17px;padding:17px;box-shadow:0 4px 16px rgba(0,0,0,.10);margin-bottom:16px}.monthly-config-grid{display:grid;grid-template-columns:repeat(4,minmax(145px,1fr));gap:12px}.monthly-grades{margin-top:15px;padding-top:13px;border-top:1px solid #e1e7eb}.monthly-grades>strong{display:block;color:#455a64;font-size:13px;margin-bottom:9px}.monthly-grade-options{display:flex;flex-wrap:wrap;gap:8px}.monthly-grade-option{display:flex;align-items:center;gap:6px;background:#f3f6f8;border:1px solid #d9e1e5;border-radius:20px;padding:7px 11px;font-size:12px;cursor:pointer}.monthly-grade-option input{width:16px;height:16px}.monthly-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:15px}.monthly-table-surface{background:#fff;border-radius:16px;padding:15px;box-shadow:0 4px 16px rgba(0,0,0,.10)}.monthly-table-scroll{overflow:auto}.monthly-exam-table{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}.monthly-exam-table th,.monthly-exam-table td{border:1px solid #b0bec5;padding:8px;text-align:center}.monthly-exam-table th{background:#263238;color:#fff;font-weight:900;font-size:16px}.monthly-exam-table th.grade-col{background:#00695c}.monthly-exam-table td.day-cell{font-weight:900;font-size:16px;color:#7a0e2e;background:#fff8e6;cursor:pointer;position:relative}.monthly-exclude-mark{margin-inline-start:7px;width:24px;height:24px;border:0;border-radius:7px;background:#dfe5e8;color:#78909c;font-weight:900;cursor:pointer}.monthly-exclude-mark.active{background:#c62828;color:#fff}.monthly-row-excluded td{opacity:.48;text-decoration:line-through}.monthly-row-excluded .monthly-exclude-mark{opacity:1;text-decoration:none}.monthly-exam-table td.date-cell{font-weight:bold;white-space:nowrap}.monthly-exam-table select{width:100%;min-width:120px;border:1px solid #cfd8dc;border-radius:8px;padding:7px;font-family:inherit;background:#fff}.monthly-subj-cell{min-width:148px;vertical-align:middle}.monthly-subj-cell select{margin:3px 0;display:block}.asg-form{display:flex;flex-direction:column;gap:12px;margin-top:8px}.asg-form-sec{background:rgba(18,12,16,.55);border:1px solid rgba(212,175,55,.28);border-radius:14px;padding:12px 14px}.asg-form-sec h4{margin:0 0 10px;color:#e8c56a;font-size:14px;font-weight:900}.asg-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px 14px;align-items:center}.asg-checks label{display:flex;align-items:center;gap:8px;font-weight:700}.monthly-notes-box{margin-top:13px;border:2px solid #7a0e2e;border-radius:12px;padding:11px;background:#fffdf8;box-shadow:0 3px 0 #d7c18a}.monthly-notes-box label{display:block;color:#7a0e2e;font-size:13px;font-weight:900;margin-bottom:7px}.monthly-notes-box textarea{width:100%;min-height:76px;resize:vertical;border:1px solid #d8c89e;border-radius:8px;padding:9px;font-family:inherit;font-size:14px;line-height:1.6;background:#fff}.monthly-empty{padding:35px;text-align:center;color:#90a4ae}
+  .monthly-config{background:#fff;border-radius:17px;padding:17px;box-shadow:0 4px 16px rgba(0,0,0,.10);margin-bottom:16px}.monthly-config-grid{display:grid;grid-template-columns:repeat(4,minmax(145px,1fr));gap:12px}.monthly-grades{margin-top:15px;padding-top:13px;border-top:1px solid #e1e7eb}.monthly-grades>strong{display:block;color:#455a64;font-size:13px;margin-bottom:9px}.monthly-grade-options{display:flex;flex-wrap:wrap;gap:8px}.monthly-grade-option{display:flex;align-items:center;gap:6px;background:#f3f6f8;border:1px solid #d9e1e5;border-radius:20px;padding:7px 11px;font-size:12px;cursor:pointer}.monthly-grade-option input{width:16px;height:16px}.monthly-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:15px}.monthly-table-surface{background:#fff;border-radius:16px;padding:15px;box-shadow:0 4px 16px rgba(0,0,0,.10)}.monthly-table-scroll{overflow:auto}.monthly-exam-table{width:100%;min-width:760px;border-collapse:collapse;font-size:13px}.monthly-exam-table th,.monthly-exam-table td{border:1px solid #b0bec5;padding:8px;text-align:center}.monthly-exam-table th{background:#263238;color:#fff;font-weight:900;font-size:16px}.monthly-exam-table th.grade-col{background:#00695c}.monthly-exam-table td.day-cell{font-weight:900;font-size:16px;color:#7a0e2e;background:#fff8e6;cursor:pointer;position:relative}.monthly-exclude-mark{margin-inline-start:7px;width:24px;height:24px;border:0;border-radius:7px;background:#dfe5e8;color:#78909c;font-weight:900;cursor:pointer}.monthly-exclude-mark.active{background:#c62828;color:#fff}.monthly-row-excluded td{opacity:.48;text-decoration:line-through}.monthly-row-excluded .monthly-exclude-mark{opacity:1;text-decoration:none}.monthly-exam-table td.date-cell{font-weight:bold;white-space:nowrap}.monthly-exam-table select{width:100%;min-width:120px;border:1px solid #cfd8dc;border-radius:8px;padding:7px;font-family:inherit;background:#fff}.monthly-subj-cell{min-width:148px;vertical-align:middle}.monthly-subj-cell select{margin:3px 0;display:block}
+  #dashListOverlay .srm-head{flex-wrap:wrap;align-items:flex-start}
+  #dashListOverlay .srm-head>div{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  #dashListOverlay .srm-head button.material-btn{width:auto!important;height:auto!important;min-width:96px;min-height:42px;padding:8px 14px;border-radius:10px;font-size:13px;font-weight:800}
+  #dashListOverlay .srm-head button:not(.material-btn){width:36px;height:36px}
+  @media screen{
+    html[data-ui-skin^="night"] .auth-card{
+      background:#1c1519!important;border-color:#8a6a40!important;color:#fff8ee!important;
+      box-shadow:0 16px 40px rgba(0,0,0,.45);
+    }
+    html[data-ui-skin^="night"] .auth-card h1{color:#ffe7c2!important}
+    html[data-ui-skin^="night"] .auth-card p,
+    html[data-ui-skin^="night"] .auth-card label{color:#efe4d4!important}
+    html[data-ui-skin^="night"] .auth-card input,
+    html[data-ui-skin^="night"] .auth-card input[type="text"],
+    html[data-ui-skin^="night"] .auth-card input[type="password"]{
+      background:#0e0b0d!important;color:#fff8ee!important;border:1px solid #8a6a50!important;
+      caret-color:#ffe7c2;
+    }
+    html[data-ui-skin^="night"] .auth-card input::placeholder{color:#cbb8a4!important;opacity:1}
+    html[data-ui-skin^="night"] #authCloudHint{color:#9ee6c5!important}
+    html[data-ui-skin^="night"] .auth-wrap{color:#fff8ee}
+  }
+
+  @media screen{
+    html[data-ui-skin^="night"] .records-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .attendance-records-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .attendance-register-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .acc-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .staff-table tbody tr:nth-child(even) td,
+    html[data-ui-skin^="night"] .students-table tbody tr:nth-child(even) td{
+      background:#1e161c!important;color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] .records-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .attendance-records-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .attendance-register-table tbody tr:nth-child(odd) td,
+    html[data-ui-skin^="night"] .acc-table tbody tr:nth-child(odd) td{
+      background:#141018!important;color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] .records-table th,
+    html[data-ui-skin^="night"] .attendance-records-table th,
+    html[data-ui-skin^="night"] .acc-table th{
+      color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] #recordsSearchInput,
+    html[data-ui-skin^="night"] .records-table-tools input{
+      background:#1a1418!important;color:#fff8ee!important;border:1px solid #6a5360!important;
+    }
+  }
+
+  @media screen{
+    html[data-ui-skin^="night"] .records-table,
+    html[data-ui-skin^="night"] .records-table td{
+      background:#141018!important;color:#fff8ee!important;border-color:#5a4450!important;
+    }
+    html[data-ui-skin^="night"] .records-table th{
+      background:#3a1d28!important;color:#ffe7c2!important;border-color:#8a6a40!important;
+    }
+    html[data-ui-skin^="night"] .records-table tbody tr:nth-child(even) td{
+      background:#1e161c!important;color:#fff8ee!important;
+    }
+    html[data-ui-skin^="night"] .records-table td.name{color:#fff4d8!important}
+    html[data-ui-skin^="night"] .records-table-tools,
+    html[data-ui-skin^="night"] .records-table-tools span{color:#e8dcc8!important}
+    html[data-ui-skin^="night"] .records-empty{background:#141018!important;color:#efe4d4!important}
+    html[data-ui-skin^="night"] .staff-table td,
+    html[data-ui-skin^="night"] .staff-table th{color:#fff8ee!important}
+    html[data-ui-skin^="night"] .staff-table td{background:#141018!important}
+    html[data-ui-skin^="night"] .staff-table th{background:#3a1d28!important}
+  }
+.asg-form{display:flex;flex-direction:column;gap:12px;margin-top:8px}.asg-form-sec{background:rgba(18,12,16,.55);border:1px solid rgba(212,175,55,.28);border-radius:14px;padding:12px 14px}.asg-form-sec h4{margin:0 0 10px;color:#e8c56a;font-size:14px;font-weight:900}.asg-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px 14px;align-items:center}.asg-checks label{display:flex;align-items:center;gap:8px;font-weight:700}.monthly-notes-box{margin-top:13px;border:2px solid #7a0e2e;border-radius:12px;padding:11px;background:#fffdf8;box-shadow:0 3px 0 #d7c18a}.monthly-notes-box label{display:block;color:#7a0e2e;font-size:13px;font-weight:900;margin-bottom:7px}.monthly-notes-box textarea{width:100%;min-height:76px;resize:vertical;border:1px solid #d8c89e;border-radius:8px;padding:9px;font-family:inherit;font-size:14px;line-height:1.6;background:#fff}.monthly-empty{padding:35px;text-align:center;color:#90a4ae}
   body.theme-dark .monthly-config,body.theme-dark .monthly-table-surface{background:#182028;color:#e7edf2}.theme-dark .monthly-grades{border-color:#35434d}.theme-dark .monthly-grades>strong{color:#ffe083}.theme-dark .monthly-grade-option{background:#111920;border-color:#3d4d57;color:#e4ebef}.theme-dark .monthly-exam-table td{border-color:#43535d;background:#151e25;color:#e7edf2}.theme-dark .monthly-exam-table td.day-cell{background:#302815;color:#ffe083}.theme-dark .monthly-exam-table select{background:#10171d;color:#fff;border-color:#465762}.theme-dark .monthly-notes-box{background:#151e25;border-color:#d4af37;box-shadow:0 3px 0 #55491f}.theme-dark .monthly-notes-box label{color:#ffe083}.theme-dark .monthly-notes-box textarea{background:#10171d;color:#fff;border-color:#465762}
   @media(max-width:850px){.monthly-config-grid{grid-template-columns:1fr 1fr}}
   @media(max-width:560px){.monthly-config-grid{grid-template-columns:1fr}.monthly-actions{flex-direction:column}.monthly-actions button{width:100%}}
@@ -3699,6 +3823,7 @@
 </style>
 <style id="dynamicPageSize">@page{ size:148.5mm 210mm; margin:0; }</style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.4/peerjs.min.js"></script>
 <script>
 /* Embedded QR Code encoder (MIT License, Kazuhiko Arase / d-project.com), bundled for offline browser use */
@@ -5068,6 +5193,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
 <div class="view wide" id="view-timetable"></div>
 <div class="view wide" id="view-privmail"></div>
 <div class="view wide" id="view-records"></div>
+<div class="view wide" id="view-backup"></div>
 <div class="view wide" id="view-notes"></div>
 <div class="view wide" id="view-accounts"></div>
 <div class="view wide" id="view-schoollogs"></div>
@@ -6625,6 +6751,7 @@ function authClampView(id){
     if(id==='view-care'&&typeof teacherCanCare==='function'&&teacherCanCare()) return id;
     if(id==='view-parents'&&typeof teacherCanParents==='function'&&teacherCanParents()) return id;
     if(id==='view-timetable') return id;
+    if(id==='view-staff') return id;
     return 'view-teacher';
   }
   if(r==='student' && id!=='view-student' && id!=='view-auth' && id!=='view-timetable') return 'view-student';
@@ -6687,6 +6814,8 @@ function restoreEntry(entry){
     if(typeof renderParentsView==='function') renderParentsView(entry.meta&&entry.meta.tab);
   } else if(entry.id === 'view-timetable'){
     if(typeof renderTimetableView==='function') renderTimetableView();
+  } else if(entry.id === 'view-backup'){
+    if(typeof renderBackupModule==='function') renderBackupModule();
   } else if(entry.id === 'view-records'){
     restoreRecordsView(entry.meta||{});
   } else if(entry.id === 'view-notes'){
@@ -7389,15 +7518,17 @@ function renderStudentsView(){
     '<div class="section-guide-editor"><label>مرشد الشعبة</label><input type="text" value="' + escapeHtml(sec.guide || gradeGuideName(currentSectionCtx.gradeLabel) || APP.school.guide || '') + '" oninput="updateSectionGuide(this.value)"></div>' +
     '<div class="import-tools">' +
       '<button onclick="addStudentRow()">➕ إضافة طالب</button>' +
-      '<label class="upload-btn">📥 استيراد إكسل<input type="file" accept=".xlsx,.xls,.csv" id="excelFile" style="display:none"></label>' +
+      '<label class="upload-btn">📥 استيراد إكسل للشعبة<input type="file" accept=".xlsx,.xls,.csv" id="excelFile" style="display:none"></label>' +
+      '<label class="upload-btn">📥 استيراد كل المدرسة<input type="file" accept=".xlsx,.xls" id="excelFileAll" style="display:none"></label>' +
       '<button onclick="togglePaste()">📋 لصق من إكسل</button>' +
-      '<button onclick="exportSectionStudentsExcel()">📤 تصدير إكسل</button>' +
+      '<button onclick="exportSectionStudentsExcel()">📤 تصدير الشعبة</button>' +
+      '<button onclick="backupExportStudentsExcel()">📤 تصدير كل المدرسة</button>' +
       '<button onclick="printSectionStudents(\'portrait\')">🖨️ طباعة عمودي</button>' +
       '<button onclick="printSectionStudents(\'landscape\')">🖨️ طباعة أفقي</button>' +
     '</div>' +
     '<div id="pasteArea" style="display:none;">' +
-      '<textarea id="pasteBox" placeholder="الصق أسماء الطلاب هنا (اسم واحد في كل سطر)" rows="6"></textarea>' +
-      '<button onclick="applyPaste()">استيراد الأسماء</button>' +
+      '<textarea id="pasteBox" placeholder="الصق الجدول مع صف العناوين (اسم الطالب، اللقب، البطاقة...). الترتيب غير مهم — يُميَّز العمود من اسمه." rows="6"></textarea>' +
+      '<button onclick="applyPaste()">إدراج البيانات بذكاء</button>' +
     '</div>' +
     '<div style="overflow-x:auto;padding-bottom:4px"><table class="students-table">' +
       '<thead><tr><th>#</th><th>اسم الطالب</th><th>اللقب</th><th>اسم الأم</th><th>المواليد</th><th>هاتف ولي الأمر</th><th>الحالة</th><th>مسقط الرأس</th><th>رقم البطاقة الوطنية</th><th>الرعاية</th><th>العمر</th><th>النتيجة</th><th>الأدوات</th></tr></thead>' +
@@ -7408,6 +7539,7 @@ function renderStudentsView(){
     '</div>';
   renderStudentRows();
   document.getElementById('excelFile').onchange = handleExcelFile;
+  const allIn=document.getElementById('excelFileAll'); if(allIn) allIn.onchange=handleExcelFileAll;
 }
 
 
@@ -7430,6 +7562,37 @@ function updateStudentsNavLabel(){
     }
   });
 }
+function xlsxHeaderStyle(){
+  return {font:{bold:true,color:{rgb:'FFFFFFFF'},sz:12,name:'Tahoma'},fill:{patternType:'solid',fgColor:{rgb:'6D1028'}},alignment:{horizontal:'center',vertical:'center',wrapText:true},border:{top:{style:'thin',color:{rgb:'C9A227'}},bottom:{style:'thin',color:{rgb:'C9A227'}},left:{style:'thin',color:{rgb:'C9A227'}},right:{style:'thin',color:{rgb:'C9A227'}}}};
+}
+function xlsxCellStyle(even){
+  return {font:{name:'Tahoma',sz:11,color:{rgb:'21151A'}},fill:{patternType:'solid',fgColor:{rgb:even?'FFF3D6':'FFFFFF'}},alignment:{horizontal:'center',vertical:'center',wrapText:true},border:{top:{style:'thin',color:{rgb:'B0A080'}},bottom:{style:'thin',color:{rgb:'B0A080'}},left:{style:'thin',color:{rgb:'B0A080'}},right:{style:'thin',color:{rgb:'B0A080'}}}};
+}
+function styleExcelSheet(ws){
+  if(!ws||!ws['!ref'])return ws;
+  const range=XLSX.utils.decode_range(ws['!ref']);
+  const cols=[];
+  for(let C=range.s.c;C<=range.e.c;C++){
+    let max=10;
+    for(let R=range.s.r;R<=range.e.r;R++){
+      const addr=XLSX.utils.encode_cell({r:R,c:C});
+      const cell=ws[addr];
+      if(!cell)continue;
+      cell.s=(R===range.s.r)?xlsxHeaderStyle():xlsxCellStyle((R-range.s.r)%2===0);
+      const len=String(cell.v==null?'':cell.v).length;
+      if(len+2>max) max=Math.min(len+2,36);
+    }
+    cols.push({wch:max});
+  }
+  ws['!cols']=cols;
+  ws['!rows']=[{hpt:24}];
+  return ws;
+}
+function xlsxWriteStyled(wb, filename){
+  if(!wb||typeof XLSX==='undefined')return;
+  (wb.SheetNames||[]).forEach(function(n){ try{styleExcelSheet(wb.Sheets[n]);}catch(e){} });
+  XLSX.writeFile(wb, filename);
+}
 function exportSectionStudentsExcel(){
   const table=document.querySelector('#view-students table.students-table');
   const sec=getCurrentSection();
@@ -7441,7 +7604,7 @@ function exportSectionStudentsExcel(){
   const safe=name.replace(/[\\/:*?"<>|]/g,'-');
   if(typeof XLSX!=='undefined'&&XLSX.utils){
     const wb=XLSX.utils.table_to_book(clone,{sheet:who});
-    XLSX.writeFile(wb,safe+'.xlsx');
+    xlsxWriteStyled(wb,safe+'.xlsx');
     return;
   }
   let csv='';
@@ -7797,43 +7960,152 @@ function togglePaste(){
   const el = document.getElementById('pasteArea');
   el.style.display = (el.style.display === 'none') ? 'block' : 'none';
 }
+function smartStudentColMap(headers){
+  const map={};
+  function normH(c){return String(c||'').replace(/\s+/g,' ').replace(/[\u200f\u200e]/g,'').trim();}
+  (headers||[]).forEach(function(c,i){
+    const t=normH(c);
+    if(!t)return;
+    if(/لقب/.test(t)) map.title=i;
+    else if(/هاتف|جوال|موبايل|ولي\s*الأمر|ولي\s*الامر|رقم\s*ولي/.test(t)) map.guardianPhone=i;
+    else if(/اسم\s*الأم|اسم\s*الام|اسم الأم|الأم$|الام$/.test(t) && !/هاتف|ولي\s*الأ/.test(t)) map.motherName=i;
+    else if(/مواليد|ميلاد|تولد/.test(t) && !/محل|مسقط|مكان/.test(t)) map.birthDate=i;
+    else if(/بطاقة|وطني|هوية/.test(t)) map.nationalId=i;
+    else if(/مسقط|محل الولادة|مكان الولادة|مسقط الرأس/.test(t)) map.birthPlace=i;
+    else if(/رعاية/.test(t)) map.careCoverage=i;
+    else if(/حالة/.test(t)) map.status=i;
+    else if(/عمر/.test(t)) map.age=i;
+    else if(/^(ت|#|تسلسل)$/.test(t)) map.seq=i;
+    else if(/اسم\s*(الطالب|التلميذ|التلمي)/.test(t) && map.name==null) map.name=i;
+    else if(/^(الاسم)$/.test(t) && map.name==null) map.name=i;
+  });
+  if(map.name==null){
+    (headers||[]).forEach(function(c,i){
+      const t=normH(c);
+      if(/تلميذ|طالب/.test(t) && !/أم|ام|هاتف/.test(t) && map.name==null) map.name=i;
+    });
+  }
+  return map;
+}
+function looksLikePhone(v){return /^(07|7|9647|\+9647)\d{8,10}$/.test(String(v||'').replace(/\s+/g,''));}
+function looksLikeId(v){const d=String(v||'').replace(/\D/g,'');return d.length>=10&&d.length<=16&&!looksLikePhone(v);}
+function looksLikeDate(v){return /\d{1,4}[\/\-.\-]\d{1,2}[\/\-.\-]\d{1,4}/.test(String(v||''))||/^\d{5}$/.test(String(v||'').trim());}
+function normalizeImportDate(v){
+  v=String(v||'').trim();
+  if(!v)return '';
+  if(/^[0-9]{5,6}$/.test(v) && typeof XLSX!=='undefined'&&XLSX.SSF){
+    try{const d=XLSX.SSF.parse_date_code(Number(v)); if(d) return String(d.y)+'-'+String(d.m).padStart(2,'0')+'-'+String(d.d).padStart(2,'0');}catch(e){}
+  }
+  const m=v.match(/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})$/);
+  if(m){
+    let a=m[1],b=m[2],y=m[3];
+    if(y.length===2) y=(Number(y)>50?'19':'20')+y;
+    if(Number(a)>12) return y+'-'+String(b).padStart(2,'0')+'-'+String(a).padStart(2,'0');
+    return y+'-'+String(a).padStart(2,'0')+'-'+String(b).padStart(2,'0');
+  }
+  return v;
+}
+function studentFromMappedRow(row, map){
+  function cell(key, fb){ const i=map[key]; if(i==null) return fb||''; return String(row[i]==null?'':row[i]).trim(); }
+  let name=normalizeImportedStudentName(cell('name'));
+  if(!name) return null;
+  let title=cell('title'), mother=cell('motherName'), birth=cell('birthDate'), phone=cell('guardianPhone');
+  let place=cell('birthPlace'), nid=cell('nationalId'), status=cell('status')||'مستمر', care=cell('careCoverage');
+  if(looksLikePhone(mother) && !looksLikePhone(phone)){ const t=phone; phone=mother; mother=t; }
+  if(looksLikePhone(place) && !phone){ phone=place; place=''; }
+  if(looksLikeId(birth) && !looksLikeId(nid)){ const t=nid; nid=birth; birth=t; }
+  if(looksLikeDate(place) && !looksLikeDate(birth)){ const t=birth; birth=place; place=t; }
+  if(looksLikeId(mother) && !nid){ nid=mother; mother=''; }
+  birth=normalizeImportDate(birth);
+  nid=String(nid||'').replace(/\.0$/,'');
+  phone=String(phone||'').replace(/\.0$/,'');
+  return {
+    id:'st_'+Date.now()+Math.random().toString(36).slice(2,6),
+    name:name, title:title, motherName:mother, birthDate:birth, guardianPhone:phone,
+    status:status||'مستمر', birthPlace:place, nationalId:nid,
+    careCoverage:/مشمول/.test(care)&&!/غير/.test(care)?'مشمول':'غير مشمول'
+  };
+}
+function ingestStudentGrid(rows, sec){
+  if(!sec||!rows||!rows.length) return 0;
+  let start=0, map={}, headerish=false;
+  for(let h=0;h<Math.min(3,rows.length);h++){
+    const cand=smartStudentColMap(rows[h]);
+    if(cand.name!=null && Object.keys(cand).length>=2){ map=cand; start=h+1; headerish=true; break; }
+  }
+  if(!headerish) map={name:0,title:1,motherName:2,birthDate:3,guardianPhone:4,status:5,birthPlace:6,nationalId:7,careCoverage:8};
+  let n=0;
+  for(let r=start;r<rows.length;r++){
+    const st=studentFromMappedRow(rows[r]||[], map);
+    if(!st) continue;
+    sec.students.push(st); n++;
+  }
+  return n;
+}
 function applyPaste(){
   const text = document.getElementById('pasteBox').value;
-  const names = text.split(/\r?\n/).map(function(line){
-    return normalizeImportedStudentName(line.split('\t')[0]);
-  }).filter(Boolean);
   const sec = getCurrentSection();
-  if(!sec || !names.length) return;
-  names.forEach(name=>{
-    sec.students.push({ id:'st_'+Date.now()+Math.random().toString(36).slice(2,6), name:name, title:'', motherName:'', birthDate:'', guardianPhone:'', status:'مستمر', birthPlace:'',nationalId:'',careCoverage:'غير مشمول' });
-  });
+  if(!sec || !String(text||'').trim()) return;
+  const rows=String(text).split(/\r?\n/).map(function(line){return line.split('\t');}).filter(function(r){return r.some(function(c){return String(c||'').trim();});});
+  const n=ingestStudentGrid(rows, sec);
   saveApp();
   document.getElementById('pasteBox').value = '';
   renderStudentRows();
+  if(n) alert('تم إدراج '+n+' طالباً بعد تمييز الأعمدة.');
+}
+function importStudentsFromWorkbook(wb, allSchool){
+  if(!wb||!wb.SheetNames||!wb.SheetNames.length) return 0;
+  let added=0, used=0;
+  if(allSchool || wb.SheetNames.length>1){
+    wb.SheetNames.forEach(function(sn){
+      const found=typeof backupFindSection==='function'?backupFindSection(sn):null;
+      if(!found||!found.sec) return;
+      const rows=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:false,defval:''});
+      added+=ingestStudentGrid(rows, found.sec);
+      used++;
+    });
+  }
+  if(!used){
+    const sec=getCurrentSection();
+    if(!sec) return 0;
+    const rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:false,defval:''});
+    added+=ingestStudentGrid(rows, sec);
+    used=1;
+  }
+  return added;
 }
 function handleExcelFile(e){
   const file = e.target.files[0];
+  if(e&&e.target) e.target.value='';
   if(!file) return;
   const reader = new FileReader();
   reader.onload = function(ev){
     try{
-      const data = new Uint8Array(ev.target.result);
-      const wb = XLSX.read(data, { type:'array' });
-      const sheet = wb.Sheets[wb.SheetNames[0]];
-      const rows = XLSX.utils.sheet_to_json(sheet, { header:1 });
-      const sec = getCurrentSection();
-      if(!sec) return;
-      rows.forEach(row=>{
-        const rawName = (row[0] || '').toString().trim();
-        if(rawName && rawName !== 'اسم الطالب' && rawName !== 'الاسم'){
-          const name=normalizeImportedStudentName(rawName);
-          if(name) sec.students.push({ id:'st_'+Date.now()+Math.random().toString(36).slice(2,6), name:name, title:'', motherName:'', birthDate:'', guardianPhone:'', status:'مستمر', birthPlace:'',nationalId:'',careCoverage:'غير مشمول' });
-        }
-      });
+      const wb = XLSX.read(new Uint8Array(ev.target.result), { type:'array' });
+      const n=importStudentsFromWorkbook(wb,false);
       saveApp();
       renderStudentRows();
+      alert('تم إدراج '+n+' طالباً بعد تمييز الأعمدة.');
     }catch(err){
       alert('تعذّرت قراءة الملف. تأكد أنه بصيغة إكسل صحيحة.');
+    }
+  };
+  reader.readAsArrayBuffer(file);
+}
+function handleExcelFileAll(e){
+  const file = e.target.files[0];
+  if(e&&e.target) e.target.value='';
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    try{
+      const wb = XLSX.read(new Uint8Array(ev.target.result), { type:'array' });
+      const n=importStudentsFromWorkbook(wb,true);
+      saveApp();
+      if(typeof renderStudentRows==='function') renderStudentRows();
+      alert(n?'تم إدراج '+n+' طالباً من شيتات الشعب.':'لم تُطابق أسماء الشيتات مع الشعب. صدّر ملف «كل المدرسة» أولاً لمعرفة التسمية.');
+    }catch(err){
+      alert('تعذّرت قراءة الملف.');
     }
   };
   reader.readAsArrayBuffer(file);
@@ -8045,9 +8317,31 @@ function staffPersonKind(emp){
   if(emp.kind==='employee')return 'employee';
   if(emp.kind==='teacher')return 'teacher';
   const j=String(emp.jobTitle||'');
-  if(/معلم|معلمة|مدرس|مدرسة/.test(j)) return 'teacher';
-  if(/موظف|مدير|معاون|سكرت|حساب|حارس|كاتب|إدار|ادار|مشاور|فني|مستخدم|أمني|امني/.test(j)) return 'employee';
+  if(/حارس|أمني|امني|نظاف|حرفي|سائق|عامل|بست|ليلي|كهرب|سباك|خدم|حراسة|بستاني/.test(j)) return 'employee';
+  if(/معلم|معلمة|مدرس|مدرسة|مدير|معاون|مرشد/.test(j)) return 'teacher';
   return 'teacher';
+}
+function staffListForMode(employees){
+  let list=(STAFF_STATE.staff||[]).filter(function(emp){
+    return staffPersonKind(emp)===(employees?'employee':'teacher');
+  });
+  if(typeof authRole==='function'&&authRole()==='teacher'){
+    const me=typeof teacherOwnStaff==='function'?teacherOwnStaff():null;
+    list=me?list.filter(function(e){return e.id===me.id;}):[];
+  }
+  return list;
+}
+function teacherOwnStaff(){
+  const me=typeof authMe==='function'?authMe():null; if(!me)return null;
+  const list=(STAFF_STATE.staff||[]);
+  if(me.staffId){const e=list.find(function(x){return x.id===me.staffId;}); if(e)return e;}
+  const nm=typeof authNorm==='function'?authNorm(me.name):String(me.name||'');
+  return list.find(function(x){return (typeof authNorm==='function'?authNorm(x.name):x.name)===nm;})||null;
+}
+function teacherCanStaffEdit(){
+  const me=typeof authMe==='function'?authMe():null; if(!me)return false;
+  if(me.canStaffEdit)return true;
+  return (me.assignments||[]).some(function(a){return a.staffEdit;});
 }
 function dashboardStaffCounts(){
   const list=(typeof STAFF_STATE!=='undefined'&&Array.isArray(STAFF_STATE.staff))?STAFF_STATE.staff:[];
@@ -8195,11 +8489,13 @@ function openDashNameList(kind){
   ov.classList.add('open');
 }
 let DASH_LIST_KIND='';
-function printDashNameList(){
+function printDashNameList(orientation){
   const table=document.querySelector('#dashListBody table');
   if(!table){alert('لا توجد قائمة للطباعة.');return;}
+  const landscape=orientation==='landscape';
   const title=(document.getElementById('dashListTitle')||{}).textContent||'كشف المدرسة';
   const clone=table.cloneNode(true);
+  clone.querySelectorAll('[style]').forEach(function(el){el.removeAttribute('style');});
   const logoHtml=APP.school.logo?'<img src="'+APP.school.logo+'" alt="">':'<span>شعار<br>المدرسة</span>';
   const year=(typeof EXAMS_STATE!=='undefined'&&EXAMS_STATE.monthly&&EXAMS_STATE.monthly.academicYear)||'2025 / 2026';
   const rows=clone.tBodies.length?Array.from(clone.tBodies[0].rows):[];
@@ -8209,8 +8505,9 @@ function printDashNameList(){
     const slice=rows.slice(p*per,(p+1)*per).map(function(r){return r.outerHTML;}).join('');
     html+='<section class="print-page"><header class="modern-head"><div class="logo">'+logoHtml+'</div><div class="head-center"><div class="school-name">'+escapeHtml(APP.school.name||'')+'</div><div class="document-title">'+escapeHtml(title)+'</div><div class="stage-name">'+escapeHtml(typeof gradebookStageTitle==='function'?gradebookStageTitle():'')+'</div></div><div class="year-box"><small>العام الدراسي</small><strong>'+escapeHtml(year)+'</strong></div></header><div class="gold-line"></div><section class="info-bar"><div class="info-item"><b>النوع:</b> '+escapeHtml(title)+'</div><div class="info-item"><b>العدد:</b> '+rows.length+'</div><div class="info-item"><b>المدير:</b> '+escapeHtml(APP.school.principal||'—')+'</div></section><table class="dash-print-table"><thead>'+(clone.tHead?clone.tHead.innerHTML:'')+'</thead><tbody>'+slice+'</tbody></table></section>';
   }
-  const css=printThemeRootCss()+'@page{size:A4 portrait;margin:7mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}html,body{margin:0;background:#fff;font-family:Tahoma,sans-serif;color:#263238}.print-page{width:100%;min-height:277mm;border:1.5px solid #7a0e2e;border-radius:8px;padding:0 0 8mm;page-break-after:always}.print-page:last-child{page-break-after:auto}.modern-head{display:grid;grid-template-columns:26mm 1fr 26mm;align-items:center;min-height:29mm;padding:3.5mm 6mm;background:linear-gradient(125deg,#5f0d27 0%,#8f153a 58%,#b68a24 100%);color:#fff}.logo{width:20mm;height:20mm;border-radius:50%;background:#fff;overflow:hidden;margin:auto}.logo img{width:100%;height:100%;object-fit:cover}.head-center{text-align:center}.school-name{font-size:20px;font-weight:900}.document-title{font-size:16px;font-weight:900;color:#ffe39a}.stage-name{font-size:12px}.year-box{text-align:center;background:rgba(0,0,0,.18);border-radius:8px;padding:2mm}.year-box small{display:block;font-size:9px}.gold-line{height:2.2mm;background:linear-gradient(90deg,#d4af37,#fff3b0,#d4af37)}.info-bar{display:flex;justify-content:space-between;gap:8px;padding:3mm 5mm;background:#fff8e6;border-bottom:1px solid #e4cf91;font-size:12px;font-weight:800}.dash-print-table{width:100%;border-collapse:collapse;margin-top:3mm;font-size:13px}.dash-print-table th,.dash-print-table td{border:1px solid #b08d2a;padding:2mm;text-align:center}.dash-print-table th{background:#7a0e2e;color:#fff}.dash-print-table td.name{text-align:right;font-weight:800}';
-  const frame=document.createElement('iframe');frame.style.cssText='position:fixed;left:-10000px;top:0;width:210mm;height:297mm;border:0';document.body.appendChild(frame);
+  const pageW=landscape?'297mm':'210mm'; const pageH=landscape?'210mm':'297mm';
+  const css=printThemeRootCss()+'@page{size:A4 '+(landscape?'landscape':'portrait')+';margin:7mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}html,body{margin:0;background:#fff;font-family:Tahoma,sans-serif;color:#263238}.print-page{width:100%;min-height:277mm;border:1.5px solid #7a0e2e;border-radius:8px;padding:0 0 8mm;page-break-after:always}.print-page:last-child{page-break-after:auto}.modern-head{display:grid;grid-template-columns:26mm 1fr 26mm;align-items:center;min-height:29mm;padding:3.5mm 6mm;background:linear-gradient(125deg,#5f0d27 0%,#8f153a 58%,#b68a24 100%);color:#fff}.logo{width:20mm;height:20mm;border-radius:50%;background:#fff;overflow:hidden;margin:auto}.logo img{width:100%;height:100%;object-fit:cover}.head-center{text-align:center}.school-name{font-size:20px;font-weight:900}.document-title{font-size:16px;font-weight:900;color:#ffe39a}.stage-name{font-size:12px}.year-box{text-align:center;background:rgba(0,0,0,.18);border-radius:8px;padding:2mm}.year-box small{display:block;font-size:9px}.gold-line{height:2.2mm;background:linear-gradient(90deg,#d4af37,#fff3b0,#d4af37)}.info-bar{display:flex;justify-content:space-between;gap:8px;padding:3mm 5mm;background:#fff8e6;border-bottom:1px solid #e4cf91;font-size:12px;font-weight:800}.dash-print-table{width:100%;border-collapse:collapse;margin-top:3mm;font-size:13px}.dash-print-table th,.dash-print-table td{border:1px solid #b08d2a;padding:2mm;text-align:center}.dash-print-table th{background:#7a0e2e;color:#fff}.dash-print-table td.name{text-align:right;font-weight:800}';
+  const frame=document.createElement('iframe');frame.style.cssText='position:fixed;left:-10000px;top:0;width:'+pageW+';height:'+pageH+';border:0';document.body.appendChild(frame);
   const doc=frame.contentDocument||frame.contentWindow.document;doc.open();
   doc.write('<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>'+escapeHtml(title)+'</title><style>'+css+'</style><style>'+printThemeRootCss()+'</style></head><body>'+html+'</body></html>');
   doc.close();setTimeout(function(){try{frame.contentWindow.focus();frame.contentWindow.print();}catch(e){alert('تعذرت الطباعة.');}},600);
@@ -8239,6 +8536,7 @@ function dashMenuItems(){
     ['📝','الامتحانات','قوائم وأسئلة وجداول','openExamsModule()','linear-gradient(135deg,#01579b,#29b6f6)'],
     ['🖨️','كشوف النتائج','طباعة النتائج','openResultsSectionsFromDashboard()','linear-gradient(135deg,#4a148c,#8e24aa)'],
     ['📚','المواد الدراسية','مواد كل صف','openSubjectsEditor()','linear-gradient(135deg,#1b5e20,#43a047)'],
+    ['💾','النسخ الاحتياطي','حفظ واسترجاع ومسح البيانات','openBackupModule()','linear-gradient(135deg,#004d40,#26a69a)'],
     ['⚙️','إعدادات المدرسة','البيانات وشكل القائمة','openSettings()','linear-gradient(135deg,#263238,#546e7a)']
   ];
 }
@@ -8336,6 +8634,140 @@ function openMainMenuFromTop(){
     return;
   }
   goDashboard();
+}
+function openBackupModule(){renderBackupModule();navigateTo('view-backup');}
+function backupCollectStore(){
+  const store={};
+  try{
+    for(let i=0;i<localStorage.length;i++){
+      const k=localStorage.key(i);
+      if(k&&k.indexOf('schoolResults')===0) store[k]=localStorage.getItem(k);
+    }
+  }catch(e){}
+  return {v:1,at:Date.now(),app:'المنظومة المدرسية',store:store};
+}
+function renderBackupModule(){
+  const el=document.getElementById('view-backup');if(!el)return;
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">💾</span><div><h2>النسخ الاحتياطي</h2><p>حفظ واسترجاع بيانات المنظومة وملفات الطلاب</p></div></div><button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button></div>'+
+    '<div class="asg-form">'+
+      '<div class="asg-form-sec"><h4>نسخة المنظومة كاملة</h4><p class="empty-hint">تشمل الطلاب والدرجات والقيود والملاك والحسابات والإعدادات المحفوظة على هذا الجهاز.</p><div style="display:flex;flex-wrap:wrap;gap:10px">'+
+        '<button class="material-btn" onclick="backupExportJson()">⬇️ حفظ نسخة احتياطية في الملفات</button>'+
+        '<button class="material-btn secondary" onclick="document.getElementById(\'backupJsonFile\').click()">⬆️ استيراد النسخة الاحتياطية</button>'+
+        '<button class="material-btn" style="background:#8b1536" onclick="backupWipeAll()">🗑️ مسح بيانات التطبيق بالكامل</button>'+
+      '</div><input id="backupJsonFile" type="file" accept="application/json,.json" style="display:none" onchange="backupImportJson(this)"></div>'+
+      '<div class="asg-form-sec"><h4>بيانات الطلاب (إكسل حسب الشعب)</h4><p class="empty-hint">التصدير: شيت لكل شعبة. الاستيراد: ملف واحد فيه شيتات الشعب، والأعمدة تُميَّز تلقائياً حتى لو اختلف ترتيبها.</p><div style="display:flex;flex-wrap:wrap;gap:10px">'+
+        '<button class="material-btn" onclick="backupExportStudentsExcel()">📤 تصدير الطلاب إكسل حسب الشعب</button>'+
+        '<button class="material-btn secondary" onclick="document.getElementById(\'backupStudentsXlsx\').click()">📥 استيراد طلاب من شيتات الشعب</button>'+
+      '</div><input id="backupStudentsXlsx" type="file" accept=".xlsx,.xls" style="display:none" onchange="backupImportStudentsExcel(this)"></div>'+
+    '</div></div>';
+}
+function backupExportJson(){
+  const pack=backupCollectStore();
+  const blob=new Blob([JSON.stringify(pack)],{type:'application/json'});
+  const a=document.createElement('a');
+  const d=new Date();
+  a.href=URL.createObjectURL(blob);
+  a.download='نسخة-المنظومة-'+d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'.json';
+  a.click();
+}
+function backupImportJson(input){
+  const file=input&&input.files&&input.files[0];
+  if(input) input.value='';
+  if(!file)return;
+  if(!confirm('سيتم استبدال بيانات هذا الجهاز بالنسخة المختارة. متابعة؟'))return;
+  const reader=new FileReader();
+  reader.onload=function(){
+    try{
+      const pack=JSON.parse(reader.result);
+      const store=pack&&pack.store?pack.store:pack;
+      if(!store||typeof store!=='object'){alert('ملف النسخة غير صالح.');return;}
+      Object.keys(store).forEach(function(k){
+        if(k.indexOf('schoolResults')===0 && store[k]!=null) localStorage.setItem(k, typeof store[k]==='string'?store[k]:JSON.stringify(store[k]));
+      });
+      alert('تم استيراد النسخة. سيتم إعادة تحميل الصفحة.');
+      location.reload();
+    }catch(e){alert('تعذر قراءة ملف النسخة.');}
+  };
+  reader.readAsText(file,'utf-8');
+}
+function backupWipeAll(){
+  if(!confirm('مسح كل بيانات المنظومة من هذا الجهاز؟ لا يمكن التراجع.'))return;
+  if(!confirm('تأكيد أخير: مسح الطلاب والدرجات والقيود والحسابات؟'))return;
+  const keep=[];
+  try{
+    const keys=[];
+    for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i); if(k&&k.indexOf('schoolResults')===0) keys.push(k);}
+    keys.forEach(function(k){localStorage.removeItem(k);});
+  }catch(e){}
+  alert('تم المسح. سيتم إعادة تحميل الصفحة.');
+  location.reload();
+}
+function backupSectionSheetName(grade,label){
+  return (String(grade||'')+' - '+String(label||'')).replace(/[\\\/\*\?\:\[\]]/g,'-');
+}
+function backupFindSection(sheetName){
+  const raw=String(sheetName||'').trim();
+  function matchPair(g,lab){
+    const sec=(gbSectionsForGrade(g)||[]).find(function(s){return String(s.label)===String(lab);});
+    return sec?{grade:g,sec:sec}:null;
+  }
+  const parts=raw.split('__');
+  if(parts.length>=2){ const hit=matchPair(parts[0],parts.slice(1).join('__')); if(hit) return hit; }
+  const dash=raw.match(/^(.+?)\s*[-–—_]\s*(\S+)$/);
+  if(dash){ const hit=matchPair(dash[1].trim(),dash[2].trim()); if(hit) return hit; }
+  let found=null;
+  gradebookGradeLabels().forEach(function(g){
+    gbSectionsForGrade(g).forEach(function(sec){
+      if(found)return;
+      const lab=String(sec.label||'');
+      if(raw===g+' '+lab || raw===g+lab) found={grade:g,sec:sec};
+    });
+  });
+  return found;
+}
+function backupExportStudentsExcel(){
+  if(typeof XLSX==='undefined'){alert('مكتبة الإكسل غير متاحة.');return;}
+  const wb=XLSX.utils.book_new();
+  const head=['ت','اسم الطالب','اللقب','اسم الأم','تاريخ الميلاد','هاتف ولي الأمر','الحالة','محل الولادة','رقم البطاقة الوطنية','الرعاية'];
+  let sheets=0;
+  gradebookGradeLabels().forEach(function(g){
+    gbSectionsForGrade(g).forEach(function(sec){
+      const aoa=[head];
+      (sec.students||[]).forEach(function(st,i){
+        aoa.push([i+1,st.name||'',st.title||'',st.motherName||'',st.birthDate||'',st.guardianPhone||'',st.status||'',st.birthPlace||'',st.nationalId||'',st.careCoverage||'']);
+      });
+      const ws=XLSX.utils.aoa_to_sheet(aoa);
+      let name=backupSectionSheetName(g,sec.label);
+      if(name.length>31) name=name.slice(0,31);
+      try{XLSX.utils.book_append_sheet(wb,ws,name);sheets++;}catch(e){}
+    });
+  });
+  if(!sheets){alert('لا توجد شعب لتصديرها.');return;}
+  xlsxWriteStyled(wb,'طلاب-حسب-الشعب.xlsx');
+}
+function backupImportStudentsExcel(input){
+  const file=input&&input.files&&input.files[0];
+  if(input) input.value='';
+  if(!file)return;
+  if(typeof XLSX==='undefined'){alert('مكتبة الإكسل غير متاحة.');return;}
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      const wb=XLSX.read(ev.target.result,{type:'array'});
+      let added=0, sheets=0;
+      wb.SheetNames.forEach(function(sn){
+        const found=backupFindSection(sn);
+        if(!found){return;}
+        sheets++;
+        const rows=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:false,defval:''});
+        added+=ingestStudentGrid(rows, found.sec);
+      });
+      if(!sheets){alert('لم يُعثر على شيتات مطابقة لأسماء الشعب. صدّر ملفاً أولاً لمعرفة التسمية.');return;}
+      saveApp();
+      alert('تم استيراد '+added+' طالباً من '+sheets+' شعبة.');
+    }catch(e){alert('تعذر استيراد ملف الطلاب.');}
+  };
+  reader.readAsArrayBuffer(file);
 }
 function goDashboard(){
   window.DASH_SHOW_REPORTS=false;
@@ -8513,6 +8945,19 @@ function gradebookSectionChanged(){
     if(host) host.innerHTML='<div class="empty-module">اضغط على أيقونة المادة لعرض جدول درجات طلاب هذه الشعبة.</div>';
   }
 }
+function keepTableHScroll(root){
+  const scope=root&&root.querySelectorAll?root:document;
+  const boxes=scope.querySelectorAll('.table-scroll,.levels-table-scroll');
+  Array.prototype.forEach.call(boxes,function(box){
+    if(box.__hScrollBound)return;
+    box.__hScrollBound=1;
+    box.__hScrollX=box.scrollLeft;
+    box.addEventListener('scroll',function(){box.__hScrollX=box.scrollLeft;},{passive:true});
+    function restore(){const x=box.__hScrollX; if(x==null)return; box.scrollLeft=x; requestAnimationFrame(function(){box.scrollLeft=x;});}
+    box.addEventListener('focusin',function(){restore();setTimeout(restore,0);setTimeout(restore,40);setTimeout(restore,120);});
+    box.addEventListener('pointerdown',function(){box.__hScrollX=box.scrollLeft;},true);
+  });
+}
 function renderGradebookTable(){
   const grade=document.getElementById('gbGrade').value, sectionId=document.getElementById('gbSection').value, subject=document.getElementById('gbSubject').value;
   const host=document.getElementById('gbTableHost'); if(!host) return;
@@ -8535,6 +8980,7 @@ function renderGradebookTable(){
   updateGradebookSummary();
   markGradebookFailCells();
   saveGradebook(GRADEBOOK);
+  keepTableHScroll(host);
 }
 
 function gradebookNumeric(v){
@@ -8876,7 +9322,7 @@ function exportGradebookExcel(){
   const safeName=currentGradebookTitle().replace(/[\\/:*?"<>|]/g,'-');
   if(typeof XLSX!=='undefined'&&XLSX.utils){
     const workbook=XLSX.utils.table_to_book(table,{sheet:'الدرجات'});
-    XLSX.writeFile(workbook,safeName+'.xlsx');
+    xlsxWriteStyled(workbook,safeName+'.xlsx');
     return;
   }
   const html='<html lang="ar" dir="rtl"><head><meta charset="UTF-8"></head><body>'+table.outerHTML+'</body></html>';
@@ -9648,12 +10094,12 @@ function printAttendanceStyled(table,title,subtitle){
   const logo=APP.school.logo?'<img src="'+APP.school.logo+'">':'شعار المدرسة',frame=document.createElement('iframe');frame.style.cssText='position:fixed;left:-10000px;top:0;width:210mm;height:297mm;border:0';document.body.appendChild(frame);const doc=frame.contentDocument;doc.open();doc.write('<html dir="rtl"><head><meta charset="UTF-8"><style>'+printThemeRootCss()+'@page{size:A4;margin:8mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{margin:0;font-family:Tahoma}.page{position:relative;width:194mm;min-height:279mm;border:1mm double var(--list-accent);padding:3mm 3mm 15mm}.head{display:grid;grid-template-columns:25mm 1fr 25mm;align-items:center;background:linear-gradient(125deg,var(--list-dark),var(--list-mid),var(--list-accent));color:#fff;padding:4mm 6mm;border-bottom:1.5mm solid var(--list-accent)}.logo{width:20mm;height:20mm;border-radius:50%;background:#fff;overflow:hidden}.logo img{width:100%;height:100%;object-fit:cover}.title{text-align:center}.title h1{margin:0;font-size:18px;font-weight:900}.title h2{margin:1mm 0 0;font-size:14px}.attendance-records-table{width:100%;border-collapse:collapse;margin-top:3mm;font-size:13px}.attendance-records-table thead{display:table-header-group}.attendance-records-table th,.attendance-records-table td{border:.3mm solid #8fa0aa;padding:2.5mm;text-align:center}.attendance-records-table th{background:linear-gradient(135deg,var(--list-dark),var(--list-mid));color:#fff;font-weight:900}.attendance-records-table td.name{text-align:right;font-weight:900}.status-absent{color:#d00000;font-weight:900}.status-leave{color:#16823b;font-weight:900}.status-excused{color:#d49a00;font-weight:900}.weekday-sunday{color:#8e24aa;font-weight:900}.weekday-monday{color:#1565c0;font-weight:900}.weekday-tuesday{color:#00897b;font-weight:900}.weekday-wednesday{color:#2e7d32;font-weight:900}.weekday-thursday{color:#ef6c00;font-weight:900}.weekday-friday{color:#c62828;font-weight:900}.weekday-saturday{color:#6d4c41;font-weight:900}.footer{position:absolute;right:0;left:0;bottom:0;padding:3mm 6mm;background:#fff3b8;border-top:.6mm solid #d4af37;display:flex;justify-content:space-between;font-size:11px;font-weight:900}</style><style>'+printThemeRootCss()+'</style></head><body><main class="page"><header class="head"><div class="logo">'+logo+'</div><div class="title"><h1>'+escapeHtml(APP.school.name)+'</h1><h2>'+escapeHtml(title)+'</h2><div>'+escapeHtml(subtitle||'')+'</div></div><div></div></header>'+table.outerHTML+'<footer class="footer"><span>مدير المدرسة: '+escapeHtml(APP.school.principal||'—')+'</span><span>الدرجات والنتائج</span></footer></main></body></html>');doc.close();setTimeout(function(){frame.contentWindow.print();},650);setTimeout(function(){frame.remove();},120000);
 }
 function printAttendanceRecords(){const table=attendancePrintableTable();if(!table){alert('اعرض السجل أولاً.');return;}const grade=(document.getElementById('recordsGrade')||{}).value||'',sec=document.getElementById('recordsSection'),section=sec&&sec.selectedIndex>=0?sec.options[sec.selectedIndex].text:'';printAttendanceStyled(table,'سجل الغياب','الصف '+grade+' — '+section);}
-function exportAttendanceExcel(){const table=document.querySelector('#attendanceRecordsOutput table');if(!table){alert('اعرض السجل أولاً.');return;}if(typeof XLSX!=='undefined'){const wb=XLSX.utils.table_to_book(table,{sheet:'سجل الغياب'});XLSX.writeFile(wb,'سجل الغياب.xlsx');return;}let csv='';table.querySelectorAll('tr').forEach(function(tr){csv+=Array.from(tr.cells).map(function(c){return '"'+c.textContent.replace(/"/g,'""')+'"';}).join(',')+'\n';});const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='سجل الغياب.csv';a.click();}
+function exportAttendanceExcel(){const table=document.querySelector('#attendanceRecordsOutput table');if(!table){alert('اعرض السجل أولاً.');return;}if(typeof XLSX!=='undefined'){const wb=XLSX.utils.table_to_book(table,{sheet:'سجل الغياب'});xlsxWriteStyled(wb,'سجل الغياب.xlsx');return;}let csv='';table.querySelectorAll('tr').forEach(function(tr){csv+=Array.from(tr.cells).map(function(c){return '"'+c.textContent.replace(/"/g,'""')+'"';}).join(',')+'\n';});const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='سجل الغياب.csv';a.click();}
 
 // ================= Staff administration module =================
 const STAFF_STORAGE_KEY='schoolResultsStaff_v1';
 function loadStaffState(){try{return JSON.parse(localStorage.getItem(STAFF_STORAGE_KEY)||'{}')||{};}catch(e){return {};}}
-function saveStaffState(){try{localStorage.setItem(STAFF_STORAGE_KEY,JSON.stringify(STAFF_STATE));return true;}catch(e){alert('تعذر الحفظ. قد تكون الصور كبيرة جدًا؛ احذف بعض الصور أو استخدم صورًا أصغر.');return false;}}
+function saveStaffState(){try{localStorage.setItem(STAFF_STORAGE_KEY,JSON.stringify(STAFF_STATE));if(typeof wifiOnSave==='function')wifiOnSave('staff');return true;}catch(e){alert('تعذر الحفظ. قد تكون الصور كبيرة جدًا؛ احذف بعض الصور أو استخدم صورًا أصغر.');return false;}}
 let STAFF_STATE=loadStaffState();if(!Array.isArray(STAFF_STATE.staff))STAFF_STATE.staff=[];
 function ensureStaffDefaults(){if(STAFF_STATE.demoV1||STAFF_STATE.staff.length)return;STAFF_STATE.staff=[
 {id:'emp_1',name:'محمد أمين عبد الله',title:'التميمي',jobTitle:'مدير مدرسة',employeeNo:'1001',birthDate:'1978-03-12',motherName:'سناء عبد الكريم',appointmentDate:'2001-09-15',startDate:'2001-09-20',adminOrderDate:'2001-09-10',specialization:'إدارة تربوية',phone:'07701234567',nationalId:'198765432101',schoolStartDate:'2018-09-01',status:'ثابت',documents:[],increments:[],promotions:[]},
@@ -9695,21 +10141,145 @@ function openStaffSearchInfo(id){
 
 function openStaffModule(){renderStaffHome();navigateTo('view-staff',{page:'home'});}
 function restoreStaffView(meta){if(meta.page==='info')renderStaffInfo();else if(meta.page==='employees')renderStaffEmployees();else if(meta.page==='documents')renderStaffDocumentsList();else if(meta.page==='documentDetail')renderStaffDocumentDetail(meta.staffId);else if(meta.page==='records')renderStaffRecordsList();else if(meta.page==='recordDetail')renderStaffRecordDetail(meta.staffId,meta.tab||'increments');else renderStaffHome();}
-function renderStaffHome(){const el=document.getElementById('view-staff');el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">👥</span><div><h2>الملاك</h2><p>إدارة معلومات الملاك ومستمسكاتهم وعلاواتهم وترفيعاتهم</p></div></div><button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button></div><div class="staff-search-box"><input id="staffSearchInput" type="search" placeholder="ابحث عن معلم أو مدرس أو موظف بالاسم أو الرقم الوظيفي..." oninput="renderStaffSearchResults(this.value)"><div id="staffSearchResults" class="staff-search-results"></div></div><div class="staff-home-grid"><button class="staff-module-card info" onclick="openStaffInfo()"><span>🧑‍🏫</span><h3>'+staffInfoTitle()+'</h3><p>بيانات الخدمة والعمر والحالة الوظيفية.</p></button><button class="staff-module-card employees" onclick="openStaffEmployees()"><span>🧑‍💼</span><h3>الموظفين</h3><p>نفس جدول الملاك بدون عمود الاختصاص الدقيق.</p></button><button class="staff-module-card docs" onclick="openStaffDocuments()"><span>🪪</span><h3>مستمسكات الملاك</h3><p>مستمسكات الموظف والزوجة والأولاد مع الطباعة الفردية والمجمعة.</p></button><button class="staff-module-card raise" onclick="openStaffRecords()"><span>📑</span><h3>العلاوات والترفيعات</h3><p>تواريخ العلاوات والترفيعات وصفحات الكتب الرسمية.</p></button></div></div>';}
+function renderStaffHome(){const el=document.getElementById('view-staff');el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">👥</span><div><h2>الملاك</h2><p>إدارة معلومات الملاك ومستمسكاتهم وعلاواتهم وترفيعاتهم</p></div></div><button class="material-btn secondary" onclick="goDashboard()">رجوع للوحة التحكم</button></div><div class="staff-search-box"><input id="staffSearchInput" type="search" placeholder="ابحث عن معلم أو مدرس أو موظف بالاسم أو الرقم الوظيفي..." oninput="renderStaffSearchResults(this.value)"><div id="staffSearchResults" class="staff-search-results"></div></div><div class="staff-home-grid"><button class="staff-module-card info" onclick="openStaffInfo()"><span>🧑‍🏫</span><h3>'+staffInfoTitle()+'</h3><p>المعلمون والمدرسون فقط — بيانات الخدمة والعمر والحالة الوظيفية.</p></button><button class="staff-module-card employees" onclick="openStaffEmployees()"><span>🧑‍💼</span><h3>الموظفين</h3><p>الحرفيون والحراس الليليون والحارس الأمني وعمال النظافة ومن في حكمهم.</p></button><button class="staff-module-card docs" onclick="openStaffDocuments()"><span>🪪</span><h3>مستمسكات الملاك</h3><p>مستمسكات الموظف والزوجة والأولاد مع الطباعة الفردية والمجمعة.</p></button><button class="staff-module-card raise" onclick="openStaffRecords()"><span>📑</span><h3>العلاوات والترفيعات</h3><p>تواريخ العلاوات والترفيعات وصفحات الكتب الرسمية.</p></button></div></div>';}
 let staffTableMode='info';
 function openStaffInfo(){renderStaffInfo();navigateTo('view-staff',{page:'info'});}
-function staffTableRows(hideSpec){return STAFF_STATE.staff.map(function(emp,i){const age=ymdDiff(emp.birthDate),service=ymdDiff(emp.startDate);return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(emp.name||'')+'</td><td>'+escapeHtml(emp.title||'')+'</td><td>'+escapeHtml(emp.jobTitle||'')+'</td><td>'+escapeHtml(emp.employeeNo||'')+'</td><td>'+escapeHtml(emp.birthDate||'')+'</td><td>'+escapeHtml(emp.motherName||'')+'</td><td>'+escapeHtml(emp.appointmentDate||'')+'</td><td>'+escapeHtml(emp.startDate||'')+'</td><td>'+escapeHtml(emp.adminOrderDate||'')+'</td>'+(hideSpec?'':'<td>'+escapeHtml(emp.specialization||'')+'</td>')+'<td>'+formatYmd(age)+'</td><td>'+formatYmd(service)+'</td><td>'+remainingService(emp.birthDate)+'</td><td>'+escapeHtml(emp.phone||'')+'</td><td>'+escapeHtml(emp.nationalId||'')+'</td><td>'+escapeHtml(emp.schoolStartDate||'')+'</td><td>'+escapeHtml(emp.status||'')+'</td><td><div class="staff-actions"><button class="staff-action edit" onclick="openStaffForm(\''+emp.id+'\')">تعديل</button><button class="staff-action delete" onclick="deleteStaff(\''+emp.id+'\')">حذف</button></div></td></tr>';}).join('');}
+function staffTableRows(hideSpec){return staffListForMode(!!hideSpec).map(function(emp,i){const age=ymdDiff(emp.birthDate),service=ymdDiff(emp.startDate);return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(emp.name||'')+'</td><td>'+escapeHtml(emp.title||'')+'</td><td>'+escapeHtml(emp.jobTitle||'')+'</td><td>'+escapeHtml(emp.employeeNo||'')+'</td><td>'+escapeHtml(emp.birthDate||'')+'</td><td>'+escapeHtml(emp.motherName||'')+'</td><td>'+escapeHtml(emp.appointmentDate||'')+'</td><td>'+escapeHtml(emp.startDate||'')+'</td><td>'+escapeHtml(emp.adminOrderDate||'')+'</td>'+(hideSpec?'':'<td>'+escapeHtml(emp.specialization||'')+'</td>')+'<td>'+formatYmd(age)+'</td><td>'+formatYmd(service)+'</td><td>'+remainingService(emp.birthDate)+'</td><td>'+escapeHtml(emp.phone||'')+'</td><td>'+escapeHtml(emp.nationalId||'')+'</td><td>'+escapeHtml(emp.schoolStartDate||'')+'</td><td>'+escapeHtml(emp.status||'')+'</td><td><div class="staff-actions"><button class="staff-action edit" onclick="openStaffForm(\''+emp.id+'\')">تعديل</button><button class="staff-action delete" onclick="deleteStaff(\''+emp.id+'\')">حذف</button></div></td></tr>';}).join('');}
 const STAFF_HEAD_EMPLOYEES='<tr><th>ت</th><th>اسم الموظف</th><th>اللقب</th><th>العنوان الوظيفي</th><th>الرقم الوظيفي</th><th>تاريخ الميلاد</th><th>اسم الأم</th><th>تاريخ التعيين</th><th>تاريخ المباشرة</th><th>تاريخ الأمر الإداري</th><th>العمر</th><th>سنوات الخدمة</th><th>المدة المتبقية لإكمال عمر ٦٠</th><th>رقم الهاتف</th><th>رقم البطاقة الوطنية</th><th>المباشرة بهذه المدرسة</th><th>الحالة</th><th>الأدوات</th></tr>';
 const STAFF_HEAD='<tr><th>ت</th><th>اسم المعلم أو المدرس</th><th>اللقب</th><th>العنوان الوظيفي</th><th>الرقم الوظيفي</th><th>تاريخ الميلاد</th><th>اسم الأم</th><th>تاريخ التعيين</th><th>تاريخ المباشرة</th><th>تاريخ الأمر الإداري</th><th>الاختصاص الدقيق</th><th>العمر</th><th>سنوات الخدمة</th><th>المدة المتبقية لإكمال عمر ٦٠</th><th>رقم الهاتف</th><th>رقم البطاقة الوطنية</th><th>المباشرة بهذه المدرسة</th><th>الحالة</th><th>الأدوات</th></tr>';
-function renderStaffInfo(){staffTableMode='info';const el=document.getElementById('view-staff');el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>'+escapeHtml(staffTableMode==='employees'?'الموظفين':'معلومات الملاك')+'</h2><p>العمر والخدمة والخدمة المتبقية تُحسب تلقائيًا</p></div></div><button class="material-btn secondary" onclick="appGoBack()">رجوع إلى الملاك</button></div><div class="staff-toolbar"><button class="material-btn secondary" onclick="printStaffInfo(\'portrait\')">🖨️ عمودي</button><button class="material-btn secondary" onclick="printStaffInfo(\'landscape\')">🖨️ أفقي</button><button class="material-btn" onclick="openStaffForm()">＋ إضافة موظف</button></div><div class="staff-table-wrap"><table class="staff-table"><thead>'+STAFF_HEAD+'</thead><tbody>'+staffTableRows()+'</tbody></table></div></div>';}function openStaffEmployees(){staffTableMode='employees';renderStaffEmployees();navigateTo('view-staff',{page:'employees'});}
-function renderStaffEmployees(){staffTableMode='employees';const el=document.getElementById('view-staff');el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍💼</span><div><h2>الموظفين</h2><p>جدول الموظفين بدون عمود الاختصاص الدقيق</p></div></div><button class="material-btn secondary" onclick="appGoBack()">رجوع إلى الملاك</button></div><div class="staff-toolbar"><button class="material-btn secondary" onclick="printStaffInfo(\'portrait\')">🖨️ عمودي</button><button class="material-btn secondary" onclick="printStaffInfo(\'landscape\')">🖨️ أفقي</button><button class="material-btn" onclick="openStaffForm()">＋ إضافة موظف</button></div><div class="staff-table-wrap"><table class="staff-table"><thead>'+STAFF_HEAD_EMPLOYEES+'</thead><tbody>'+staffTableRows(true)+'</tbody></table></div></div>';}
+function renderStaffInfo(){staffTableMode='info';const el=document.getElementById('view-staff');el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>'+escapeHtml(staffTableMode==='employees'?'الموظفين':'معلومات الملاك')+'</h2><p>العمر والخدمة والخدمة المتبقية تُحسب تلقائيًا</p></div></div><button class="material-btn secondary" onclick="appGoBack()">رجوع إلى الملاك</button></div>'+staffToolbarHtml()+ '<div class="staff-table-wrap"><table class="staff-table"><thead>'+STAFF_HEAD+'</thead><tbody>'+staffTableRows()+'</tbody></table></div></div>';staffAfterRender();}function openStaffEmployees(){staffTableMode='employees';renderStaffEmployees();navigateTo('view-staff',{page:'employees'});}
+function renderStaffEmployees(){staffTableMode='employees';const el=document.getElementById('view-staff');el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍💼</span><div><h2>الموظفين</h2><p>الحرفيون والحراس وعمال النظافة والأمن — منفصلون عن المعلمين</p></div></div><button class="material-btn secondary" onclick="appGoBack()">رجوع إلى الملاك</button></div>'+staffToolbarHtml()+'<div class="staff-table-wrap"><table class="staff-table"><thead>'+STAFF_HEAD_EMPLOYEES+'</thead><tbody>'+staffTableRows(true)+'</tbody></table></div></div>';staffAfterRender();}
 
 let editingStaffId=null;
-function openStaffForm(id){editingStaffId=id||null;const emp=id?findStaff(id):{status:'عقد'};document.getElementById('staffFormTitle').textContent=id?'تعديل بيانات الموظف':'إضافة موظف';const fields=[['name','الاسم الكامل','text'],['title','اللقب','text'],['jobTitle','العنوان الوظيفي','text'],['employeeNo','الرقم الوظيفي','text'],['birthDate','تاريخ الميلاد','date'],['motherName','اسم الأم','text'],['appointmentDate','تاريخ التعيين','date'],['startDate','تاريخ المباشرة','date'],['adminOrderDate','تاريخ الأمر الإداري','date'],['specialization','الاختصاص الدقيق','text'],['phone','رقم الهاتف','text'],['nationalId','رقم البطاقة الوطنية','text'],['schoolStartDate','تاريخ المباشرة بهذه المدرسة','date']];let html='<div class="staff-form-grid">';fields.forEach(function(f){html+='<div class="mat-field"><label>'+f[1]+'</label><input id="staff_'+f[0]+'" type="'+f[2]+'" value="'+escapeHtml(emp[f[0]]||'')+'"></div>';});html+='<div class="mat-field"><label>الحالة</label><select id="staff_status">'+['عقد','ثابت','تكليف','مجاز','ملاك دائم','منقول','متقاعد'].map(function(v){return '<option'+((emp.status||'عقد')===v?' selected':'')+'>'+v+'</option>';}).join('')+'</select></div></div><div class="student-form-actions"><button class="material-btn secondary" onclick="closeStaffForm()">إلغاء</button><button class="material-btn" onclick="saveStaffForm()">حفظ</button></div>';document.getElementById('staffFormBody').innerHTML=html;document.getElementById('staffFormOverlay').classList.add('open');}
+function staffToolbarHtml(){
+  return '<div class="staff-toolbar">'+
+    '<button class="material-btn secondary" onclick="printStaffInfo(\'portrait\')">🖨️ عمودي</button>'+
+    '<button class="material-btn secondary" onclick="printStaffInfo(\'landscape\')">🖨️ أفقي</button>'+
+    '<button class="material-btn secondary" onclick="exportStaffExcel()">📤 تصدير إكسل</button>'+
+    '<label class="upload-btn material-btn secondary" style="display:inline-flex;align-items:center;gap:6px">📥 استيراد إكسل<input type="file" accept=".xlsx,.xls,.csv" style="display:none" onchange="importStaffExcel(this)"></label>'+
+    '<button class="material-btn secondary" onclick="toggleStaffPaste()">📋 لصق</button>'+
+    '<button class="material-btn" id="staffAddBtn" onclick="openStaffForm()">＋ إضافة</button></div>'+
+    '<div id="staffPasteArea" style="display:none;margin:8px 0"><textarea id="staffPasteBox" rows="5" placeholder="الصق الجدول مع صف العناوين (الاسم، اللقب، العنوان الوظيفي، الرقم الوظيفي...)"></textarea><button class="material-btn" onclick="applyStaffPaste()">إدراج بذكاء</button></div>';
+}
+function staffAfterRender(){
+  const admin=!(typeof authRole==='function'&&authRole()==='teacher');
+  const add=document.getElementById('staffAddBtn');
+  if(add) add.style.display=admin?'':'none';
+  document.querySelectorAll('.staff-action.delete').forEach(function(b){b.style.display=admin?'':'none';});
+  if(!admin && !teacherCanStaffEdit()){
+    document.querySelectorAll('.staff-action.edit').forEach(function(b){b.textContent='عرض';});
+    document.querySelectorAll('.staff-toolbar .upload-btn, .staff-toolbar button').forEach(function(b){
+      const t=b.textContent||'';
+      if(/استيراد|لصق|تصدير/.test(t) || b.classList.contains('upload-btn')){
+        if(/تصدير/.test(t)) return;
+        if(/استيراد|لصق/.test(t) || (b.tagName==='LABEL'&&/استيراد/.test(t))) b.style.display='none';
+      }
+    });
+  }
+}
+function toggleStaffPaste(){const el=document.getElementById('staffPasteArea'); if(!el)return; el.style.display=el.style.display==='none'?'block':'none';}
+function smartStaffColMap(headers){
+  const map={};
+  (headers||[]).forEach(function(c,i){
+    const t=String(c||'').replace(/\s+/g,' ').trim();
+    if(!t)return;
+    if(/اسم/.test(t) && !/أم|ام/.test(t) && map.name==null) map.name=i;
+    else if(/لقب/.test(t)) map.title=i;
+    else if(/عنوان|وظيفة|مسمى/.test(t)) map.jobTitle=i;
+    else if(/رقم وظيفي|الرقم الوظيفي/.test(t)) map.employeeNo=i;
+    else if(/ميلاد|مواليد|تولد/.test(t)) map.birthDate=i;
+    else if(/أم|الام|الأم/.test(t) && !/أمر/.test(t)) map.motherName=i;
+    else if(/تعيين/.test(t)) map.appointmentDate=i;
+    else if(/مباشرة بهذه|هذه المدرسة/.test(t)) map.schoolStartDate=i;
+    else if(/مباشرة/.test(t)) map.startDate=i;
+    else if(/أمر إداري|امر اداري/.test(t)) map.adminOrderDate=i;
+    else if(/اختصاص/.test(t)) map.specialization=i;
+    else if(/هاتف|جوال|موبايل/.test(t)) map.phone=i;
+    else if(/بطاقة|وطني|هوية/.test(t)) map.nationalId=i;
+    else if(/حالة/.test(t)) map.status=i;
+  });
+  return map;
+}
+function ingestStaffGrid(rows, kind){
+  if(!rows||!rows.length) return 0;
+  let start=0, map=smartStaffColMap(rows[0]);
+  if(map.name!=null) start=1;
+  else map={name:0,title:1,jobTitle:2,employeeNo:3,birthDate:4,motherName:5,appointmentDate:6,startDate:7,phone:8,nationalId:9,status:10};
+  let n=0;
+  for(let r=start;r<rows.length;r++){
+    const row=rows[r]||[];
+    function cell(k){const i=map[k]; if(i==null)return ''; return String(row[i]==null?'':row[i]).trim();}
+    const name=cell('name'); if(!name) continue;
+    let emp=(STAFF_STATE.staff||[]).find(function(e){return (typeof authNorm==='function'?authNorm(e.name):e.name)===(typeof authNorm==='function'?authNorm(name):name);});
+    if(!emp){ emp={id:'emp_'+Date.now()+'_'+r,documents:[],increments:[],promotions:[]}; STAFF_STATE.staff.push(emp); }
+    ['title','jobTitle','employeeNo','birthDate','motherName','appointmentDate','startDate','adminOrderDate','specialization','phone','nationalId','schoolStartDate','status'].forEach(function(k){ const v=cell(k); if(v) emp[k]=v; });
+    emp.name=name;
+    if(kind) emp.kind=kind;
+    n++;
+  }
+  return n;
+}
+function exportStaffExcel(){
+  if(typeof XLSX==='undefined'){alert('مكتبة الإكسل غير متاحة.');return;}
+  const head=['ت','الاسم','اللقب','العنوان الوظيفي','الرقم الوظيفي','تاريخ الميلاد','اسم الأم','تاريخ التعيين','تاريخ المباشرة','تاريخ الأمر الإداري','الاختصاص','الهاتف','البطاقة الوطنية','المباشرة بالمدرسة','الحالة'];
+  const keys=['name','title','jobTitle','employeeNo','birthDate','motherName','appointmentDate','startDate','adminOrderDate','specialization','phone','nationalId','schoolStartDate','status'];
+  const wb=XLSX.utils.book_new();
+  [['المعلمون','teacher'],['الموظفون','employee']].forEach(function(pair){
+    const aoa=[head];
+    (STAFF_STATE.staff||[]).filter(function(emp){return staffPersonKind(emp)===pair[1];}).forEach(function(emp,i){
+      aoa.push([i+1].concat(keys.map(function(k){return emp[k]||'';})));
+    });
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(aoa),pair[0]);
+  });
+  if(typeof xlsxWriteStyled==='function') xlsxWriteStyled(wb,'الملاك.xlsx'); else XLSX.writeFile(wb,'الملاك.xlsx');
+}
+function importStaffExcel(input){
+  const file=input&&input.files&&input.files[0];
+  if(input) input.value='';
+  if(!file||typeof XLSX==='undefined')return;
+  if(typeof authRole==='function'&&authRole()==='teacher'&&!teacherCanStaffEdit()){alert('غير مسموح باستيراد الملاك.');return;}
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      const wb=XLSX.read(ev.target.result,{type:'array'});
+      let n=0;
+      wb.SheetNames.forEach(function(sn){
+        const kind=/موظف/.test(sn)?'employee':(/معلم|مدرس/.test(sn)?'teacher':'');
+        const rows=XLSX.utils.sheet_to_json(wb.Sheets[sn],{header:1,raw:false,defval:''});
+        n+=ingestStaffGrid(rows, kind||(staffTableMode==='employees'?'employee':'teacher'));
+      });
+      saveStaffState();
+      if(staffTableMode==='employees')renderStaffEmployees(); else renderStaffInfo();
+      alert('تم استيراد/تحديث '+n+' سجل.');
+    }catch(e){alert('تعذر قراءة ملف الإكسل.');}
+  };
+  reader.readAsArrayBuffer(file);
+}
+function applyStaffPaste(){
+  if(typeof authRole==='function'&&authRole()==='teacher'&&!teacherCanStaffEdit()){alert('غير مسموح.');return;}
+  const text=(document.getElementById('staffPasteBox')||{}).value||'';
+  const rows=String(text).split(/\r?\n/).map(function(l){return l.split('\t');}).filter(function(r){return r.some(function(c){return String(c||'').trim();});});
+  const n=ingestStaffGrid(rows, staffTableMode==='employees'?'employee':'teacher');
+  saveStaffState();
+  if(staffTableMode==='employees')renderStaffEmployees(); else renderStaffInfo();
+  alert('تم إدراج '+n+' سجل.');
+}
+function openStaffForm(id){
+  if(typeof authRole==='function'&&authRole()==='teacher'){
+    const own=teacherOwnStaff();
+    if(!own){alert('لا توجد بيانات ملاك مربوطة بحسابك.');return;}
+    if(id && id!==own.id){alert('يمكنك فتح بياناتك فقط.');return;}
+    if(!id) id=own.id;
+  }
+  editingStaffId=id||null;const emp=id?findStaff(id):{status:'عقد'};document.getElementById('staffFormTitle').textContent=id?'تعديل بيانات الموظف':'إضافة موظف';const fields=[['name','الاسم الكامل','text'],['title','اللقب','text'],['jobTitle','العنوان الوظيفي','text'],['employeeNo','الرقم الوظيفي','text'],['birthDate','تاريخ الميلاد','date'],['motherName','اسم الأم','text'],['appointmentDate','تاريخ التعيين','date'],['startDate','تاريخ المباشرة','date'],['adminOrderDate','تاريخ الأمر الإداري','date'],['specialization','الاختصاص الدقيق','text'],['phone','رقم الهاتف','text'],['nationalId','رقم البطاقة الوطنية','text'],['schoolStartDate','تاريخ المباشرة بهذه المدرسة','date']];let html='<div class="staff-form-grid">';fields.forEach(function(f){html+='<div class="mat-field"><label>'+f[1]+'</label><input id="staff_'+f[0]+'" type="'+f[2]+'" value="'+escapeHtml(emp[f[0]]||'')+'"'+(f[0]==='jobTitle'?' list="staffJobHints"':'')+'></div>';});
+  const jobs=staffTableMode==='employees'?['حرفي','حارس ليلي','حارس أمني','عامل نظافة','سائق','كهربائي','سباك']:['معلم','معلمة','مدرس','مدرسة','مدير مدرسة','معاون مدير','مرشد تربوي'];
+  html+='<datalist id="staffJobHints">'+jobs.map(function(j){return '<option value="'+j+'">';}).join('')+'</datalist>';html+='<div class="mat-field"><label>الحالة</label><select id="staff_status">'+['عقد','ثابت','تكليف','مجاز','ملاك دائم','منقول','متقاعد'].map(function(v){return '<option'+((emp.status||'عقد')===v?' selected':'')+'>'+v+'</option>';}).join('')+'</select></div></div><div class="student-form-actions"><button class="material-btn secondary" onclick="closeStaffForm()">إلغاء</button><button class="material-btn" onclick="saveStaffForm()">حفظ</button></div>';document.getElementById('staffFormBody').innerHTML=html;document.getElementById('staffFormOverlay').classList.add('open');}
 function closeStaffForm(){document.getElementById('staffFormOverlay').classList.remove('open');editingStaffId=null;}
 function isStaffFormOpen(){const overlay=document.getElementById('staffFormOverlay');return !!(overlay&&overlay.classList.contains('open'));}
-function saveStaffForm(){const name=document.getElementById('staff_name').value.trim();if(!name){alert('أدخل الاسم.');return;}let emp=editingStaffId?findStaff(editingStaffId):{id:'emp_'+Date.now()+Math.random().toString(36).slice(2,6),documents:[],increments:[],promotions:[]};['name','title','jobTitle','employeeNo','birthDate','motherName','appointmentDate','startDate','adminOrderDate','specialization','phone','nationalId','schoolStartDate','status'].forEach(function(k){emp[k]=document.getElementById('staff_'+k).value.trim();});emp.kind=staffTableMode==='employees'?'employee':'teacher';if(!editingStaffId)STAFF_STATE.staff.push(emp);saveStaffState();if(typeof authEnsureStaffAccount==='function'&&emp.kind!=='employee')authEnsureStaffAccount(emp);closeStaffForm();if(staffTableMode==='employees')renderStaffEmployees();else renderStaffInfo();}
-function deleteStaff(id){const emp=findStaff(id);if(!emp||!confirm('حذف '+emp.name+' وجميع ملفاته؟'))return;STAFF_STATE.staff=STAFF_STATE.staff.filter(function(x){return x.id!==id;});saveStaffState();if(staffTableMode==='employees')renderStaffEmployees();else renderStaffInfo();}
+function saveStaffForm(){
+  if(typeof authRole==='function'&&authRole()==='teacher'&&!teacherCanStaffEdit()){alert('عرض فقط. لم يكلفك المدير بتعديل بيانات الملاك.');return;}
+  const name=document.getElementById('staff_name').value.trim();if(!name){alert('أدخل الاسم.');return;}let emp=editingStaffId?findStaff(editingStaffId):{id:'emp_'+Date.now()+Math.random().toString(36).slice(2,6),documents:[],increments:[],promotions:[]};['name','title','jobTitle','employeeNo','birthDate','motherName','appointmentDate','startDate','adminOrderDate','specialization','phone','nationalId','schoolStartDate','status'].forEach(function(k){emp[k]=document.getElementById('staff_'+k).value.trim();});emp.kind=staffTableMode==='employees'?'employee':'teacher';if(!editingStaffId)STAFF_STATE.staff.push(emp);saveStaffState();if(typeof authEnsureStaffAccount==='function'&&emp.kind!=='employee')authEnsureStaffAccount(emp);closeStaffForm();if(staffTableMode==='employees')renderStaffEmployees();else renderStaffInfo();}
+function deleteStaff(id){if(typeof authRole==='function'&&authRole()==='teacher'){alert('لا يمكن حذف سجل الملاك.');return;}const emp=findStaff(id);if(!emp||!confirm('حذف '+emp.name+' وجميع ملفاته؟'))return;STAFF_STATE.staff=STAFF_STATE.staff.filter(function(x){return x.id!==id;});saveStaffState();if(staffTableMode==='employees')renderStaffEmployees();else renderStaffInfo();}
 function printStaffInfo(){
   const table=document.querySelector('.staff-table');if(!table)return;const clone=table.cloneNode(true);clone.querySelectorAll('th:last-child,td:last-child').forEach(function(x){x.remove();});const logo=APP.school.logo?'<img src="'+APP.school.logo+'">':'شعار المدرسة',frame=document.createElement('iframe');frame.style.cssText='position:fixed;left:-10000px;top:0;width:297mm;height:210mm;border:0';document.body.appendChild(frame);const doc=frame.contentDocument;doc.open();doc.write('<html lang="ar" dir="rtl"><head><meta charset="UTF-8"><style>'+printThemeRootCss()+'@page{size:297mm 210mm;margin:6mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{margin:0;font-family:Tahoma,Arial}.page{position:relative;width:285mm;min-height:198mm;border:1mm double var(--list-accent);padding:3mm 3mm 13mm}.head{display:grid;grid-template-columns:26mm 1fr 26mm;align-items:center;background:linear-gradient(125deg,var(--list-dark),var(--list-mid),var(--list-accent));color:#fff;padding:3mm 7mm;border-bottom:1.5mm solid var(--list-accent)}.logo{width:20mm;height:20mm;border-radius:50%;background:#fff;overflow:hidden}.logo img{width:100%;height:100%;object-fit:cover}.title{text-align:center}.title h1{margin:0;font-size:19px}.title h2{margin:1mm 0 0;font-size:15px}.staff-table{width:100%;border-collapse:collapse;font-size:5.8px;margin-top:3mm}.staff-table thead{display:table-header-group}.staff-table th,.staff-table td{border:.25mm solid #82949e;padding:1.1mm .45mm;text-align:center;white-space:normal}.staff-table th{background:#00695c;color:#fff;font-weight:900}.staff-table td.name{text-align:right;font-weight:900}.footer{position:absolute;right:0;left:0;bottom:0;padding:2.5mm 7mm;background:#fff3b8;border-top:.6mm solid #d4af37;display:flex;justify-content:space-between;font-size:9px;font-weight:900}</style><style>'+printThemeRootCss()+'</style></head><body><main class="page"><header class="head"><div class="logo">'+logo+'</div><div class="title"><h1>'+escapeHtml(APP.school.name)+'</h1><h2>'+escapeHtml(staffTableMode==='employees'?'الموظفين':staffInfoTitle())+'</h2></div><div></div></header>'+clone.outerHTML+'<footer class="footer"><span>مدير المدرسة: '+escapeHtml(APP.school.principal||'—')+'</span><span>'+escapeHtml(staffTableMode==='employees'?'سجل الموظفين':staffInfoTitle())+'</span></footer></main></body></html>');doc.close();setTimeout(function(){frame.contentWindow.print();},650);setTimeout(function(){frame.remove();},120000);
 }
@@ -9819,6 +10389,7 @@ function renderLevelsTables(){
   const monthlyHead='<tr><th>ت</th><th>اسم الطالب</th><th class="month-group">تشرين الأول</th><th class="month-group">تشرين الثاني</th><th class="month-group">كانون الأول</th><th class="exam-group">نصف السنة</th><th class="month-group">شباط</th><th class="month-group">نيسان</th><th class="exam-group">نهاية السنة</th></tr>';
   host.className='';host.innerHTML='<section class="levels-record-block"><div class="levels-record-title"><div class="levels-record-title-main"><h3>سجل المستويات الأسبوعي</h3><button type="button" class="levels-print-btn" onclick="printLevelsTable(\'weekly\',\'portrait\')">🖨️ عمودي</button><button type="button" class="levels-print-btn" onclick="printLevelsTable(\'weekly\',\'landscape\')">🖨️ أفقي</button></div><span>'+escapeHtml(subject)+' — شعبة '+escapeHtml(section.label)+'</span></div><div class="levels-table-scroll"><table class="levels-table weekly"><thead>'+weeklyHead+'</thead><tbody>'+weeklyRows+'</tbody></table></div></section><section class="levels-record-block"><div class="levels-record-title"><div class="levels-record-title-main"><h3>المستويات الشهرية</h3><button type="button" class="levels-print-btn" onclick="printLevelsTable(\'monthly\',\'portrait\')">🖨️ عمودي</button><button type="button" class="levels-print-btn" onclick="printLevelsTable(\'monthly\',\'landscape\')">🖨️ أفقي</button></div><span>'+escapeHtml(subject)+' — شعبة '+escapeHtml(section.label)+'</span></div><div class="levels-table-scroll"><table class="levels-table monthly"><thead>'+monthlyHead+'</thead><tbody>'+monthlyRows+'</tbody></table></div></section>';
   saveLevelsState();
+  keepTableHScroll(host);
 }
 function printLevelsTable(kind,orientation){
   const source=document.querySelector('.levels-table.'+kind);
@@ -9847,7 +10418,7 @@ function printLevelsTable(kind,orientation){
 // ================= Exams module / seating plan =================
 const EXAMS_STORAGE_KEY='schoolResultsExams_v1';
 function loadExamsState(){try{return JSON.parse(localStorage.getItem(EXAMS_STORAGE_KEY)||'{}')||{};}catch(e){return {};}}
-function saveExamsState(){try{localStorage.setItem(EXAMS_STORAGE_KEY,JSON.stringify(EXAMS_STATE));}catch(e){}}
+function saveExamsState(){try{localStorage.setItem(EXAMS_STORAGE_KEY,JSON.stringify(EXAMS_STATE));}catch(e){} if(typeof wifiOnSave==='function')wifiOnSave('exams');}
 let EXAMS_STATE=loadExamsState();
 if(!EXAMS_STATE.seating)EXAMS_STATE.seating={examType:'mid',examMode:'written',academicYear:'2025 / 2026',hallCount:2,seatsPerHall:20,doubleSeats:true,sectors:2,rows:4,columns:3,participants:'all'};
 if(!EXAMS_STATE.seating.academicYear)EXAMS_STATE.seating.academicYear='2025 / 2026';
@@ -9912,17 +10483,46 @@ function generateQuestionPaper(){const data=collectQuestionData();if(!data.grade
 function saveQuestionPaper(){
   const data=collectQuestionData();if(!data.grade||!data.subject){alert('اختر الصف والمادة.');return;}if(!data.saveName){alert('اكتب اسمًا لحفظ الأسئلة.');return;}
   const existingId=EXAMS_STATE.questions.editingId||'',existing=existingId?EXAMS_STATE.savedQuestions.find(function(p){return p.id===existingId;}):null;
-  const saved=Object.assign({},data,{id:existing?existing.id:'q_'+Date.now(),savedAt:new Date().toISOString(),generated:true,editingId:existing?existing.id:''});
+  const me=typeof authMe==='function'?authMe():null;
+  const saved=Object.assign({},data,{id:existing?existing.id:'q_'+Date.now(),savedAt:new Date().toISOString(),generated:true,editingId:existing?existing.id:'',ownerId:existing&&existing.ownerId?existing.ownerId:(me&&me.id)||'admin',ownerName:existing&&existing.ownerName?existing.ownerName:(me&&me.name)||'المدير',ownerRole:existing&&existing.ownerRole?existing.ownerRole:(me&&me.role)||'admin'});
   if(existing)Object.assign(existing,saved);else EXAMS_STATE.savedQuestions.push(saved);
   EXAMS_STATE.questions=Object.assign({},saved,{editingId:saved.id});saveExamsState();renderQuestionPreview(EXAMS_STATE.questions);alert('تم حفظ الأسئلة باسم: '+data.saveName);
 }
-function renderSavedQuestions(){
+function savedQuestionsForViewer(){
   const items=EXAMS_STATE.savedQuestions||[];
-  document.getElementById('view-exams').innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">💾</span><div><h2>الأسئلة المحفوظة</h2><p>فتح أو تعديل أو طباعة أوراق الأسئلة</p></div></div><button class="material-btn secondary" onclick="appGoBack()">رجوع إلى إنشاء الأسئلة</button></div><div class="staff-list-grid">'+(items.length?items.map(function(item){return '<div class="staff-person-card"><strong>'+escapeHtml(item.saveName||item.title)+'</strong><small>'+escapeHtml(item.subject||'')+' — الصف '+escapeHtml(item.grade||'')+' — '+escapeHtml(item.title||'')+'</small><div class="staff-doc-actions" style="margin-top:12px"><button onclick="editSavedQuestion(\''+item.id+'\')">فتح وتعديل</button><button onclick="printSavedQuestion(\''+item.id+'\')">طباعة</button><button class="delete" onclick="deleteSavedQuestion(\''+item.id+'\')">حذف</button></div></div>';}).join(''):'<div class="empty-hint">لا توجد أسئلة محفوظة بعد.</div>')+'</div></div>';
+  if(typeof authRole==='function'&&authRole()==='teacher'){
+    const me=authMe();
+    return items.filter(function(p){return p.ownerId&&me&&p.ownerId===me.id;});
+  }
+  return items.slice();
 }
-function editSavedQuestion(id){const item=EXAMS_STATE.savedQuestions.find(function(p){return p.id===id;});if(!item)return;EXAMS_STATE.questions=Object.assign({},item,{editingId:id});saveExamsState();renderQuestionBuilder();navigateTo('view-exams',{page:'questionCreate'});}
+function renderSavedQuestions(){
+  const items=savedQuestionsForViewer();
+  const admin=!(typeof authRole==='function'&&authRole()==='teacher');
+  const groups={};
+  items.forEach(function(item){
+    const k=admin?(item.ownerName||'المدير'):'أسئلتي';
+    (groups[k]=groups[k]||[]).push(item);
+  });
+  let body='';
+  Object.keys(groups).forEach(function(owner){
+    if(admin) body+='<h3 style="margin:16px 0 8px">أسئلة: '+escapeHtml(owner)+'</h3>';
+    body+='<div class="staff-list-grid">'+groups[owner].map(function(item){
+      return '<div class="staff-person-card"><strong>'+escapeHtml(item.saveName||item.title)+'</strong><small>'+escapeHtml(item.subject||'')+' — الصف '+escapeHtml(item.grade||'')+(admin&&item.ownerName?(' — '+escapeHtml(item.ownerName)):'')+'</small><div class="staff-doc-actions" style="margin-top:12px"><button onclick="editSavedQuestion(\''+item.id+'\')">فتح وتعديل</button><button onclick="printSavedQuestion(\''+item.id+'\')">طباعة</button><button class="delete" onclick="deleteSavedQuestion(\''+item.id+'\')">حذف</button></div></div>';
+    }).join('')+'</div>';
+  });
+  document.getElementById('view-exams').innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">💾</span><div><h2>الأسئلة المحفوظة</h2><p>'+(admin?'كل أسئلة المعلمين بأسمائهم':'أسئلتك فقط — طباعة أو حذف')+'</p></div></div><button class="material-btn secondary" onclick="appGoBack()">رجوع إلى إنشاء الأسئلة</button></div>'+(body||'<div class="empty-hint">لا توجد أسئلة محفوظة بعد.</div>')+'</div>';
+}
+function editSavedQuestion(id){const item=EXAMS_STATE.savedQuestions.find(function(p){return p.id===id;});if(!item)return;
+  if(typeof authRole==='function'&&authRole()==='teacher'){const me=authMe(); if(item.ownerId!==(me&&me.id)){alert('يمكنك تعديل أسئلتك فقط.');return;}}EXAMS_STATE.questions=Object.assign({},item,{editingId:id});saveExamsState();renderQuestionBuilder();navigateTo('view-exams',{page:'questionCreate'});}
 function printSavedQuestion(id){const item=EXAMS_STATE.savedQuestions.find(function(p){return p.id===id;});if(!item)return;const current=EXAMS_STATE.questions;EXAMS_STATE.questions=item;printQuestionPaper();EXAMS_STATE.questions=current;}
-function deleteSavedQuestion(id){if(!confirm('حذف ورقة الأسئلة المحفوظة؟'))return;EXAMS_STATE.savedQuestions=EXAMS_STATE.savedQuestions.filter(function(p){return p.id!==id;});saveExamsState();renderSavedQuestions();}
+function deleteSavedQuestion(id){
+  const item=(EXAMS_STATE.savedQuestions||[]).find(function(p){return p.id===id;});
+  if(typeof authRole==='function'&&authRole()==='teacher'){
+    const me=authMe();
+    if(!item||item.ownerId!==(me&&me.id)){alert('يمكنك حذف أسئلتك فقط.');return;}
+  }
+  if(!confirm('حذف ورقة الأسئلة المحفوظة؟'))return;EXAMS_STATE.savedQuestions=EXAMS_STATE.savedQuestions.filter(function(p){return p.id!==id;});saveExamsState();renderSavedQuestions();}
 function questionRoundLabel(title){return String(title||'').indexOf('الدور الثالث')!==-1?'الدور الثالث':(String(title||'').indexOf('الدور الثاني')!==-1?'الدور الثاني':'الدور الأول');}
 function questionDegreeText(value){
   const raw=String(value==null?'':value).trim();if(!raw)return '';
@@ -10490,7 +11090,7 @@ window.addEventListener('resize',function(){if(currentViewId==='view-exams')scal
 const RECORDS_STORAGE_KEY='schoolResultsRecords_v1';
 const RECORDS_LETTERS=['أ','ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي'];
 function loadRecordsState(){try{return JSON.parse(localStorage.getItem(RECORDS_STORAGE_KEY)||'{}')||{};}catch(e){return {};}}
-function saveRecordsState(){try{localStorage.setItem(RECORDS_STORAGE_KEY,JSON.stringify(RECORDS_STATE));}catch(e){alert('تعذر حفظ القيود. قد تكون مساحة التخزين ممتلئة.');}}
+function saveRecordsState(){try{localStorage.setItem(RECORDS_STORAGE_KEY,JSON.stringify(RECORDS_STATE));}catch(e){alert('تعذر حفظ القيود. قد تكون مساحة التخزين ممتلئة.');} if(typeof wifiOnSave==='function')wifiOnSave('records');}
 let RECORDS_STATE=loadRecordsState();
 if(!Array.isArray(RECORDS_STATE.items))RECORDS_STATE.items=[];
 let RECORDS_DOC_ZOOM=1;
@@ -10656,10 +11256,10 @@ function renderRecordsList(letter){
       '<button class="ra-manual" onclick="openRecordsGradesForm(\''+r.id+'\')">إدخال يدوي</button>'+
     '</div></td></tr>';
   });
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🗂️</span><div><h2>القيود</h2><p>'+(letter?('الحرف '+letter+' — '):'')+items.length+' قيد</p></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="material-btn" onclick="openRecordsForm(\'\')">＋ إضافة قيد</button><button class="material-btn secondary" onclick="printRecordsList()">🖨️ طباعة</button><button class="material-btn secondary" onclick="openRecordsModule()">رجوع إلى القيود</button></div></div>'+
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🗂️</span><div><h2>القيود</h2><p>'+(letter?('الحرف '+letter+' — '):'')+items.length+' قيد</p></div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="material-btn" onclick="openRecordsForm(\'\')">＋ إضافة قيد</button><button class="material-btn secondary" onclick="exportRecordsExcel()">⬇️ تصدير إكسل</button><button class="material-btn secondary" onclick="document.getElementById(\'recordsExcelFile\').click()">⬆️ استيراد إكسل</button><button class="material-btn secondary" onclick="printRecordsList()">🖨️ طباعة</button><button class="material-btn secondary" onclick="openRecordsModule()">رجوع إلى القيود</button></div></div>'+
     '<div class="records-table-tools"><input id="recordsSearchInput" type="search" placeholder="بحث بالاسم أو رقم القيد..." value="'+escapeHtml(q)+'" oninput="renderRecordsList(RECORDS_FILTER_LETTER)"><span style="color:#78909c;font-size:12px">تسلسل الحروف يُحسب داخل كل حرف أبجدي</span></div>'+
     (rows?'<div class="data-surface"><div class="table-scroll"><table class="records-table"><thead><tr><th>التسلسل</th><th>تسلسل الحروف</th><th>اسم الطالب</th><th>رقم القيد</th><th>الإجراءات</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>':'<div class="records-empty">لا توجد قيود بعد. اضغط «إضافة قيد» لتسجيل اسم ورقم قيد.</div>')+
-    '<input type="file" id="recordsDocFile" accept="image/*" style="display:none" onchange="handleRecordDocFile(this)">';
+    '<input type="file" id="recordsDocFile" accept="image/*" style="display:none" onchange="handleRecordDocFile(this)"><input type="file" id="recordsExcelFile" accept=".xlsx,.xls,.csv" style="display:none" onchange="importRecordsExcel(this)">';
   const inp=document.getElementById('recordsSearchInput');
   if(inp&&q){inp.focus();try{inp.setSelectionRange(q.length,q.length);}catch(e){}}
 }
@@ -10731,6 +11331,68 @@ function openRecordsDocViewer(id){
 }
 function applyRecordsDocZoom(){const img=document.getElementById('recordsDocImg');if(img)img.style.transform='scale('+RECORDS_DOC_ZOOM+')';}
 function changeRecordsDocZoom(delta){RECORDS_DOC_ZOOM=Math.max(0.4,Math.min(4,RECORDS_DOC_ZOOM+delta));applyRecordsDocZoom();}
+function exportRecordsExcel(){
+  rebuildRecordLetterSeq();
+  let items=recordsItems().slice().sort(function(a,b){
+    const ia=RECORDS_LETTERS.indexOf(a.letter||recordFirstLetter(a.name));
+    const ib=RECORDS_LETTERS.indexOf(b.letter||recordFirstLetter(b.name));
+    if(ia!==ib)return ia-ib;
+    return (a.letterSeq||0)-(b.letterSeq||0);
+  });
+  if(RECORDS_FILTER_LETTER)items=items.filter(function(r){return (r.letter||recordFirstLetter(r.name))===RECORDS_FILTER_LETTER;});
+  const aoa=[['تسلسل','اسم الطالب','رقم القيد']];
+  items.forEach(function(r,i){aoa.push([i+1,r.name||'',r.recordNo||'']);});
+  if(typeof XLSX!=='undefined'&&XLSX.utils){
+    const wb=XLSX.utils.book_new();
+    const ws=XLSX.utils.aoa_to_sheet(aoa);
+    XLSX.utils.book_append_sheet(wb,ws,'القيود');
+    xlsxWriteStyled(wb,'سجل-القيود.xlsx');
+    return;
+  }
+  const csv=aoa.map(function(row){return row.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='سجل-القيود.csv';a.click();
+}
+function importRecordsExcel(input){
+  const file=input&&input.files&&input.files[0];
+  if(input) input.value='';
+  if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      if(typeof XLSX==='undefined'){alert('تعذر قراءة الإكسل في هذا المتصفح.');return;}
+      const wb=XLSX.read(ev.target.result,{type:'array'});
+      const sheet=wb.Sheets[wb.SheetNames[0]];
+      const aoa=XLSX.utils.sheet_to_json(sheet,{header:1,raw:false,defval:''});
+      if(!aoa||!aoa.length){alert('الملف فارغ.');return;}
+      let start=0;
+      const h=aoa[0].map(function(x){return String(x||'').trim();});
+      if(/تسلسل|اسم|قيد/.test(h.join(' '))) start=1;
+      let nameI=1,noI=2;
+      h.forEach(function(c,i){
+        if(/اسم/.test(c)) nameI=i;
+        if(/قيد|رقم/.test(c)&&!/تسلسل/.test(c)) noI=i;
+      });
+      if(start===0){nameI=1;noI=2;}
+      let added=0,updated=0;
+      for(let r=start;r<aoa.length;r++){
+        const row=aoa[r]||[];
+        const name=String(row[nameI]!=null?row[nameI]:row[1]||'').trim();
+        const recordNo=String(row[noI]!=null?row[noI]:row[2]||'').trim();
+        if(!name&&!recordNo)continue;
+        if(!name||!recordNo)continue;
+        let rec=null;
+        if(recordNo) rec=recordsItems().find(function(x){return String(x.recordNo||'')===recordNo;});
+        if(!rec) rec=recordsItems().find(function(x){return normalizeRecordName(x.name)===normalizeRecordName(name);});
+        if(rec){ rec.name=name; rec.recordNo=recordNo; updated++; }
+        else { RECORDS_STATE.items.push({id:'rec_'+Date.now()+'_'+r,name:name,recordNo:recordNo,documentImage:'',grades:{},createdAt:new Date().toISOString()}); added++; }
+      }
+      rebuildRecordLetterSeq();saveRecordsState();renderRecordsList(RECORDS_FILTER_LETTER);
+      alert('تم الاستيراد: '+added+' جديداً، '+updated+' محدّثاً.');
+    }catch(e){alert('تعذرت قراءة ملف الإكسل.');}
+  };
+  reader.readAsArrayBuffer(file);
+}
 function printRecordsList(){
   rebuildRecordLetterSeq();
   let items=recordsItems().slice().sort(function(a,b){
@@ -12047,6 +12709,16 @@ function authLogout(){
   showView('view-auth');
 }
 function openAuthTasks(){if(authRole()!=='admin'){alert('هذا القسم للمدير فقط.');return;}renderAuthTasksHome();navigateTo('view-tasks',{page:'home'});}
+function openAuthStudentLogins(){
+  if(authRole()!=='admin'){alert('هذا القسم للمدير فقط.');return;}
+  navigateTo('view-tasks',{page:'students'});
+  renderAuthStudentAccounts();
+}
+function openAuthStaffLogins(){
+  if(authRole()!=='admin'){alert('هذا القسم للمدير فقط.');return;}
+  navigateTo('view-tasks',{page:'accounts'});
+  renderAuthAccounts();
+}
 function restoreTasksView(meta){
   const p=meta&&meta.page;
   if(p==='accounts')renderAuthAccounts();
@@ -12117,8 +12789,8 @@ function renderAuthTasksHome(){
     '<button type="button" class="material-btn" onclick="saveTaskFacebook()">حفظ رابط فيسبوك</button></div>'+
     '<div class="staff-home-grid">'+
     '<button class="staff-module-card info" onclick="renderAuthAssign();navigateTo(\'view-tasks\',{page:\'assign\'})"><span>🗂️</span><h3>توزيع المهام</h3><p>تكليف معلم/مدرس بمادة وشعبة: سجل درجات، مستويات، غياب، أسئلة، قائمة امتحان، واجب بيتي.</p></button>'+
-    '<button class="staff-module-card raise" onclick="renderAuthAccounts();navigateTo(\'view-tasks\',{page:\'accounts\'})"><span>🔐</span><h3>حسابات دخول الملاك</h3><p>حسابات المدير والمعلمين فقط — اسم دخول إنجليزي ورقم سري. المعلمون: '+nT+'</p></button>'+
-    '<button class="staff-module-card info" onclick="renderAuthStudentAccounts();navigateTo(\'view-tasks\',{page:\'students\'})"><span>🎓</span><h3>حسابات الطلاب</h3><p>كل الطلاب حسب الصف والشعبة مع رقم سري يُولَّد تلقائياً ويمكن تعديله.</p></button>'+
+    '<button type="button" class="staff-module-card raise" onclick="openAuthStaffLogins()"><span>🔐</span><h3>حسابات دخول الملاك</h3><p>دخول المعلمين والمدير فقط (tch / admin) — العدد: '+nT+'</p></button>'+
+    '<button type="button" class="staff-module-card info" onclick="openAuthStudentLogins()"><span>🎓</span><h3>حسابات دخول الطلاب</h3><p>دخول الطلاب فقط (st + الرقم السري) حسب الصف والشعبة — العدد: '+nS+'</p></button>'+
     '<button class="staff-module-card raise" onclick="renderWifiSync();navigateTo(\'view-tasks\',{page:\'wifi\'})"><span>📡</span><h3>الربط عبر الواي فاي</h3><p>ربط أجهزة المعلمين بالمدير على نفس الشبكة ومزامنة الدرجات والمستويات والمهام والإشعارات.</p></button>'+
     '</div></div>';
 }
@@ -12147,11 +12819,13 @@ function authEnsureStudentAccount(st,grade,sectionId){
     acc={id:authUid(),role:'student',name:nm,login:authGenLogin('st'),password:authGenPass(),studentId:st.id,grade:grade||'',sectionId:sectionId||''};
     AUTH_STATE.accounts.push(acc);saveAuthState();
   }else{
-    acc.grade=grade||acc.grade;acc.sectionId=sectionId||acc.sectionId;
-    if(st.name&&authNorm(st.name)) acc.name=st.name;
-    authEnsureLogin(acc,'st');
-    authEnsureUniquePass(acc);
-    saveAuthState();
+    let dirty=false;
+    if((grade||'') && acc.grade!==grade){acc.grade=grade;dirty=true;}
+    if((sectionId||'') && acc.sectionId!==sectionId){acc.sectionId=sectionId;dirty=true;}
+    if(st.name&&authNorm(st.name)&&acc.name!==st.name){acc.name=st.name;dirty=true;}
+    if(authEnsureLogin(acc,'st')) dirty=true;
+    if(authEnsureUniquePass(acc)) dirty=true;
+    if(dirty) saveAuthState();
   }
   return acc;
 }
@@ -12189,7 +12863,7 @@ function authSyncStaffAccounts(){
 }
 function renderAuthStudentAccounts(){
   const el=document.getElementById('view-tasks');if(!el)return;
-  authSyncAllStudentAccounts();
+  try{authSyncAllStudentAccounts();}catch(e){}
   let blocks='';
   gradebookGradeLabels().forEach(function(grade){
     gbSectionsForGrade(grade).forEach(function(sec){
@@ -12199,11 +12873,18 @@ function renderAuthStudentAccounts(){
         const acc=authEnsureStudentAccount(st,grade,sec.id);
         return '<tr><td>'+(i+1)+'</td><td class="name">'+escapeHtml(st.name||'—')+liveDotHtml(acc.id)+'</td><td dir="ltr"><b>'+escapeHtml(acc.login||'')+'</b></td><td><input data-acc="'+acc.id+'" class="st-pass-input" type="text" value="'+escapeHtml(acc.password||'')+'" style="width:110px;text-align:center;font-weight:800"></td><td><button class="material-btn secondary" onclick="authRegenStudentPass(\''+acc.id+'\')">توليد جديد</button></td></tr>';
       }).join('');
-      blocks+='<h3 style="margin:16px 0 8px">الصف '+escapeHtml(grade)+' — شعبة '+escapeHtml(sec.label)+' <small style="color:#78909c">('+toArabicDigits(String(sts.length))+')</small></h3>'+
+      blocks+='<div class="asg-sec-print-row" style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:16px 0 8px"><h3 style="margin:0">الصف '+escapeHtml(grade)+' — شعبة '+escapeHtml(sec.label)+' <small style="color:#78909c">('+toArabicDigits(String(sts.length))+')</small></h3>'+
+        '<button type="button" class="material-btn secondary" onclick="printAuthStudentSectionBy(\''+escapeHtml(grade)+'\',\''+sec.id+'\')">🖨️ طباعة الشعبة</button></div>'+
         '<div class="table-scroll"><table class="acc-table"><thead><tr><th>ت</th><th>اسم الطالب</th><th>اسم الدخول</th><th>الرقم السري</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>';
     });
   });
+  const gOpts=gradebookGradeLabels().map(function(g){return '<option value="'+escapeHtml(g)+'">'+escapeHtml(g)+'</option>';}).join('');
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🎓</span><div><h2>حسابات الطلاب</h2><p>كل الطلاب من قسم الطلاب حسب الصف والشعبة — الرقم السري يُولَّد تلقائياً ويمكن تعديله</p></div></div><button class="material-btn secondary" onclick="openAuthTasks()">رجوع إلى المهام</button></div>'+
+    '<div class="slog-filters" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr));align-items:end">'+
+      '<div class="mat-field"><label>طباعة شعبة</label><select id="accPrintGrade" onchange="authAccPrintGradeChanged()"><option value="">اختر الصف</option>'+gOpts+'</select></div>'+
+      '<div class="mat-field"><label>الشعبة</label><select id="accPrintSection"><option value="">اختر الشعبة</option></select></div>'+
+      '<button class="material-btn" onclick="printAuthStudentSection()">🖨️ طباعة حسابات الشعبة</button>'+
+    '</div>'+
     '<p style="color:#546e7a">عدّل الرقم السري ثم اضغط خارج الحقل للحفظ. الطالب يدخل بالاسم والرقم السري.</p>'+
     (blocks||'<div class="empty-hint">لا يوجد طلاب بعد في قسم الطلاب.</div>');
   el.querySelectorAll('.st-pass-input').forEach(function(inp){
@@ -12223,6 +12904,8 @@ function authRegenStudentPass(id){
 }
 function renderAuthAccounts(){
   const el=document.getElementById('view-tasks');if(!el)return;
+  const entry=Array.isArray(appStack)&&appStack.length?appStack[appStack.length-1]:null;
+  if(entry&&entry.id==='view-tasks'&&entry.meta&&entry.meta.page==='students')return;
   AUTH_STATE.accounts.forEach(function(a){if(a.role==='admin'){if(!a.login)a.login='admin';} else if(a.role==='teacher') authEnsureLogin(a,'tch');});
   const staffAcc=AUTH_STATE.accounts.filter(function(a){return a.role==='admin'||a.role==='teacher';});
   const rows=staffAcc.map(function(a,i){
@@ -12241,29 +12924,96 @@ function renderAuthAccounts(){
       });
     });
   });
-  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🔐</span><div><h2>حسابات دخول الملاك</h2><p>منفصلة عن الطلاب — اسم الدخول إنجليزي يُولَّد تلقائياً ويمكن تعديله</p></div></div><button class="material-btn secondary" onclick="openAuthTasks()">رجوع إلى المهام</button></div>'+
+  if(typeof authSyncStaffAccounts==='function')authSyncStaffAccounts();
+  const staffTeachers=(STAFF_STATE.staff||[]).filter(function(emp){return !staffPersonKind||staffPersonKind(emp)!=='employee';});
+  const staffOpts=staffTeachers.map(function(emp){return '<option value="'+escapeHtml(emp.id)+'">'+escapeHtml(emp.name)+(emp.jobTitle?(' — '+escapeHtml(emp.jobTitle)):'' )+'</option>';}).join('');
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🔐</span><div><h2>حسابات دخول الملاك</h2><p>أسماء المعلمين من قسم الملاك فقط</p></div></div><button class="material-btn secondary" onclick="openAuthTasks()">رجوع إلى المهام</button></div>'+
     '<div class="slog-filters" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))">'+
+      '<div class="mat-field"><label>المعلم من الملاك</label><select id="accStaffId" onchange="authAccStaffPicked()"><option value="">اختر من الملاك</option>'+staffOpts+'</select></div>'+
       '<div class="mat-field"><label>الاسم الظاهر</label><input id="accName" type="text"></div>'+
       '<div class="mat-field"><label>اسم الدخول (إنجليزي)</label><input id="accLogin" type="text" dir="ltr" placeholder="يُولَّد تلقائياً إن تُرك فارغاً"></div>'+
       '<div class="mat-field"><label>الرقم السري</label><input id="accPass" type="text"></div>'+
       '<div class="mat-field"><label>الصفة</label><select id="accRole"><option value="teacher">معلم / مدرس</option><option value="admin">مدير</option></select></div>'+
       '<button class="material-btn" onclick="authSaveAccount()">حفظ الحساب</button>'+
+      '<button class="material-btn secondary" onclick="printAuthStaffAccounts()">🖨️ طباعة حسابات الملاك</button>'+
     '</div>'+
     '<input type="hidden" id="accEditId" value="">'+
     '<div class="table-scroll"><table class="acc-table"><thead><tr><th>ت</th><th>الاسم</th><th>اسم الدخول</th><th>الصفة</th><th>الرقم السري</th><th>إجراء</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
+function authAccStaffPicked(){
+  const sid=(document.getElementById('accStaffId')||{}).value||'';
+  const emp=(STAFF_STATE.staff||[]).find(function(e){return e.id===sid;});
+  const nameEl=document.getElementById('accName');
+  if(nameEl) nameEl.value=emp?emp.name:'';
+}
+function authAccPrintGradeChanged(){
+  const g=(document.getElementById('accPrintGrade')||{}).value||'';
+  const sec=document.getElementById('accPrintSection');
+  if(!sec)return;
+  sec.innerHTML='<option value="">اختر الشعبة</option>'+(g?gbSectionsForGrade(g).map(function(s){return '<option value="'+s.id+'">'+escapeHtml(s.label)+'</option>';}).join(''):'');
+}
+function printAuthRoster(title, heads, rows){
+  if(!rows.length){alert('لا توجد حسابات للطباعة.');return;}
+  const logo=APP.school.logo?'<img src="'+APP.school.logo+'">':'شعار المدرسة';
+  const year=(typeof EXAMS_STATE!=='undefined'&&EXAMS_STATE.monthly&&EXAMS_STATE.monthly.academicYear)||'2025 / 2026';
+  const th=heads.map(function(h){return '<th>'+h+'</th>';}).join('');
+  const body=rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('');
+  const frame=document.createElement('iframe');frame.style.cssText='position:fixed;left:-10000px;top:0;width:210mm;height:297mm;border:0';document.body.appendChild(frame);
+  const doc=frame.contentDocument||frame.contentWindow.document;doc.open();
+  doc.write('<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>'+escapeHtml(title)+'</title><style>@page{size:A4 portrait;margin:8mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{margin:0;font-family:Tahoma,Arial;background:#fff}.page{width:194mm;min-height:279mm;border:1.2mm double #d4af37;padding:4mm}.head{display:grid;grid-template-columns:24mm 1fr 24mm;align-items:center;background:linear-gradient(125deg,#004d40,#00897b,#d4af37);color:#fff;padding:4mm;border-radius:3mm}.logo{width:18mm;height:18mm;border-radius:50%;background:#fff;overflow:hidden;margin:auto}.logo img{width:100%;height:100%;object-fit:cover}.title{text-align:center}.title h1{margin:0;font-size:16px}.title h2{margin:2mm 0 0;font-size:15px}table{width:100%;border-collapse:collapse;margin-top:4mm;font-size:13px}th,td{border:1px solid #004d40;padding:6px;text-align:center}th{background:#00695c;color:#fff}td.name{text-align:right;font-weight:800}</style></head><body><div class="page"><div class="head"><div class="logo">'+logo+'</div><div class="title"><h1>'+escapeHtml(APP.school.name||'')+'</h1><h2>'+escapeHtml(title)+'</h2><div>للعام الدراسي '+escapeHtml(year)+'</div></div><div></div></div><table><thead><tr>'+th+'</tr></thead><tbody>'+body+'</tbody></table></div></body></html>');
+  doc.close();
+  setTimeout(function(){try{frame.contentWindow.focus();frame.contentWindow.print();}catch(e){} setTimeout(function(){if(frame.parentNode)frame.remove();},60000);},300);
+}
+function printAuthStudentSectionBy(grade,sectionId){
+  if(!grade||!sectionId){alert('اختر الصف والشعبة.');return;}
+  const sec=gbSectionsForGrade(grade).find(function(s){return s.id===sectionId;});
+  if(!sec){alert('الشعبة غير موجودة.');return;}
+  const rows=(sec.students||[]).filter(function(st){return st&&st.id;}).map(function(st,i){
+    const acc=authEnsureStudentAccount(st,grade,sec.id);
+    return [String(i+1),escapeHtml(st.name||''),escapeHtml(acc.login||''),escapeHtml(acc.password||'')];
+  });
+  printAuthRoster('حسابات الطلاب — الصف '+grade+' / شعبة '+(sec.label||''), ['ت','اسم الطالب','رمز الدخول','كلمة السر'], rows);
+}
+function printAuthStudentSection(){
+  const grade=(document.getElementById('accPrintGrade')||{}).value||'';
+  const sectionId=(document.getElementById('accPrintSection')||{}).value||'';
+  printAuthStudentSectionBy(grade,sectionId);
+}
+function printAuthStaffAccounts(){
+  if(typeof authSyncStaffAccounts==='function')authSyncStaffAccounts();
+  const rows=AUTH_STATE.accounts.filter(function(a){return a.role==='admin'||a.role==='teacher';}).map(function(a,i){
+    return [String(i+1),escapeHtml(a.name||''),escapeHtml(a.login||''),escapeHtml(a.password||''),a.role==='admin'?'مدير':'معلم'];
+  });
+  printAuthRoster('حسابات دخول الملاك', ['ت','الاسم','رمز الدخول','كلمة السر','الصفة'], rows);
+}
 function authEditAccount(id){
   const a=AUTH_STATE.accounts.find(function(x){return x.id===id;});if(!a)return;
   document.getElementById('accEditId').value=id;
+  const sid=document.getElementById('accStaffId');
+  if(sid){
+    let match=a.staffId||'';
+    if(!match){
+      const emp=(STAFF_STATE.staff||[]).find(function(e){return authNorm(e.name)===authNorm(a.name);});
+      if(emp) match=emp.id;
+    }
+    sid.value=match;
+  }
   document.getElementById('accName').value=a.name||'';
   const lg=document.getElementById('accLogin'); if(lg) lg.value=a.login||'';
   document.getElementById('accPass').value=a.password||'';
   document.getElementById('accRole').value=a.role==='admin'?'admin':'teacher';
 }
 function authSaveAccount(){
-  const name=authNorm((document.getElementById('accName')||{}).value);
-  const pass=String((document.getElementById('accPass')||{}).value||'');
+  const staffId=(document.getElementById('accStaffId')||{}).value||'';
   const role=(document.getElementById('accRole')||{}).value||'teacher';
+  if(role==='teacher'&&!staffId){alert('اختر المعلم من الملاك.');return;}
+  if(staffId){
+    const emp=(STAFF_STATE.staff||[]).find(function(e){return e.id===staffId;});
+    const nameEl=document.getElementById('accName');
+    if(emp&&nameEl) nameEl.value=emp.name||'';
+  }
+  const name=authNorm((document.getElementById('accName')||{}).value);
+  let pass=String((document.getElementById('accPass')||{}).value||'');
   const editId=(document.getElementById('accEditId')||{}).value||'';
   if(!name){alert('أدخل الاسم.');return;}
   if(!pass) pass=authGenPass(editId||null);
@@ -12275,6 +13025,7 @@ function authSaveAccount(){
   let rec=editId?AUTH_STATE.accounts.find(function(a){return a.id===editId;}):null;
   if(!rec){rec={id:authUid(),assignments:[]};AUTH_STATE.accounts.push(rec);}
   rec.name=name;rec.password=pass;rec.role=role==='admin'?'admin':'teacher';
+  if(staffId) rec.staffId=staffId;
   let login=authNorm((document.getElementById('accLogin')||{}).value);
   if(login&&authHasArabic(login)){alert('اسم الدخول يجب أن يكون إنجليزياً.');return;}
   if(!login) login=authGenLogin(rec.role==='admin'?'adm':'tch');
@@ -12292,7 +13043,17 @@ function authDeleteAccount(id){
 
 function renderAuthAssign(){
   const el=document.getElementById('view-tasks');if(!el)return;
-  const teachers=AUTH_STATE.accounts.filter(function(a){return a.role==='teacher';});
+  const teachers=(function(){
+    if(typeof authSyncStaffAccounts==='function')authSyncStaffAccounts();
+    const staff=(typeof STAFF_STATE!=='undefined'&&STAFF_STATE.staff)?STAFF_STATE.staff:[];
+    const out=[];
+    staff.forEach(function(emp){
+      if(typeof staffPersonKind==='function'&&staffPersonKind(emp)==='employee')return;
+      const acc=typeof authEnsureStaffAccount==='function'?authEnsureStaffAccount(emp):null;
+      if(acc) out.push(acc);
+    });
+    return out;
+  })();
   const tOpts=teachers.map(function(t){return '<option value="'+t.id+'">'+escapeHtml(t.name)+'</option>';}).join('');
   const gOpts=slogGrades?slogGrades().map(function(g){return '<option value="'+escapeHtml(g)+'">'+escapeHtml(g)+'</option>';}).join(''):gradebookGradeLabels().map(function(g){return '<option value="'+escapeHtml(g)+'">'+escapeHtml(g)+'</option>';}).join('');
   const night=(document.documentElement.getAttribute('data-ui-skin')||'').indexOf('night')===0;
@@ -12319,6 +13080,7 @@ function renderAuthAssign(){
     if(t.canCare) extras.push({k:'care',lab:'الرعاية والأيتام'});
     if(t.canParents) extras.push({k:'parents',lab:'أولياء الأمور'});
     if(t.canTimetable) extras.push({k:'timetable',lab:'جدول الحصص'});
+    if(t.canStaffEdit) extras.push({k:'staffEdit',lab:'تعديل بياناته في الملاك'});
     if(!list.length && !extras.length) return;
     let body='';
     extras.forEach(function(ex,i){
@@ -12359,6 +13121,7 @@ function renderAuthAssign(){
         '<label><input type="checkbox" id="asgCare"> الرعاية والأيتام</label>'+
         '<label><input type="checkbox" id="asgParents"> أولياء الأمور</label>'+
         '<label><input type="checkbox" id="asgTime"> جدول الحصص</label>'+
+        '<label><input type="checkbox" id="asgStaffEdit"> تعديل بياناته في الملاك</label>'+
       '</div></div>'+
       '<div><button class="material-btn" onclick="authAddAssign()">حفظ التكليف</button></div>'+
     '</div>'+
@@ -12421,8 +13184,10 @@ function authAddAssign(){
   if(wantParents) t.canParents=true;
   if(wantTime) t.canTimetable=true;
   if(wantRec) t.canRecords=true;
+  const wantStaffEdit=!!(document.getElementById('asgStaffEdit')||{}).checked;
+  if(wantStaffEdit) t.canStaffEdit=true;
   const sheetScope=((document.getElementById('asgSheetScope')||{}).value)||'section';
-  if((wantCare||wantParents||wantTime||wantRec) && !grade && !sectionId && !subject && !wantSheets){
+  if((wantCare||wantParents||wantTime||wantRec||wantStaffEdit) && !grade && !sectionId && !subject && !wantSheets){
     saveAuthState();renderAuthAssign();
     alert('تم تكليف «'+t.name+'» بالمهام العامة المحددة.');
     return;
@@ -12477,6 +13242,7 @@ function authRevokeSchoolTask(tid,kind){
   if(kind==='care'){ t.canCare=false; (t.assignments||[]).forEach(function(a){a.care=false;}); }
   if(kind==='parents'){ t.canParents=false; (t.assignments||[]).forEach(function(a){a.parents=false;}); }
   if(kind==='timetable'){ t.canTimetable=false; (t.assignments||[]).forEach(function(a){a.timetable=false;}); }
+  if(kind==='staffEdit'){ t.canStaffEdit=false; (t.assignments||[]).forEach(function(a){a.staffEdit=false;}); }
   saveAuthState();renderAuthAssign();
 }
 
@@ -12501,7 +13267,7 @@ function renderTeacherHome(){
   const canAtt=asgs.some(function(a){return a.attendance;});
   const canRec=teacherCanRecords();
   const canCareT=teacherCanCare(); const canSheets=teacherCanSheets();
-  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(typeof teacherCanParents==='function'&&teacherCanParents()?'<button class="material-btn" onclick="teacherOpenParents()">👨‍👩‍👧 أولياء الأمور</button>':'')+'<button class="material-btn" onclick="openTimetableModule()">🗓️ جدول الحصص</button>'+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
+  const attBar=(canAtt?'<button class="material-btn" onclick="teacherOpenAtt()">📋 تسجيل غياب المدرسة</button>':'')+(canRec?'<button class="material-btn" onclick="teacherOpenRecords()">📑 إدارة القيود</button>':'')+(canCareT?'<button class="material-btn" onclick="teacherOpenCare()">🤍 الرعاية والأيتام</button>':'')+(typeof teacherCanParents==='function'&&teacherCanParents()?'<button class="material-btn" onclick="teacherOpenParents()">👨‍👩‍👧 أولياء الأمور</button>':'')+'<button class="material-btn" onclick="teacherOpenStaff()">👤 بياناتي في الملاك</button>'+'<button class="material-btn" onclick="openTimetableModule()">🗓️ جدول الحصص</button>'+(canSheets?'<button class="material-btn" onclick="teacherOpenSheets()">🖨️ كشوف النتائج</button>':'')+'<button class="material-btn secondary" onclick="openMailModule()">✉️ المراسلة</button>';
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🧑‍🏫</span><div><h2>لوحة المعلم</h2><p>مرحباً '+escapeHtml(me.name)+' — المواد والمهام المكلّف بها فقط</p></div></div>'+facebookHeadBtn()+'</div>'+
     wifiTeacherBar()+ '<div style="display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px">'+attBar+'</div>'+
     '<div class="grade-report-grid">'+(cards||'<div class="empty-hint">لا توجد مهام بعد. يطلب من المدير توزيع المواد من قسم المهام.</div>')+'</div></div>';
@@ -12538,6 +13304,7 @@ function teacherOpenParents(){
   if(!teacherCanParents()){alert('لم تُكلَّف بقسم أولياء الأمور.');return;}
   openParentsModule();
 }
+function teacherOpenStaff(){ openStaffInfo(); }
 function teacherCanTimetable(){
   const me=authMe(); if(!me)return false;
   if(me.canTimetable)return true;
@@ -12682,6 +13449,7 @@ function renderTeacherLevels(asg){
     '<section class="levels-record-block"><div class="levels-record-title"><div class="levels-record-title-main"><h3>سجل المستويات الأسبوعي</h3></div><span>'+escapeHtml(asg.subject)+'</span></div><div class="levels-table-scroll"><table class="levels-table weekly"><thead>'+weeklyHead+'</thead><tbody>'+weeklyRows+'</tbody></table></div></section>'+
     '<section class="levels-record-block"><div class="levels-record-title"><div class="levels-record-title-main"><h3>المستويات الشهرية</h3></div><span>'+escapeHtml(asg.subject)+'</span></div><div class="levels-table-scroll"><table class="levels-table monthly"><thead>'+monthlyHead+'</thead><tbody>'+monthlyRows+'</tbody></table></div></section>';
   if(typeof saveLevelsState==='function')saveLevelsState();
+  if(typeof keepTableHScroll==='function')keepTableHScroll(el);
 }
 function renderTeacherAtt(){
   const el=document.getElementById('view-teacher');if(!el)return;
@@ -12761,6 +13529,7 @@ function renderTeacherGrades(asg){
   }).join('');
   el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">📊</span><div><h2>سجل درجات '+escapeHtml(asg.subject)+'</h2><p>'+escapeHtml(asg.grade)+' / '+escapeHtml(asg.sectionLabel)+'</p></div></div><button class="material-btn secondary" onclick="openTeacherHome()">رجوع لمهام المعلم</button></div>'+(sixth?'<label style="display:flex;align-items:center;gap:8px;margin:8px 0;font-weight:800"><input type="checkbox"'+(rec.term1BestTwo?' checked':'')+' onchange="teacherSetTerm1BestTwo(\''+asg.id+'\',this.checked)"> احتساب معدل الفصل الأول من أعلى درجتين</label>':'')+
     '<div class="table-scroll"><table class="slog-table"><thead><tr>'+head+'</tr></thead><tbody>'+(body||'<tr><td>لا طلاب</td></tr>')+'</tbody></table></div>';
+  keepTableHScroll(el);
 }
 function teacherSetTerm1BestTwo(asgId,on){
   const asg=teacherAsg(asgId);if(!asg)return;
@@ -12779,7 +13548,18 @@ function teacherSetScore(asgId,stId,key,el){
   if(typeof usesSixthGradeLayout==='function'&&usesSixthGradeLayout(asg.grade)&&typeof gbCompute56==='function')gbCompute56(row,rec);
   rec.updatedAt=Date.now();
   if(typeof saveGradebook==='function')saveGradebook(GRADEBOOK);
-  renderTeacherGrades(asg);
+  if(el && typeof usesSixthGradeLayout==='function' && usesSixthGradeLayout(asg.grade) && typeof gbCompute56==='function'){
+    const tr=el.closest('tr');
+    if(tr){
+      const map={term1:5,term2:9,coursework:10,finalGrade:12};
+      Object.keys(map).forEach(function(k){
+        const td=tr.children[map[k]];
+        if(td) td.textContent=(row[k]===''||row[k]==null)?'—':String(row[k]);
+      });
+    }
+  }
+  const box=el&&el.closest&&el.closest('.table-scroll');
+  if(box&&box.__hScrollX!=null) box.scrollLeft=box.__hScrollX;
 }
 function renderTeacherEval(asg){
   const el=document.getElementById('view-teacher');if(!el||!asg)return;
@@ -13607,10 +14387,7 @@ function cloudRefreshUi(){
       return;
     }
     if((entry.id||'')==='view-tasks'){
-      try{
-        if(typeof renderAuthAssign==='function' && document.getElementById('asgTeacher')) renderAuthAssign();
-        else if(typeof restoreEntry==='function') restoreEntry(entry);
-      }catch(e){}
+      try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
       return;
     }
     if(typeof restoreEntry==='function') restoreEntry(entry);
@@ -13885,17 +14662,13 @@ function liveFetchWho(){
   fetch(url).then(function(r){return r.json();}).then(function(obj){
     LIVE_WHO=obj&&typeof obj==='object'?obj:{};
     document.querySelectorAll('#view-tasks .live-dot').forEach(function(el){
-      const nameCell=el.closest('td');
+      const id=el.getAttribute('data-uid')||'';
+      let on=false;
+      if(id&&LIVE_WHO&&LIVE_WHO[id]&&LIVE_WHO[id].at){
+        on=(Date.now()-Number(LIVE_WHO[id].at))<50000;
+      }
+      el.classList.toggle('on',on);
     });
-    if(typeof authRole==='function'&&authRole()==='admin'&&typeof currentViewId!=='undefined'&&currentViewId==='view-tasks'){
-      const ae=document.activeElement;
-      if(ae&&(ae.tagName==='INPUT'||ae.tagName==='SELECT'||ae.tagName==='TEXTAREA'))return;
-      try{
-        if(document.querySelector('#view-tasks h2')&&/حسابات/.test(document.querySelector('#view-tasks h2').textContent||'')){
-          if(typeof renderAuthAccounts==='function') renderAuthAccounts();
-        }
-      }catch(e){}
-    }
   }).catch(function(){});
 }
 function liveStart(){
@@ -13980,5 +14753,5 @@ try{document.addEventListener('visibilitychange',function(){if(!document.hidden)
 
 
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a30878eb8923ad36',t:'MTc4NzYzODYzMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
