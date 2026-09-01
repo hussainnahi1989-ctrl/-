@@ -6314,6 +6314,7 @@ function loadApp(){
 }
 function saveApp(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(APP)); }catch(e){}
+  try{if(typeof wifiOnSave==='function')wifiOnSave('app');}catch(e){}
 }
 let APP = loadApp();
 if(!APP.school) APP.school = {name:'نور العلم', principal:'محمد أمين عبد الله', guide:'جعفر صادق مهدي', logo:DEFAULT_SCHOOL_LOGO, stage:''};
@@ -14280,14 +14281,21 @@ function wifiApply(pack,fromRole){
     if(pack.HW){AUTH_HW=wifiMergeById(AUTH_HW,pack.HW); try{localStorage.setItem(AUTH_HW_KEY,JSON.stringify(AUTH_HW));}catch(e){}}
     if(pack.MAIL){MAIL_STATE=wifiMergeById(MAIL_STATE,pack.MAIL); try{localStorage.setItem(MAIL_KEY,JSON.stringify(MAIL_STATE));}catch(e){}}
     if(pack.NOTIF){NOTIF_STATE=wifiMergeById(NOTIF_STATE,pack.NOTIF); try{localStorage.setItem(NOTIF_KEY,JSON.stringify(NOTIF_STATE));}catch(e){}}
-    if(pack.AUTH&&pack.AUTH.accounts&&fromRole==='admin'){
-      AUTH_STATE.accounts=pack.AUTH.accounts;
+    if(pack.AUTH&&Array.isArray(pack.AUTH.accounts)&&pack.AUTH.accounts.length){
+      const map={};
+      (AUTH_STATE.accounts||[]).forEach(function(a){if(a&&a.id)map[a.id]=a;});
+      pack.AUTH.accounts.forEach(function(a){if(a&&a.id)map[a.id]=a;});
+      AUTH_STATE.accounts=Object.keys(map).map(function(k){return map[k];});
       try{localStorage.setItem(AUTH_KEY,JSON.stringify(AUTH_STATE));}catch(e){}
     }
-    if(pack.APP&&pack.APP.grades&&fromRole==='admin'){
+    if(pack.APP&&Array.isArray(pack.APP.grades)&&pack.APP.grades.length){
       APP.grades=pack.APP.grades;
-      if(pack.APP.school) APP.school=pack.APP.school;
-      if(typeof saveApp==='function')saveApp();
+      if(pack.APP.school){
+        const keepLogo=APP.school&&APP.school.logo;
+        APP.school=pack.APP.school;
+        if(keepLogo&&!APP.school.logo) APP.school.logo=keepLogo;
+      }
+      try{localStorage.setItem(STORAGE_KEY, JSON.stringify(APP));}catch(e){}
     }
   }catch(e){}
   if(typeof updateMailBadges==='function')updateMailBadges();
@@ -14336,9 +14344,14 @@ function cloudPack(){
   const p = typeof wifiCollect==='function' ? wifiCollect() : {v:1,at:Date.now()};
   p.kind='cloud';
   p.at=Date.now();
-  try{p.APP_FULL=APP;}catch(e){}
-  try{p.STAFF=STAFF;}catch(e){}
-  try{p.EXAMS=EXAMS;}catch(e){}
+  try{
+    p.APP_FULL=APP;
+    if(p.APP_FULL&&p.APP_FULL.school&&p.APP_FULL.school.logo&&String(p.APP_FULL.school.logo).length>180000){
+      p.APP_FULL=Object.assign({},APP,{school:Object.assign({},APP.school,{logo:''})});
+    }
+  }catch(e){}
+  try{p.STAFF=typeof STAFF_STATE!=='undefined'?STAFF_STATE:null;}catch(e){}
+  try{p.EXAMS=typeof EXAMS_STATE!=='undefined'?EXAMS_STATE:null;}catch(e){}
   try{p.SLOG=SLOG;}catch(e){}
   try{p.NOTES=NOTES;}catch(e){}
   try{p.CARE=CARE;}catch(e){}
@@ -14367,8 +14380,8 @@ function cloudApplyFull(pack){
     try{ if(typeof window[name]!=='undefined') window[name]=val; }catch(e){}
     if(key){try{localStorage.setItem(key,JSON.stringify(val));}catch(e){}}
   }
-  try{if(pack.STAFF){STAFF=pack.STAFF; localStorage.setItem(STAFF_STORAGE_KEY,JSON.stringify(STAFF));}}catch(e){}
-  try{if(pack.EXAMS){EXAMS=pack.EXAMS; localStorage.setItem(EXAMS_STORAGE_KEY,JSON.stringify(EXAMS));}}catch(e){}
+  try{if(pack.STAFF){STAFF_STATE=pack.STAFF; localStorage.setItem(STAFF_STORAGE_KEY,JSON.stringify(STAFF_STATE));}}catch(e){}
+  try{if(pack.EXAMS){EXAMS_STATE=pack.EXAMS; localStorage.setItem(EXAMS_STORAGE_KEY,JSON.stringify(EXAMS_STATE));}}catch(e){}
   try{if(pack.SLOG){SLOG=pack.SLOG; localStorage.setItem(SLOG_KEY,JSON.stringify(SLOG));}}catch(e){}
   try{if(pack.NOTES){NOTES=pack.NOTES; localStorage.setItem(NOTES_STORAGE_KEY,JSON.stringify(NOTES));}}catch(e){}
   try{if(pack.CARE){CARE=pack.CARE; localStorage.setItem(CARE_STORAGE_KEY,JSON.stringify(CARE));}}catch(e){}
@@ -14484,7 +14497,7 @@ function cloudListen(){
       fetch(cloudEndpoint()).then(function(r){return r.json();}).then(function(pack){
         cloudHandleRemote(pack);
       }).catch(function(){});
-    },3500);
+    },2000);
   }
 }
 function cloudSaveCfgFromForm(){
