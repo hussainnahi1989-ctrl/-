@@ -5062,6 +5062,9 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700&display=swap" rel="stylesheet">
+<!-- Firebase SDK for real-time sync -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
@@ -14327,6 +14330,8 @@ CLOUD_CFG.url=CLOUD_DEFAULT_URL;
 CLOUD_CFG.room=CLOUD_DEFAULT_ROOM;
 try{saveCloudCfg();}catch(e){}
 let CLOUD_PUSH_T=null, CLOUD_BUSY=false, CLOUD_LAST=0;
+let FIREBASE_APP=null, FIREBASE_DB=null, FIREBASE_REF=null, FIREBASE_LISTENER=null;
+
 function cloudEnabled(){
   const u=String(CLOUD_CFG.url||'').trim().replace(/\/$/,'');
   return !!(CLOUD_CFG.on && u && /^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(u));
@@ -14340,6 +14345,26 @@ function cloudSetStatus(msg,ok){
   const el=document.getElementById('cloudStatus');
   if(el){el.textContent=msg||''; el.style.color=ok===false?'#b91c1c':(ok?'#047857':'#64748b');}
 }
+
+/* ===== Firebase SDK initialization for real-time WebSocket sync ===== */
+function cloudInitFirebase(){
+  if(!cloudEnabled())return false;
+  if(FIREBASE_DB&&FIREBASE_REF)return true;
+  try{
+    const url=String(CLOUD_CFG.url||'').trim().replace(/\/$/,'');
+    const match=url.match(/^https:\/\/([a-z0-9-]+)\.(firebaseio\.com|firebasedatabase\.app)/i);
+    if(!match)return false;
+    const projectId=match[1];
+    if(!FIREBASE_APP){
+      FIREBASE_APP=firebase.initializeApp({databaseURL:url}, 'schoolRealtime_'+projectId);
+    }
+    FIREBASE_DB=firebase.database(FIREBASE_APP);
+    const room=String(CLOUD_CFG.room||'school1').replace(/[^A-Za-z0-9_\-]/g,'')||'school1';
+    FIREBASE_REF=FIREBASE_DB.ref(room);
+    return true;
+  }catch(e){return false;}
+}
+
 function cloudPack(){
   const p = typeof wifiCollect==='function' ? wifiCollect() : {v:1,at:Date.now()};
   p.kind='cloud';
@@ -14399,47 +14424,63 @@ function cloudApplyFull(pack){
   if(pack.at) CLOUD_SEEN=Number(pack.at)||CLOUD_SEEN;
   } finally { CLOUD_APPLYING=false; }
 }
-async function cloudPushNow(){
-  if(!cloudEnabled()){cloudSetStatus('فعّل السحابة والصق رابط Firebase أولاً',false);return false;}
-  if(CLOUD_BUSY)return false;
-  CLOUD_BUSY=true;
-  cloudSetStatus('جاري الرفع…');
-  try{
-    const res=await fetch(cloudEndpoint(),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(cloudPack())});
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    CLOUD_LAST=Date.now();
-    cloudSetStatus('تم الرفع إلى السحابة',true);
-    return true;
-  }catch(e){
-    cloudSetStatus('فشل الرفع: تحقق من الرابط وقواعد Firebase',false);
-    return false;
-  }finally{CLOUD_BUSY=false;}
-}
-async function cloudPullNow(silent){
-  if(!cloudEnabled()){if(!silent)cloudSetStatus('السحابة غير مفعّلة',false);return false;}
-  cloudSetStatus('جاري السحب…');
-  try{
-    const ac=typeof AbortController==='function'?new AbortController():null;
-    const to=ac?setTimeout(function(){try{ac.abort();}catch(e){}},12000):null;
-    const res=await fetch(cloudEndpoint(), ac?{signal:ac.signal}:{});
-    if(to)clearTimeout(to);
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    const pack=await res.json();
-    if(!pack){if(!silent)cloudSetStatus('السحابة فارغة — ارفع من جهاز المدير أولاً',false);return false;}
-    cloudApplyFull(pack);
-    cloudSetStatus('تم تحديث البيانات من السحابة',true);
-    try{cloudListen();}catch(e){}
-    return true;
-  }catch(e){
-    if(!silent)cloudSetStatus('فشل السحب — تحقق من الإنترنت والرابط',false);
-    return false;
-  }
-}
+
+/* ===== Real-time push via Firebase SDK (WebSocket — instant) ===== */
 function cloudOnSave(){
   if(!cloudEnabled()||CLOUD_APPLYING)return;
-  clearTimeout(CLOUD_PUSH_T);
-  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},800);
+  if(!cloudInitFirebase()){
+    /* fallback to REST if SDK init fails */
+    clearTimeout(CLOUD_PUSH_T);
+    CLOUD_PUSH_T=setTimeout(function(){cloudPushRest();},200);
+    return;
+  }
+  /* Push immediately via WebSocket — no debounce */
+  try{
+    const pack=cloudPack();
+    FIREBASE_REF.set(pack).then(function(){
+      CLOUD_LAST=Date.now();
+      cloudSetStatus('تم المزامنة الفورية ✓',true);
+    }).catch(function(e){
+      cloudSetStatus('خطأ مزامنة: '+e.message,false);
+    });
+  }catch(e){
+    clearTimeout(CLOUD_PUSH_T);
+    CLOUD_PUSH_T=setTimeout(function(){cloudPushRest();},200);
+  }
 }
+
+/* ===== Real-time listener via Firebase SDK (WebSocket — instant) ===== */
+function cloudListen(){
+  if(!cloudEnabled())return;
+  if(!cloudInitFirebase()){
+    /* fallback to REST polling */
+    cloudListenRest();
+    return;
+  }
+  /* Remove old listener if any */
+  if(FIREBASE_LISTENER){try{FIREBASE_REF.off('value',FIREBASE_LISTENER);}catch(e){} FIREBASE_LISTENER=null;}
+  /* Attach real-time WebSocket listener — fires instantly on any change */
+  FIREBASE_LISTENER=FIREBASE_REF.on('value', function(snap){
+    const pack=snap.val();
+    if(pack&&typeof pack==='object'){
+      cloudHandleRemote(pack);
+    }
+  });
+  cloudSetStatus('متصل بالمزامنة الفورية ✓',true);
+  /* Also start heartbeat for live presence */
+  if(typeof liveStart==='function'){try{liveStart();}catch(e){}}
+}
+
+function cloudHandleRemote(pack){
+  if(!pack||typeof pack!=='object')return;
+  const at=Number(pack.at||0);
+  if(at && at<=CLOUD_SEEN)return;
+  if(at && at===CLOUD_LAST)return;
+  cloudApplyFull(pack);
+  cloudRefreshUi();
+  try{if(typeof liveCheckIncoming==='function')liveCheckIncoming();}catch(e){}
+}
+
 function cloudRefreshUi(){
   if(!authHasSession())return;
   if(document.body.classList.contains('mail-full')){try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){} return;}
@@ -14466,16 +14507,56 @@ function cloudRefreshUi(){
     else if(typeof updateNotifDot==='function') updateNotifDot();
   }catch(e){}
 }
-function cloudHandleRemote(pack){
-  if(!pack||typeof pack!=='object')return;
-  const at=Number(pack.at||0);
-  if(at && at<=CLOUD_SEEN)return;
-  if(at && at===CLOUD_LAST)return;
-  cloudApplyFull(pack);
-  cloudRefreshUi();
-  try{if(typeof liveCheckIncoming==='function')liveCheckIncoming();}catch(e){}
+
+/* ===== REST fallback (only used if Firebase SDK fails to init) ===== */
+async function cloudPushRest(){
+  if(!cloudEnabled())return false;
+  if(CLOUD_BUSY)return false;
+  CLOUD_BUSY=true;
+  cloudSetStatus('جاري الرفع…');
+  try{
+    const res=await fetch(cloudEndpoint(),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(cloudPack())});
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    CLOUD_LAST=Date.now();
+    cloudSetStatus('تم الرفع إلى السحابة',true);
+    return true;
+  }catch(e){
+    cloudSetStatus('فشل الرفع: تحقق من الرابط وقواعد Firebase',false);
+    return false;
+  }finally{CLOUD_BUSY=false;}
 }
-function cloudListen(){
+async function cloudPullNow(silent){
+  if(!cloudEnabled()){if(!silent)cloudSetStatus('السحابة غير مفعّلة',false);return false;}
+  cloudSetStatus('جاري السحب…');
+  try{
+    if(cloudInitFirebase()&&FIREBASE_REF){
+      /* Use SDK for pull */
+      const snap=await FIREBASE_REF.once('value');
+      const pack=snap.val();
+      if(!pack){if(!silent)cloudSetStatus('السحابة فارغة — ارفع من جهاز المدير أولاً',false);return false;}
+      cloudApplyFull(pack);
+      cloudSetStatus('تم تحديث البيانات من السحابة',true);
+      try{cloudListen();}catch(e){}
+      return true;
+    }
+    /* REST fallback */
+    const ac=typeof AbortController==='function'?new AbortController():null;
+    const to=ac?setTimeout(function(){try{ac.abort();}catch(e){}},12000):null;
+    const res=await fetch(cloudEndpoint(), ac?{signal:ac.signal}:{});
+    if(to)clearTimeout(to);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const pack=await res.json();
+    if(!pack){if(!silent)cloudSetStatus('السحابة فارغة — ارفع من جهاز المدير أولاً',false);return false;}
+    cloudApplyFull(pack);
+    cloudSetStatus('تم تحديث البيانات من السحابة',true);
+    try{cloudListen();}catch(e){}
+    return true;
+  }catch(e){
+    if(!silent)cloudSetStatus('فشل السحب — تحقق من الإنترنت والرابط',false);
+    return false;
+  }
+}
+function cloudListenRest(){
   if(!cloudEnabled())return;
   try{if(CLOUD_ES){CLOUD_ES.close();CLOUD_ES=null;}}catch(e){}
   try{
@@ -14489,7 +14570,7 @@ function cloudListen(){
     es.addEventListener('put', onEv);
     es.addEventListener('patch', onEv);
     es.onmessage=onEv;
-    es.onerror=function(){ /* يبقى يعيد الاتصال تلقائياً */ };
+    es.onerror=function(){};
   }catch(e){}
   if(!window._cloudPoll){
     window._cloudPoll=setInterval(function(){
@@ -14497,7 +14578,7 @@ function cloudListen(){
       fetch(cloudEndpoint()).then(function(r){return r.json();}).then(function(pack){
         cloudHandleRemote(pack);
       }).catch(function(){});
-    },2000);
+    },3000);
   }
 }
 function cloudSaveCfgFromForm(){
@@ -14508,7 +14589,10 @@ function cloudSaveCfgFromForm(){
   if(roomEl) CLOUD_CFG.room=roomEl.value.trim()||'school1';
   if(onEl) CLOUD_CFG.on=!!onEl.checked;
   saveCloudCfg();
-  cloudSetStatus(cloudEnabled()?'حُفظت إعدادات السحابة': 'أدخل رابطاً صحيحاً مثل https://اسم.firebaseio.com', cloudEnabled());
+  /* Re-init Firebase with new config */
+  FIREBASE_APP=null; FIREBASE_DB=null; FIREBASE_REF=null; FIREBASE_LISTENER=null;
+  if(cloudEnabled()){cloudInitFirebase();cloudListen();}
+  cloudSetStatus(cloudEnabled()?'حُفظت إعدادات السحابة — متصل فورياً': 'أدخل رابطاً صحيحاً مثل https://اسم.firebaseio.com', cloudEnabled());
 }
 function cloudHtml(){return '';}
 
@@ -14516,8 +14600,8 @@ function cloudHtml(){return '';}
 function wifiOnSave(){
   try{cloudOnSave();}catch(e){}
   if(WIFI_STATUS!=='on')return;
-  clearTimeout(WIFI_PUSH_T);
-  WIFI_PUSH_T=setTimeout(function(){wifiBroadcast({kind:'full',pack:wifiCollect()});},600);
+  /* WiFi broadcast immediately — no debounce */
+  try{wifiBroadcast({kind:'full',pack:wifiCollect()});}catch(e){}
 }
 function wifiHookChannel(ch,peerName){
   const id=peerName||('p'+Date.now());
@@ -14823,5 +14907,5 @@ try{document.addEventListener('visibilitychange',function(){if(!document.hidden)
 
 
 </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a343c2a3dec283b5',t:'MTc4ODI2MDMxMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
