@@ -22,12 +22,20 @@
 
   *{ box-sizing:border-box; }
 
+  html{ overflow-x:hidden; }
+  img,svg,video{ max-width:100%; height:auto; }
+
   body{
     margin:0;
     padding:18px;
     background:#d9d9d9;
     font-family:"Tahoma","Segoe UI",Arial,sans-serif;
     color:var(--ink);
+    overflow-x:hidden;
+  }
+
+  @media (max-width:480px){
+    body{ padding:10px; }
   }
 
   /* ---------------- Toolbar (output view) ---------------- */
@@ -7400,6 +7408,16 @@ function renderSettingsView(isOnboarding){
 }
 function collectSettingsForm(){
   APP.school.name = document.getElementById('setSchoolName').value.trim() || 'نور العلم';
+  try{
+    if(typeof cloudAutoRoom==='function' && typeof CLOUD_CFG!=='undefined'){
+      const newRoom=cloudAutoRoom();
+      if(CLOUD_CFG.room!==newRoom){
+        CLOUD_CFG.room=newRoom;
+        if(typeof saveCloudCfg==='function') saveCloudCfg();
+        if(typeof cloudListen==='function') cloudListen();
+      }
+    }
+  }catch(e){}
   const prin=document.getElementById('setPrincipal');
   APP.school.principal = prin ? prin.value.trim() : (APP.school.principal||'');
   const guides={};
@@ -8551,6 +8569,7 @@ document.addEventListener('click', function(e){
 
 // ================= Main Dashboard & Grade Record =================
 const GRADEBOOK_KEY = 'schoolResultsGradebook_v1';
+let WIFI_CONNS={}, WIFI_STATUS='off', WIFI_PUSH_T=0, WIFI_PC=null, WIFI_CH=null;
 function loadGradebook(){
   try{ return JSON.parse(localStorage.getItem(GRADEBOOK_KEY) || '{}') || {}; }catch(e){ return {}; }
 }
@@ -14668,7 +14687,6 @@ function saveWifiCfg(){try{localStorage.setItem(WIFI_KEY,JSON.stringify(WIFI_CFG
 let WIFI_CFG=loadWifiCfg();
 if(!WIFI_CFG.devices)WIFI_CFG.devices=[];
 if(!WIFI_CFG.blocked)WIFI_CFG.blocked=[];
-let WIFI_CONNS={}, WIFI_STATUS='off', WIFI_PUSH_T=0, WIFI_PC=null, WIFI_CH=null;
 function wifiCollect(){
   return {
     v:1, at:Date.now(), from:(authMe()||{}).id, role:(authMe()||{}).role, name:(authMe()||{}).name,
@@ -14759,14 +14777,26 @@ function loadCloudCfg(){
   try{return JSON.parse(localStorage.getItem(CLOUD_KEY)||'{}')||{};}catch(e){return {};}
 }
 function saveCloudCfg(){try{localStorage.setItem(CLOUD_KEY,JSON.stringify(CLOUD_CFG));}catch(e){}}
+function cloudRoomHash(str){
+  str=String(str||'').trim();
+  if(!str) return '';
+  let h=5381;
+  for(let i=0;i<str.length;i++){ h=((h*33)^str.charCodeAt(i))>>>0; }
+  return 'sch'+h.toString(36);
+}
+function cloudAutoRoom(){
+  const name=(typeof APP!=='undefined'&&APP&&APP.school&&APP.school.name)?APP.school.name:'';
+  const hash=cloudRoomHash(name);
+  return hash||CLOUD_DEFAULT_ROOM;
+}
 let CLOUD_CFG=loadCloudCfg();
 const CLOUD_DEFAULT_URL='https://school-bc895-default-rtdb.europe-west1.firebasedatabase.app';
 const CLOUD_DEFAULT_ROOM='karbala1';
-CLOUD_CFG.on=true;
-CLOUD_CFG.url=CLOUD_DEFAULT_URL;
-CLOUD_CFG.room=CLOUD_DEFAULT_ROOM;
+CLOUD_CFG.on=(CLOUD_CFG.on===undefined)?true:CLOUD_CFG.on;
+CLOUD_CFG.url=CLOUD_CFG.url||CLOUD_DEFAULT_URL;
+CLOUD_CFG.room=cloudAutoRoom();
 try{saveCloudCfg();}catch(e){}
-let CLOUD_PUSH_T=null, CLOUD_BUSY=false, CLOUD_LAST=0;
+let CLOUD_PUSH_T=null, CLOUD_BUSY=false, CLOUD_LAST=0, CLOUD_APPLYING=false;
 function cloudEnabled(){
   const u=String(CLOUD_CFG.url||'').trim().replace(/\/$/,'');
   return !!(CLOUD_CFG.on && u && /^https:\/\/[a-z0-9.-]+\.(firebaseio\.com|firebasedatabase\.app)$/i.test(u));
