@@ -6892,6 +6892,26 @@ document.addEventListener('keydown', function(e){
   }
 });
 
+window.SCHOOL_LINK_CODE=(function(){
+  try{
+    const q=new URLSearchParams(location.search||'');
+    const code=String(q.get('s')||q.get('school')||'').replace(/[^A-Za-z0-9_\-]/g,'').slice(0,40);
+    if(!code) return '';
+    const origSet=Storage.prototype.setItem.bind(localStorage);
+    const origGet=Storage.prototype.getItem.bind(localStorage);
+    const origRem=Storage.prototype.removeItem.bind(localStorage);
+    function ns(k){
+      k=String(k||'');
+      if(k.indexOf('schoolResults')!==0) return k;
+      if(k.indexOf('schoolResults__'+code+'__')===0) return k;
+      return 'schoolResults__'+code+'__'+k.slice('schoolResults'.length);
+    }
+    localStorage.setItem=function(k,v){return origSet(ns(k),v);};
+    localStorage.getItem=function(k){return origGet(ns(k));};
+    localStorage.removeItem=function(k){return origRem(ns(k));};
+    return code;
+  }catch(e){return '';}
+})();
 // ================= App data & views =================
 const STORAGE_KEY = 'schoolResultsApp_v1';
 const GRADE_GROUPS = [
@@ -13688,7 +13708,7 @@ function renderAuthLogin(){
     '<div class="mat-field"><label>اسم الدخول</label><input id="authName" type="text" autocomplete="username" dir="ltr" placeholder="مثال: st482193"></div>'+
     '<div class="mat-field"><label>الرقم السري</label><input id="authPass" type="password" autocomplete="current-password"></div>'+
     '<button type="button" class="material-btn" style="width:100%;margin-top:8px" onclick="authDoLogin()">دخول</button>'+
-    '<small id="authCloudHint" style="display:block;margin-top:12px;color:#047857">السحابة مربوطة تلقائياً — أدخل اسم الدخول والرقم السري فقط</small>'+
+    '<small id="authCloudHint" style="display:block;margin-top:12px;color:#047857">السحابة مربوطة تلقائياً — أدخل اسم الدخول والرقم السري فقط'+(typeof SCHOOL_LINK_CODE==='string'&&SCHOOL_LINK_CODE?(' — رمز المدرسة: '+SCHOOL_LINK_CODE):'')+'</small>'+
     '</div></div>';
   const pn=document.getElementById('authPass');
   if(pn) pn.addEventListener('keydown',function(e){if(e.key==='Enter')authDoLogin();});
@@ -15218,6 +15238,12 @@ function cloudRoomHash(str){
   return 'sch'+h.toString(36);
 }
 function cloudAutoRoom(){
+  if(typeof SCHOOL_LINK_CODE==='string'&&SCHOOL_LINK_CODE) return SCHOOL_LINK_CODE;
+  try{
+    const q=new URLSearchParams(location.search||'');
+    const code=String(q.get('s')||q.get('school')||'').replace(/[^A-Za-z0-9_\-]/g,'').slice(0,40);
+    if(code) return code;
+  }catch(e){}
   const name=(typeof APP!=='undefined'&&APP&&APP.school&&APP.school.name)?APP.school.name:'';
   const hash=cloudRoomHash(name);
   return hash||CLOUD_DEFAULT_ROOM;
@@ -15343,32 +15369,49 @@ async function cloudPullNow(silent){
 function cloudOnSave(){
   if(!cloudEnabled()||CLOUD_APPLYING)return;
   clearTimeout(CLOUD_PUSH_T);
-  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},800);
+  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},220);
 }
 function cloudRefreshUi(){
   if(!authHasSession())return;
-  if(document.body.classList.contains('mail-full')){try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){} return;}
+  try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
+  try{if(typeof refreshNotifBell==='function')refreshNotifBell(); else if(typeof updateNotifDot==='function')updateNotifDot();}catch(e){}
   const ae=document.activeElement;
-  if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable)){
+  const typing=ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable);
+  if(typing){
     clearTimeout(CLOUD_UI_T);
-    CLOUD_UI_T=setTimeout(cloudRefreshUi,2500);
+    CLOUD_UI_T=setTimeout(cloudRefreshUi,1800);
     return;
   }
   try{
     const entry=Array.isArray(appStack)&&appStack.length?appStack[appStack.length-1]:null;
     if(!entry||entry.id==='view-auth')return;
-    if(/view-(teacher|student|gradebook|gradebook-detail|attendance|levels|mail|exams)/.test(entry.id||'')){
-      try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
+    const id=entry.id||'';
+    const pg=entry.meta&&entry.meta.page;
+    if(id==='view-mail'||document.body.classList.contains('mail-full')){
+      if(typeof renderMailHome==='function') renderMailHome();
       return;
     }
-    if((entry.id||'')==='view-tasks'){
-      try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
+    if(id==='view-gradebook-detail'){
+      if(typeof renderGradebookTable==='function'&&document.getElementById('gbTableHost')) renderGradebookTable();
+      return;
+    }
+    if(id==='view-dashboard'){
+      if(typeof renderDashboard==='function') renderDashboard();
+      return;
+    }
+    if(id==='view-teacher'&&(pg==='home'||!pg)){
+      if(typeof renderTeacherHome==='function') renderTeacherHome();
+      return;
+    }
+    if(id==='view-student'){
+      if(typeof renderStudentHome==='function') renderStudentHome();
+      return;
+    }
+    if(id==='view-tasks'||id==='view-exams'||id==='view-attendance'||id==='view-levels'||id==='view-gradebook'||(id==='view-teacher'&&pg&&pg!=='home')){
       return;
     }
     if(typeof restoreEntry==='function') restoreEntry(entry);
-    if(typeof showView==='function') showView(entry.id);
-    if(typeof refreshNotifBell==='function') refreshNotifBell();
-    else if(typeof updateNotifDot==='function') updateNotifDot();
+    if(typeof showView==='function') showView(id);
   }catch(e){}
 }
 function cloudHandleRemote(pack){
@@ -15394,15 +15437,21 @@ function cloudListen(){
     es.addEventListener('put', onEv);
     es.addEventListener('patch', onEv);
     es.onmessage=onEv;
-    es.onerror=function(){ /* يبقى يعيد الاتصال تلقائياً */ };
+    es.onerror=function(){ try{setTimeout(function(){if(typeof cloudListen==='function')cloudListen();},4000);}catch(e){} };
   }catch(e){}
+  if(!window._cloudVis){
+    window._cloudVis=true;
+    document.addEventListener('visibilitychange',function(){
+      if(!document.hidden&&typeof cloudPullNow==='function') cloudPullNow(true);
+    });
+  }
   if(!window._cloudPoll){
     window._cloudPoll=setInterval(function(){
       if(!cloudEnabled()||CLOUD_BUSY||CLOUD_APPLYING||document.hidden)return;
       fetch(cloudEndpoint()).then(function(r){return r.json();}).then(function(pack){
         cloudHandleRemote(pack);
       }).catch(function(){});
-    },2000);
+    },1200);
   }
 }
 function cloudSaveCfgFromForm(){
@@ -15835,5 +15884,5 @@ if(document.readyState==='loading'){
 }
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a345f553dbfac297',t:'MTc4ODI4MzM1OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a345f553dbfac297',t:'MTc4ODI4MzM1OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a35283b2ed21d103',t:'MTc4ODQxNTAxOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
