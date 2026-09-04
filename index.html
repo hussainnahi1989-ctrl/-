@@ -5406,6 +5406,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
     __devCache = codeFromRaw(deviceRaw()).replace(/(.{4})/g,'$1-').replace(/-$/,'');
     return __devCache;
   }
+  window.srGetDeviceCode = deviceCode;
   var __varCache=null;
   function deviceVariantCodes(){
     if(__varCache) return __varCache;
@@ -5551,6 +5552,9 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
             'style="flex:1;padding:9px 4px;border-radius:9px;border:1.5px solid #d8c6cc;background:#fff;color:#7a1230;font-weight:900;font-size:12.5px;cursor:pointer">دائم</button>'+
         '</div>'+
         '<div id="srLicKgOut"></div>'+
+        '<button type="button" style="width:100%;margin-top:10px;padding:10px;border:none;border-radius:10px;'+
+          'background:#2d3436;color:#fff;font-weight:900;font-size:13px;cursor:pointer" '+
+          'onclick="window.__srShowRegistry()">👥 حسابات العملاء (تسجيلات جديدة)</button>'+
         '<button class="srLicLater" onclick="window.__srLicClose()">إغلاق</button>'+
       '</div>';
     document.body.appendChild(wrap);
@@ -5583,7 +5587,79 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
       try{ if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt); }catch(e){}
     };
     window.__srLicClose = function(){ var el=document.getElementById('srLicOverlay'); if(el) el.remove(); };
+    window.__srShowRegistry = function(){ var el=document.getElementById('srLicOverlay'); if(el) el.remove(); showCustomerRegistry(); };
     setTimeout(function(){ var e=document.getElementById('srLicKgIn'); if(e) e.focus(); }, 100);
+  }
+
+  function showCustomerRegistry(){
+    var wrap=document.createElement('div');
+    wrap.id='srLicOverlay';
+    wrap.innerHTML =
+      '<div class="srLicCard" style="text-align:right;max-height:88vh">'+
+        '<h2 style="text-align:center">👥 حسابات العملاء</h2>'+
+        '<div class="srLicSub" style="text-align:center">المدارس التي سجّلت حساباً جديداً وبدأت التجربة المجانية.</div>'+
+        '<div style="display:flex;gap:6px;margin-bottom:10px">'+
+          '<button type="button" onclick="window.__srRegRefresh()" style="flex:1;padding:9px;border:none;'+
+            'border-radius:9px;background:#7a1230;color:#fff;font-weight:900;font-size:12.5px;cursor:pointer">🔄 تحديث</button>'+
+          '<button type="button" onclick="window.__srLicClose()" style="flex:1;padding:9px;border:1.5px solid #d8c6cc;'+
+            'border-radius:9px;background:#fff;color:#7a1230;font-weight:900;font-size:12.5px;cursor:pointer">🔑 توليد يدوي</button>'+
+        '</div>'+
+        '<div id="srRegList" style="text-align:center;font-size:12.5px;font-weight:700;color:#8a7a80;padding:14px 0">جارٍ التحميل…</div>'+
+      '</div>';
+    document.body.appendChild(wrap);
+    window.__srLicClose = function(){ var el=document.getElementById('srLicOverlay'); if(el) el.remove(); showKeyGenUI(); };
+    window.__srRegRefresh = function(){ loadRegistry(); };
+    window.__srRegActivate = function(devClean, schoolName){
+      var el=document.getElementById('srLicOverlay'); if(el) el.remove();
+      showKeyGenUI();
+      setTimeout(function(){
+        var inp=document.getElementById('srLicKgIn');
+        if(inp){ inp.value=devClean; window.__srLicKgRun(); }
+      }, 60);
+    };
+    window.__srRegDelete = function(devClean){
+      if(!confirm('حذف هذا التسجيل من القائمة؟ (لن يؤثر على تفعيل المدرسة إن كانت مفعّلة أصلاً)')) return;
+      var base=(typeof CLOUD_DEFAULT_URL!=='undefined'?CLOUD_DEFAULT_URL:'').replace(/\/$/,'');
+      if(!base) return;
+      fetch(base+'/_customers/'+encodeURIComponent(devClean)+'.json', {method:'DELETE'})
+        .then(function(){ loadRegistry(); }).catch(function(){});
+    };
+    function loadRegistry(){
+      var list=document.getElementById('srRegList');
+      if(list) list.innerHTML='جارٍ التحميل…';
+      var base=(typeof CLOUD_DEFAULT_URL!=='undefined'?CLOUD_DEFAULT_URL:'').replace(/\/$/,'');
+      if(!base){ if(list) list.textContent='⛔ لا يوجد رابط سحابة'; return; }
+      fetch(base+'/_customers.json').then(function(r){ return r.json(); }).then(function(data){
+        if(!list) return;
+        if(!data || typeof data!=='object' || !Object.keys(data).length){
+          list.textContent='لا توجد تسجيلات جديدة حالياً.';
+          return;
+        }
+        var rows = Object.keys(data).map(function(k){ var v=data[k]||{}; v.__dev=k; return v; });
+        rows.sort(function(a,b){ return (b.registeredAt||0)-(a.registeredAt||0); });
+        list.innerHTML = rows.map(function(v){
+          var dateStr = v.registeredAt ? new Date(v.registeredAt).toLocaleString('ar-EG') : '';
+          var stageAr = v.stage==='elementary'?'ابتدائية':(v.stage==='intermediate'?'متوسطة':(v.stage==='prep'?'إعدادية':''));
+          return '<div style="background:#faf3f5;border:1.3px solid #ecd8de;border-radius:12px;padding:10px 12px;margin-bottom:9px;text-align:right">'+
+            '<div style="font-weight:900;color:#7a1230;font-size:14px;margin-bottom:3px">'+escapeHtmlSr(v.school||'—')+'</div>'+
+            (v.principal?'<div style="font-size:11.5px;color:#8a7a80">المدير: '+escapeHtmlSr(v.principal)+'</div>':'')+
+            '<div style="font-size:11.5px;color:#8a7a80">البريد: '+escapeHtmlSr(v.email||'—')+'</div>'+
+            (stageAr?'<div style="font-size:11.5px;color:#8a7a80">المرحلة: '+stageAr+'</div>':'')+
+            '<div style="font-size:11px;color:#a89298;margin-top:3px">'+dateStr+'</div>'+
+            '<div style="font-family:monospace;direction:ltr;text-align:center;background:#fff;border:1px dashed #d8c6cc;'+
+              'border-radius:8px;padding:5px;margin-top:6px;font-weight:800;font-size:12.5px;color:#7a1230">'+escapeHtmlSr(v.device||v.__dev)+'</div>'+
+            '<div style="display:flex;gap:6px;margin-top:8px">'+
+              '<button type="button" onclick="window.__srRegActivate(\''+v.__dev+'\',\''+escapeHtmlSr(v.school||'').replace(/'/g,'')+'\')" '+
+                'style="flex:1;padding:8px;border:none;border-radius:8px;background:#16a34a;color:#fff;font-weight:900;font-size:12px;cursor:pointer">✅ تفعيل الآن</button>'+
+              '<button type="button" onclick="window.__srRegDelete(\''+v.__dev+'\')" '+
+                'style="padding:8px 12px;border:none;border-radius:8px;background:#eee;color:#900;font-weight:900;font-size:12px;cursor:pointer">🗑</button>'+
+            '</div>'+
+          '</div>';
+        }).join('');
+      }).catch(function(){ if(list) list.textContent='⛔ تعذّر الاتصال — تحقق من الإنترنت'; });
+    }
+    function escapeHtmlSr(s){ return String(s||'').replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+    loadRegistry();
   }
 
   function waLink(msg){ return 'https://wa.me/'+SUPPORT_PHONE+(msg?('?text='+encodeURIComponent(msg)):''); }
@@ -5835,6 +5911,7 @@ if (typeof module !== 'undefined' && module.exports) { module.exports = QRCodeLi
 <div class="view wide" id="view-records"></div>
 <div class="view wide" id="view-backup"></div>
 <div class="view wide" id="view-notes"></div>
+<div class="view wide" id="view-vendor-schools"></div>
 <div class="view wide" id="view-accounts"></div>
 <div class="view wide" id="view-schoollogs"></div>
 <div class="view wide" id="view-barcode"></div>
@@ -6892,26 +6969,6 @@ document.addEventListener('keydown', function(e){
   }
 });
 
-window.SCHOOL_LINK_CODE=(function(){
-  try{
-    const q=new URLSearchParams(location.search||'');
-    const code=String(q.get('s')||q.get('school')||'').replace(/[^A-Za-z0-9_\-]/g,'').slice(0,40);
-    if(!code) return '';
-    const origSet=Storage.prototype.setItem.bind(localStorage);
-    const origGet=Storage.prototype.getItem.bind(localStorage);
-    const origRem=Storage.prototype.removeItem.bind(localStorage);
-    function ns(k){
-      k=String(k||'');
-      if(k.indexOf('schoolResults')!==0) return k;
-      if(k.indexOf('schoolResults__'+code+'__')===0) return k;
-      return 'schoolResults__'+code+'__'+k.slice('schoolResults'.length);
-    }
-    localStorage.setItem=function(k,v){return origSet(ns(k),v);};
-    localStorage.getItem=function(k){return origGet(ns(k));};
-    localStorage.removeItem=function(k){return origRem(ns(k));};
-    return code;
-  }catch(e){return '';}
-})();
 // ================= App data & views =================
 const STORAGE_KEY = 'schoolResultsApp_v1';
 const GRADE_GROUPS = [
@@ -6976,6 +7033,7 @@ function loadApp(){
 function saveApp(){
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(APP)); }catch(e){}
   try{if(typeof wifiOnSave==='function')wifiOnSave('app');}catch(e){}
+  try{if(typeof vendorPingSchool==='function')vendorPingSchool();}catch(e){}
 }
 let APP = loadApp();
 if(!APP.school) APP.school = {name:'نور العلم', principal:'محمد أمين عبد الله', guide:'جعفر صادق مهدي', logo:DEFAULT_SCHOOL_LOGO, stage:''};
@@ -7450,6 +7508,7 @@ function authClampView(id){
     return 'view-teacher';
   }
   if(r==='student' && id!=='view-student' && id!=='view-auth' && id!=='view-timetable') return 'view-student';
+  if(r==='vendor' && id!=='view-vendor-schools' && id!=='view-auth' && id!=='view-dashboard') return 'view-vendor-schools';
   return id;
 }
 function navigateTo(id, meta, replace){
@@ -7476,6 +7535,8 @@ function restoreEntry(entry){
   if(!entry) return;
   if(entry.id === 'view-auth'){
     renderAuthLogin();
+  } else if(entry.id === 'view-vendor-schools'){
+    if(typeof renderVendorSchools==='function')renderVendorSchools();
   } else if(entry.id === 'view-tasks'){
     restoreTasksView(entry.meta||{});
   } else if(entry.id === 'view-privmail'){
@@ -7611,11 +7672,22 @@ window.addEventListener('popstate', function(){
 function initApp(){
   authEnsure();
   function initAppAfterCloud(){
+  if(!AUTH_STATE.registered){
+    if(APP.school && APP.school.stage){
+      AUTH_STATE.registered = true;
+      saveAuthState();
+    } else {
+      renderStageView(true);
+      navigateTo('view-stage', {}, true);
+      return;
+    }
+  }
   if(!authHasSession()){
     renderAuthLogin();
     navigateTo('view-auth', {}, true);
     return;
   }
+  if(typeof vendorIsOwner==='function'&&vendorIsOwner()){ openVendorSchools(); return; }
   if(authRole()==='teacher'){ renderTeacherHome(); navigateTo('view-teacher',{page:'home'}, true); return; }
   if(authRole()==='student'){ renderStudentHome(); navigateTo('view-student',{page:'home'}, true); return; }
   if(!APP.school.stage){
@@ -7693,12 +7765,17 @@ function renderWelcomeSetupView(){
   const s = APP.school || {};
   el.innerHTML =
     '<div class="panel">' +
-      '<h2>بيانات المدرسة</h2>' +
-      '<p style="color:#666;font-size:13.5px;margin-top:-6px;">اكتب اسم المدرسة واسم مدير المدرسة، ثم اضغط دخول لبدء استخدام النظام. يمكنك تعديل هذه البيانات لاحقًا من الإعدادات.</p>' +
+      '<h2>إنشاء حساب المدرسة</h2>' +
+      '<p style="color:#666;font-size:13.5px;margin-top:-6px;">أدخل بيانات مدرستك لإنشاء حسابك الخاص بالنظام. ستستخدم البريد الإلكتروني ورمز الدخول لتسجيل الدخول لاحقًا.</p>' +
       '<label>اسم المدرسة</label>' +
       '<input type="text" id="welcomeSchoolName" value="'+escapeHtml(s.name||'')+'" placeholder="اكتب اسم مدرستك">' +
       '<label>اسم مدير المدرسة</label>' +
       '<input type="text" id="welcomePrincipalName" value="'+escapeHtml(s.principal||'')+'" placeholder="اكتب اسم المدير">' +
+      '<label>البريد الإلكتروني</label>' +
+      '<input type="text" id="welcomeEmail" dir="ltr" style="text-align:left" placeholder="example@email.com">' +
+      '<label>رمز الدخول (كلمة السر)</label>' +
+      '<input type="text" id="welcomeCode" dir="ltr" style="text-align:left" placeholder="4 أحرف على الأقل">' +
+      '<div class="srLicErr" id="welcomeErr" style="text-align:right;color:#c0102f;font-weight:800;font-size:12.5px;min-height:16px;margin-top:8px"></div>' +
       '<div class="panel-actions"><button onclick="finishWelcomeSetup()">دخول</button></div>' +
     '</div>';
   setTimeout(function(){ const e=document.getElementById('welcomeSchoolName'); if(e){ e.focus(); e.select&&e.select(); } }, 80);
@@ -7706,10 +7783,18 @@ function renderWelcomeSetupView(){
 function finishWelcomeSetup(){
   const nameEl=document.getElementById('welcomeSchoolName');
   const principalEl=document.getElementById('welcomePrincipalName');
+  const emailEl=document.getElementById('welcomeEmail');
+  const codeEl=document.getElementById('welcomeCode');
+  const errEl=document.getElementById('welcomeErr');
   const name=((nameEl&&nameEl.value)||'').trim();
   const principal=((principalEl&&principalEl.value)||'').trim();
+  const email=((emailEl&&emailEl.value)||'').trim();
+  const code=((codeEl&&codeEl.value)||'').trim();
+  if(!name){ if(errEl)errEl.textContent='⛔ اكتب اسم المدرسة'; return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ if(errEl)errEl.textContent='⛔ اكتب بريداً إلكترونياً صحيحاً'; return; }
+  if(code.length<4){ if(errEl)errEl.textContent='⛔ رمز الدخول يجب أن يكون 4 أحرف على الأقل'; return; }
   if(!APP.school) APP.school = {};
-  APP.school.name = name || APP.school.name || 'نور العلم';
+  APP.school.name = name;
   APP.school.principal = principal || APP.school.principal || '';
   saveApp();
   try{
@@ -7722,7 +7807,35 @@ function finishWelcomeSetup(){
       }
     }
   }catch(e){}
+  authEnsure();
+  let adminAcc = AUTH_STATE.accounts.find(function(a){ return a.role==='admin'; });
+  if(!adminAcc){ adminAcc={id:'admin_1',name:'المدير',role:'admin'}; AUTH_STATE.accounts.push(adminAcc); }
+  adminAcc.login = email;
+  adminAcc.password = code;
+  adminAcc.name = principal || adminAcc.name || 'المدير';
+  adminAcc.email = email;
+  AUTH_STATE.registered = true;
+  saveAuthState();
+  authSetSession(adminAcc);
+  try{ srPushCustomerRegistry(name, principal, email); }catch(e){}
   goDashboard();
+}
+function srPushCustomerRegistry(schoolName, principal, email){
+  try{
+    if(typeof window.srGetDeviceCode!=='function') return;
+    const dev = window.srGetDeviceCode();
+    const cleanDev = String(dev||'').replace(/[^0-9A-Z]/g,'');
+    if(!cleanDev) return;
+    const base = (typeof CLOUD_DEFAULT_URL!=='undefined' ? CLOUD_DEFAULT_URL : '').replace(/\/$/,'');
+    if(!base) return;
+    const url = base+'/_customers/'+encodeURIComponent(cleanDev)+'.json';
+    const payload = {
+      school: schoolName||'', principal: principal||'', email: email||'',
+      device: dev||'', stage: (APP.school&&APP.school.stage)||'',
+      registeredAt: Date.now()
+    };
+    fetch(url, {method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)}).catch(function(){});
+  }catch(e){}
 }
 
 function escapeHtml(s){
@@ -9265,7 +9378,7 @@ function printDashNameList(orientation){
   setTimeout(function(){if(frame.parentNode)frame.remove();},120000);
 }
 function dashMenuItems(){
-  return [
+  var items = [
     ['▦','كشوفات المدرسة','أعداد الطلاب والنتائج والدوام','reports','linear-gradient(135deg,#6d1028,#c9a227)'],
     ['🏫','الطلاب','الصفوف والشعب والأسماء','openGradesEditor()','linear-gradient(135deg,#1565c0,#42a5f5)'],
     ['📊','سجل المواد والدرجات','درجات الشعب والمواد','openGradebook()','linear-gradient(135deg,#2e7d32,#66bb6a)'],
@@ -9290,6 +9403,10 @@ function dashMenuItems(){
     ['💾','النسخ الاحتياطي','حفظ واسترجاع ومسح البيانات','openBackupModule()','linear-gradient(135deg,#004d40,#26a69a)'],
     ['⚙️','إعدادات المدرسة','البيانات وشكل القائمة','openSettings()','linear-gradient(135deg,#263238,#546e7a)']
   ];
+  if(typeof vendorIsOwner==='function'&&vendorIsOwner()){
+    items.unshift(['🏫','حسابات المدارس','المدارس المفعّلة وتواريخ التفعيل والانتهاء','openVendorSchools()','linear-gradient(135deg,#4a148c,#c9a227)']);
+  }
+  return items;
 }
 function openDashboardReports(){window.DASH_SHOW_REPORTS=true;renderDashboard();showView('view-dashboard');}
 function renderDashboardLauncher(){
@@ -9551,6 +9668,7 @@ function backupImportStudentsExcel(input){
 }
 function goDashboard(){
   window.DASH_SHOW_REPORTS=false;
+  if(typeof vendorIsOwner==='function'&&vendorIsOwner()){ openVendorSchools(); return; }
   if(typeof authRole==='function'&&authRole()==='teacher'){ openTeacherHome(); return; }
   if(typeof authRole==='function'&&authRole()==='student'){ openStudentHome(); return; }
   if(!APP.school.stage){ renderStageView(true); navigateTo('view-stage'); return; }
@@ -13708,7 +13826,7 @@ function renderAuthLogin(){
     '<div class="mat-field"><label>اسم الدخول</label><input id="authName" type="text" autocomplete="username" dir="ltr" placeholder="مثال: st482193"></div>'+
     '<div class="mat-field"><label>الرقم السري</label><input id="authPass" type="password" autocomplete="current-password"></div>'+
     '<button type="button" class="material-btn" style="width:100%;margin-top:8px" onclick="authDoLogin()">دخول</button>'+
-    '<small id="authCloudHint" style="display:block;margin-top:12px;color:#047857">السحابة مربوطة تلقائياً — أدخل اسم الدخول والرقم السري فقط'+(typeof SCHOOL_LINK_CODE==='string'&&SCHOOL_LINK_CODE?(' — رمز المدرسة: '+SCHOOL_LINK_CODE):'')+'</small>'+
+    '<small id="authCloudHint" style="display:block;margin-top:12px;color:#047857">السحابة مربوطة تلقائياً — أدخل اسم الدخول والرقم السري فقط</small>'+
     '</div></div>';
   const pn=document.getElementById('authPass');
   if(pn) pn.addEventListener('keydown',function(e){if(e.key==='Enter')authDoLogin();});
@@ -13717,10 +13835,19 @@ function authDoLogin(){
   const name=(document.getElementById('authName')||{}).value;
   const pass=(document.getElementById('authPass')||{}).value;
   const hint=document.getElementById('authCloudHint');
+  if(typeof vendorTryLogin==='function'){
+    const vo=vendorTryLogin(name,pass);
+    if(vo){
+      authSetSession(vo);
+      if(typeof openVendorSchools==='function')openVendorSchools();
+      return;
+    }
+  }
   function finish(acc){
     if(!acc){alert('الاسم أو الرقم السري غير صحيح.');return;}
     authSetSession(acc);
-    if(acc.role==='teacher'){renderTeacherHome();appStack=[{id:'view-teacher',meta:{page:'home'}}];showView('view-teacher');}
+    if(acc.role==='vendor'||(typeof vendorIsOwner==='function'&&vendorIsOwner())){if(typeof openVendorSchools==='function')openVendorSchools();else if(typeof goDashboard==='function')goDashboard();}
+    else if(acc.role==='teacher'){renderTeacherHome();appStack=[{id:'view-teacher',meta:{page:'home'}}];showView('view-teacher');}
     else if(acc.role==='student'){renderStudentHome();appStack=[{id:'view-student',meta:{page:'home'}}];showView('view-student');}
     else {if(typeof goDashboard==='function')goDashboard();else if(typeof renderDashboard==='function')renderDashboard();}
   }
@@ -15238,12 +15365,12 @@ function cloudRoomHash(str){
   return 'sch'+h.toString(36);
 }
 function cloudAutoRoom(){
-  if(typeof SCHOOL_LINK_CODE==='string'&&SCHOOL_LINK_CODE) return SCHOOL_LINK_CODE;
   try{
-    const q=new URLSearchParams(location.search||'');
-    const code=String(q.get('s')||q.get('school')||'').replace(/[^A-Za-z0-9_\-]/g,'').slice(0,40);
-    if(code) return code;
+    var q=new URLSearchParams(location.search||'');
+    var sc=(q.get('s')||q.get('school')||'').trim().toLowerCase().replace(/[^a-z0-9_-]/g,'');
+    if(sc){ window.SCHOOL_LINK_CODE=sc; return sc; }
   }catch(e){}
+  if(window.SCHOOL_LINK_CODE) return String(window.SCHOOL_LINK_CODE);
   const name=(typeof APP!=='undefined'&&APP&&APP.school&&APP.school.name)?APP.school.name:'';
   const hash=cloudRoomHash(name);
   return hash||CLOUD_DEFAULT_ROOM;
@@ -15369,49 +15496,32 @@ async function cloudPullNow(silent){
 function cloudOnSave(){
   if(!cloudEnabled()||CLOUD_APPLYING)return;
   clearTimeout(CLOUD_PUSH_T);
-  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},220);
+  CLOUD_PUSH_T=setTimeout(function(){cloudPushNow();},800);
 }
 function cloudRefreshUi(){
   if(!authHasSession())return;
-  try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
-  try{if(typeof refreshNotifBell==='function')refreshNotifBell(); else if(typeof updateNotifDot==='function')updateNotifDot();}catch(e){}
+  if(document.body.classList.contains('mail-full')){try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){} return;}
   const ae=document.activeElement;
-  const typing=ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable);
-  if(typing){
+  if(ae&&(ae.tagName==='INPUT'||ae.tagName==='TEXTAREA'||ae.tagName==='SELECT'||ae.isContentEditable)){
     clearTimeout(CLOUD_UI_T);
-    CLOUD_UI_T=setTimeout(cloudRefreshUi,1800);
+    CLOUD_UI_T=setTimeout(cloudRefreshUi,2500);
     return;
   }
   try{
     const entry=Array.isArray(appStack)&&appStack.length?appStack[appStack.length-1]:null;
     if(!entry||entry.id==='view-auth')return;
-    const id=entry.id||'';
-    const pg=entry.meta&&entry.meta.page;
-    if(id==='view-mail'||document.body.classList.contains('mail-full')){
-      if(typeof renderMailHome==='function') renderMailHome();
+    if(/view-(teacher|student|gradebook|gradebook-detail|attendance|levels|mail|exams)/.test(entry.id||'')){
+      try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
       return;
     }
-    if(id==='view-gradebook-detail'){
-      if(typeof renderGradebookTable==='function'&&document.getElementById('gbTableHost')) renderGradebookTable();
-      return;
-    }
-    if(id==='view-dashboard'){
-      if(typeof renderDashboard==='function') renderDashboard();
-      return;
-    }
-    if(id==='view-teacher'&&(pg==='home'||!pg)){
-      if(typeof renderTeacherHome==='function') renderTeacherHome();
-      return;
-    }
-    if(id==='view-student'){
-      if(typeof renderStudentHome==='function') renderStudentHome();
-      return;
-    }
-    if(id==='view-tasks'||id==='view-exams'||id==='view-attendance'||id==='view-levels'||id==='view-gradebook'||(id==='view-teacher'&&pg&&pg!=='home')){
+    if((entry.id||'')==='view-tasks'){
+      try{if(typeof updateMailBadges==='function')updateMailBadges();}catch(e){}
       return;
     }
     if(typeof restoreEntry==='function') restoreEntry(entry);
-    if(typeof showView==='function') showView(id);
+    if(typeof showView==='function') showView(entry.id);
+    if(typeof refreshNotifBell==='function') refreshNotifBell();
+    else if(typeof updateNotifDot==='function') updateNotifDot();
   }catch(e){}
 }
 function cloudHandleRemote(pack){
@@ -15437,21 +15547,15 @@ function cloudListen(){
     es.addEventListener('put', onEv);
     es.addEventListener('patch', onEv);
     es.onmessage=onEv;
-    es.onerror=function(){ try{setTimeout(function(){if(typeof cloudListen==='function')cloudListen();},4000);}catch(e){} };
+    es.onerror=function(){ /* يبقى يعيد الاتصال تلقائياً */ };
   }catch(e){}
-  if(!window._cloudVis){
-    window._cloudVis=true;
-    document.addEventListener('visibilitychange',function(){
-      if(!document.hidden&&typeof cloudPullNow==='function') cloudPullNow(true);
-    });
-  }
   if(!window._cloudPoll){
     window._cloudPoll=setInterval(function(){
       if(!cloudEnabled()||CLOUD_BUSY||CLOUD_APPLYING||document.hidden)return;
       fetch(cloudEndpoint()).then(function(r){return r.json();}).then(function(pack){
         cloudHandleRemote(pack);
       }).catch(function(){});
-    },1200);
+    },2000);
   }
 }
 function cloudSaveCfgFromForm(){
@@ -15770,6 +15874,209 @@ function liveCheckIncoming(silent){
   if(typeof updateHwDot==='function')updateHwDot();
 }
 
+
+/* ===== مالك البرنامج — حسابات المدارس ===== */
+var VENDOR_OWNER_LOGINS=['hsm','owner','مالك','hsmadmin'];
+var VENDOR_OWNER_PASS='HSM2026';
+var VENDOR_PAGES_BASE='https://hussainnahi1989-ctrl.github.io/-/';
+var VENDOR_SCHOOLS_CACHE=[];
+function vendorNormLogin(s){return String(s||'').trim().toLowerCase().replace(/\s+/g,'');}
+function vendorTryLogin(name,pass){
+  var n=vendorNormLogin(name), p=String(pass||'');
+  if(VENDOR_OWNER_LOGINS.indexOf(n)<0) return null;
+  if(p!==VENDOR_OWNER_PASS) return null;
+  return {id:'vendor_owner',name:'مالك البرنامج',login:'hsm',role:'vendor',password:''};
+}
+function vendorIsOwner(){
+  try{
+    var s=typeof authSession==='function'?authSession():null;
+    return !!(s&&(s.role==='vendor'||s.id==='vendor_owner'));
+  }catch(e){return false;}
+}
+function vendorCloudBase(){
+  var u='';
+  try{u=String((CLOUD_CFG&&CLOUD_CFG.url)||CLOUD_DEFAULT_URL||'').replace(/\/$/,'');}catch(e){}
+  return u;
+}
+function vendorFmtDate(v){
+  if(!v) return '—';
+  try{
+    var d=(typeof v==='number')?new Date(v):new Date(String(v));
+    if(isNaN(d.getTime())) return String(v);
+    var y=d.getFullYear(), m=('0'+(d.getMonth()+1)).slice(-2), day=('0'+d.getDate()).slice(-2);
+    return toArabicDigits?toArabicDigits(day+'/'+m+'/'+y): (day+'/'+m+'/'+y);
+  }catch(e){return '—';}
+}
+function vendorStatusOf(row){
+  var exp=row&&row.expiresAt;
+  if(!exp) return {t:'ساري',c:'#15803d'};
+  var t=typeof exp==='number'?exp:Date.parse(exp);
+  if(!t||isNaN(t)) return {t:'ساري',c:'#15803d'};
+  if(t<Date.now()) return {t:'منتهٍ',c:'#b91c1c'};
+  if(t-Date.now()<1000*60*60*24*30) return {t:'قارب الانتهاء',c:'#c2410c'};
+  return {t:'ساري',c:'#15803d'};
+}
+function vendorSchoolCodeOf(){
+  try{
+    if(window.SCHOOL_LINK_CODE) return String(window.SCHOOL_LINK_CODE);
+    var q=new URLSearchParams(location.search||'');
+    var sc=(q.get('s')||q.get('school')||'').trim().toLowerCase().replace(/[^a-z0-9_-]/g,'');
+    if(sc) return sc;
+  }catch(e){}
+  try{return String(CLOUD_CFG&&CLOUD_CFG.room||'karbala1');}catch(e2){return 'karbala1';}
+}
+function vendorPingSchool(){
+  if(typeof vendorIsOwner==='function'&&vendorIsOwner()) return;
+  var name=(APP&&APP.school&&APP.school.name)||'';
+  if(!name) return;
+  var code=vendorSchoolCodeOf();
+  var base=vendorCloudBase();
+  if(!base) return;
+  var now=Date.now();
+  var payload={
+    code:code,
+    name:name,
+    principal:(APP.school&&APP.school.principal)||'',
+    stage:(APP.school&&APP.school.stage)||'',
+    updatedAt:now
+  };
+  fetch(base+'/_vendor_schools/'+encodeURIComponent(code)+'.json').then(function(r){return r.json();}).then(function(ex){
+    var row=ex&&typeof ex==='object'?ex:{};
+    if(!row.activatedAt) row.activatedAt=now;
+    if(!row.expiresAt) row.expiresAt=now+365*24*60*60*1000;
+    row.code=code; row.name=name; row.principal=payload.principal; row.stage=payload.stage; row.updatedAt=now;
+    return fetch(base+'/_vendor_schools/'+encodeURIComponent(code)+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(row)});
+  }).catch(function(){});
+}
+function openVendorSchools(){
+  if(!vendorIsOwner()){alert('هذا القسم لمالك البرنامج فقط.');return;}
+  renderVendorSchools();
+  navigateTo('view-vendor-schools',{});
+}
+function vendorSaveRow(code, patch){
+  var base=vendorCloudBase();
+  if(!base||!code) return Promise.resolve();
+  return fetch(base+'/_vendor_schools/'+encodeURIComponent(code)+'.json').then(function(r){return r.json();}).then(function(ex){
+    var row=ex&&typeof ex==='object'?ex:{};
+    Object.keys(patch||{}).forEach(function(k){row[k]=patch[k];});
+    row.code=code;
+    row.updatedAt=Date.now();
+    return fetch(base+'/_vendor_schools/'+encodeURIComponent(code)+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(row)});
+  });
+}
+function vendorMergeCustomers(intoMap){
+  var base=vendorCloudBase();
+  if(!base) return Promise.resolve(intoMap);
+  return fetch(base+'/_customers.json').then(function(r){return r.json();}).then(function(data){
+    if(!data||typeof data!=='object') return intoMap;
+    Object.keys(data).forEach(function(k){
+      var v=data[k]||{};
+      var code=String(v.code||v.device||k).toLowerCase().replace(/[^a-z0-9_-]/g,'')||k;
+      if(!intoMap[code]){
+        intoMap[code]={code:code,name:v.school||v.name||code,principal:v.principal||'',stage:v.stage||'',activatedAt:v.registeredAt||v.activatedAt||0,expiresAt:v.expiresAt||0,fromCustomers:true};
+      }
+    });
+    return intoMap;
+  }).catch(function(){return intoMap;});
+}
+function renderVendorSchools(){
+  var el=document.getElementById('view-vendor-schools'); if(!el) return;
+  el.innerHTML='<div class="module-shell"><div class="module-head"><div class="module-title"><span class="mi">🏫</span><div><h2>حسابات المدارس</h2><p>المدارس المفعّلة حالياً — اسم المدرسة وتاريخ التفعيل والانتهاء</p></div></div><button class="material-btn secondary" onclick="authLogout()">تسجيل خروج</button></div><div id="vendorSchoolsBody" style="padding:8px 4px 28px">جارٍ التحميل من السحابة…</div></div>';
+  var base=vendorCloudBase();
+  var body=document.getElementById('vendorSchoolsBody');
+  if(!base){ if(body) body.textContent='لا يوجد رابط سحابة.'; return; }
+  fetch(base+'/_vendor_schools.json').then(function(r){return r.json();}).then(function(data){
+    var map={};
+    if(data&&typeof data==='object'){
+      Object.keys(data).forEach(function(k){
+        var v=data[k]||{};
+        v.code=v.code||k;
+        map[String(v.code)]=v;
+      });
+    }
+    return vendorMergeCustomers(map);
+  }).then(function(map){
+    var rows=Object.keys(map).map(function(k){return map[k];});
+    rows.sort(function(a,b){return String(a.name||'').localeCompare(String(b.name||''),'ar');});
+    VENDOR_SCHOOLS_CACHE=rows;
+    if(!body) return;
+    var add='<div style="background:#fff;border:1px solid #e8d4c4;border-radius:14px;padding:14px;margin-bottom:16px">'
+      +'<div style="font-weight:900;color:#6d1028;margin-bottom:10px">إضافة / تفعيل مدرسة</div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px">'
+      +'<input id="vsName" placeholder="اسم المدرسة" style="padding:10px;border:1px solid #ddd;border-radius:10px">'
+      +'<input id="vsCode" placeholder="رمز الرابط مثل alnour" dir="ltr" style="padding:10px;border:1px solid #ddd;border-radius:10px">'
+      +'<input id="vsAct" type="date" title="تاريخ التفعيل" style="padding:10px;border:1px solid #ddd;border-radius:10px">'
+      +'<input id="vsExp" type="date" title="تاريخ الانتهاء" style="padding:10px;border:1px solid #ddd;border-radius:10px">'
+      +'</div>'
+      +'<button type="button" class="material-btn" style="margin-top:10px" onclick="vendorAddSchool()">حفظ التفعيل</button>'
+      +'<p style="margin:8px 0 0;color:#78909c;font-size:12px">رابط المدرسة بعد الحفظ: '+VENDOR_PAGES_BASE+'?s=الرمز</p></div>';
+    if(!rows.length){
+      body.innerHTML=add+'<div class="no-grade-reports">لا توجد مدارس مفعّلة حالياً.</div>';
+      return;
+    }
+    var cards=rows.map(function(v,i){
+      var st=vendorStatusOf(v);
+      var code=escapeHtml(v.code||'');
+      var link=VENDOR_PAGES_BASE+'?s='+encodeURIComponent(v.code||'');
+      return '<article style="background:#fff;border:1px solid #ead9c8;border-radius:14px;padding:14px 16px;margin-bottom:10px">'
+        +'<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start">'
+        +'<div><div style="font-weight:900;font-size:18px;color:#6d1028">'+escapeHtml(v.name||'—')+'</div>'
+        +'<div style="font-size:12px;color:#607d8b;direction:ltr;text-align:right;margin-top:4px">'+code+'</div></div>'
+        +'<span style="background:'+st.c+';color:#fff;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800">'+st.t+'</span></div>'
+        +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">'
+        +'<div style="background:#faf6ef;border-radius:10px;padding:8px 10px"><small style="color:#8d6e63">تاريخ التفعيل</small><div style="font-weight:800">'+vendorFmtDate(v.activatedAt)+'</div></div>'
+        +'<div style="background:#faf6ef;border-radius:10px;padding:8px 10px"><small style="color:#8d6e63">تاريخ انتهاء التفعيل</small><div style="font-weight:800">'+vendorFmtDate(v.expiresAt)+'</div></div>'
+        +'</div>'
+        +(v.principal?'<div style="margin-top:8px;font-size:13px;color:#546e7a">المدير: '+escapeHtml(v.principal)+'</div>':'')
+        +'<div style="margin-top:10px;font-size:12px;word-break:break-all"><a href="'+link+'" target="_blank" rel="noopener">'+link+'</a></div>'
+        +'<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">'
+        +'<button type="button" class="material-btn secondary" onclick="vendorEditDates('+i+')">تعديل التواريخ</button>'
+        +'<button type="button" class="material-btn secondary" onclick="vendorDeleteSchool('+i+')">حذف</button>'
+        +'</div></article>';
+    }).join('');
+    body.innerHTML=add+cards;
+  }).catch(function(){
+    if(body) body.textContent='تعذر جلب قائمة المدارس. تحقق من اتصال السحابة.';
+  });
+}
+function vendorAddSchool(){
+  if(!vendorIsOwner()) return;
+  var name=((document.getElementById('vsName')||{}).value||'').trim();
+  var code=((document.getElementById('vsCode')||{}).value||'').trim().toLowerCase().replace(/[^a-z0-9_-]/g,'');
+  var act=((document.getElementById('vsAct')||{}).value||'');
+  var exp=((document.getElementById('vsExp')||{}).value||'');
+  if(!name||!code){alert('أدخل اسم المدرسة ورمز الرابط.');return;}
+  var activatedAt=act?Date.parse(act):Date.now();
+  var expiresAt=exp?Date.parse(exp):(Date.now()+365*24*60*60*1000);
+  vendorSaveRow(code,{name:name,code:code,activatedAt:activatedAt,expiresAt:expiresAt}).then(function(){
+    alert('تم حفظ التفعيل. الرابط:\\n'+VENDOR_PAGES_BASE+'?s='+code);
+    renderVendorSchools();
+  }).catch(function(){alert('تعذر الحفظ على السحابة.');});
+}
+function vendorResolveCode(x){
+  if(typeof x==='number' && VENDOR_SCHOOLS_CACHE[x]) return VENDOR_SCHOOLS_CACHE[x].code;
+  return x;
+}
+function vendorEditDates(x){
+  if(!vendorIsOwner()) return;
+  var code=vendorResolveCode(x);
+  var act=prompt('تاريخ التفعيل (YYYY-MM-DD)','');
+  var exp=prompt('تاريخ الانتهاء (YYYY-MM-DD)','');
+  if(!act&&!exp) return;
+  var patch={};
+  if(act) patch.activatedAt=Date.parse(act);
+  if(exp) patch.expiresAt=Date.parse(exp);
+  vendorSaveRow(code,patch).then(function(){renderVendorSchools();});
+}
+function vendorDeleteSchool(x){
+  if(!vendorIsOwner()) return;
+  var code=vendorResolveCode(x);
+  if(!confirm('حذف هذه المدرسة من قائمة التفعيل؟')) return;
+  var base=vendorCloudBase();
+  fetch(base+'/_vendor_schools/'+encodeURIComponent(code)+'.json',{method:'DELETE'}).then(function(){renderVendorSchools();});
+}
+
+
 loadUiTheme();
 initApp();
 setTimeout(function(){try{liveStart();}catch(e){}},800);
@@ -15884,5 +16191,5 @@ if(document.readyState==='loading'){
 }
 
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a345f553dbfac297',t:'MTc4ODI4MzM1OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a35283b2ed21d103',t:'MTc4ODQxNTAxOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a35fb43a3b39254b',t:'MTc4ODU1MzMyMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
